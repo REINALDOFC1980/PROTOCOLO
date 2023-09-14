@@ -1,0 +1,634 @@
+﻿@model CondutorInfrator.Models.ProcessoViewModel
+
+@{
+    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+    var Pes_TipoPessoa = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+}
+
+
+
+<link href="~/Content/Imagem.css" rel="stylesheet" />
+<div class="container">
+    <div class="conteudo">
+
+
+
+        <div class="row">
+            <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+                <h5> <img src="~/img/Assitente.png" style="margin-left:20px;" /><strong> Aqui você pode CONFIMAR ou RECUSAR o processo, logo após a decisão o processo será encaminhado a TRANSALVADOR.</strong></h5>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="lista-situacao">
+                    <ul>
+                        <li class="ativo">
+                            <span>#</span>
+                            <h2>Situação Atual do Processo:</h2>
+                            <p>
+                                <a href="#" id="mytooltip" data-toggle="" title="@Html.DisplayFor(model => model.StsPro_Orientacao, new { htmlAttributes = new { @class = "form-control", id = "StsPro_Orientacao", } })"
+                                   data-placement="right">@Html.DisplayFor(model => model.StsPro_Descricao, new { htmlAttributes = new { @class = "form-control", id = "StsPro_Descricao", } })</a>
+                                <br>
+                                <strong> @Html.DisplayFor(model => model.Mot_Descricao, new { htmlAttributes = new { @class = "form-control", id = "Mot_Descricao" } })</strong>
+
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-3 text-right text-danger">
+                <h5>
+                    <img src="~/img/Assitente (1).png" />  <strong>Mais informações? @Html.ActionLink("Clique aqui!", "informacao_importante", "pessoa")</strong>
+                </h5>
+            </div>
+        </div>
+
+        <br />
+
+
+        <div class="col-md-12">
+            <div class="row">
+
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <p class="numero-protocolo">
+                            N° Processo: @Html.DisplayFor(model => model.Pro_Numero, new { htmlAttributes = new { @class = "form-control", id = "Pro_Numero" } })
+                            @Html.EditorFor(model => model.Pro_Numero, new { htmlAttributes = new { @class = "form-control", id = "Pro_Numero", style = "display:none" } })
+                        </p>
+                    </div>
+
+                    <div class="col-md-6 text-center">
+                        <p class="numero-protocolo">
+                            N° Protocolo: @Html.DisplayFor(model => model.Pro_Processo, new { htmlAttributes = new { @class = "form-control", id = "Pro_Processo_" } })
+                            @Html.EditorFor(model => model.Pro_Processo, new { htmlAttributes = new { @class = "form-control", id = "Pro_Processo", style = "display:none" } })
+                        </p>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        @{
+            try
+            {
+                if (Pes_TipoPessoa == "FÍSICA")
+                {
+                    <img src="~/img/Assitente (1).png" /> <strong>Deseja alterar seu dados? @Html.ActionLink("Clique aqui!", "perfil_cpf", "perfil")</strong>
+                }
+                else
+                {
+                    <img src="~/img/Assitente (1).png" /> <strong>Deseja alterar seu dados? @Html.ActionLink("Clique aqui!", "perfil_cnpj", "perfil")</strong>
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <h3>Informações do Condutor Infrator</h3>
+
+
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Con_CPF)</th>
+                            <td>@Html.DisplayFor(model => model.Con_CPF, new { htmlAttributes = new { @class = "form-control", id = "Con_CPF" } })</td>
+                            <td>@Html.HiddenFor(model => model.Con_CPF)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Con_Nome)</th>
+                            <td>@Html.DisplayFor(model => model.Con_Nome, new { htmlAttributes = new { @class = "form-control", id = "Con_Nome" } })</td>
+                            <td>@Html.HiddenFor(model => model.Con_Nome)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Con_RegistroCNH)</th>
+                            <td>@Html.DisplayFor(model => model.Con_RegistroCNH, new { htmlAttributes = new { @class = "form-control", id = "Con_RegistroCNH" } })</td>
+                            <td>@Html.HiddenFor(model => model.Con_RegistroCNH)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Con_CNHValidade)</th>
+                            <td>@Html.DisplayFor(model => model.Con_CNHValidade, new { htmlAttributes = new { @class = "form-control", id = "Con_CNHValidade" } })</td>
+                            <td>@Html.HiddenFor(model => model.Con_CNHValidade)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Con_EndPro_Logradouro)</th>
+                            <td>@Html.DisplayFor(model => model.Con_EndPro_Logradouro, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Logradouro" } })</td>
+                            <td>@Html.HiddenFor(model => model.Con_EndPro_Logradouro)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Con_EndPro_Bairro)</th>
+                            <td>@Html.DisplayFor(model => model.Con_EndPro_Bairro, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Bairro" } })</td>
+                            <td>@Html.HiddenFor(model => model.Con_EndPro_Bairro)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Con_EndPro_Complemento)</th>
+                            <td>@Html.DisplayFor(model => model.Con_EndPro_Complemento, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Complemento" } })</td>
+                            <td>@Html.HiddenFor(model => model.Con_EndPro_Complemento)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Con_EndPro_Cidade)</th>
+                            <td>@Html.DisplayFor(model => model.Con_EndPro_Cidade, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Cidade" } })</td>
+                            <td>@Html.HiddenFor(model => model.Con_EndPro_Cidade)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Con_EndPro_Estado)</th>
+                            <td>@Html.DisplayFor(model => model.Con_EndPro_Estado, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Estado" } })</td>
+                            <td>@Html.HiddenFor(model => model.Con_EndPro_Estado)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Con_EndPro_Pais)</th>
+                            <td>@Html.DisplayFor(model => model.Con_EndPro_Pais, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Pais" } })</td>
+                            <td>@Html.HiddenFor(model => model.Con_EndPro_Pais)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Con_EndPro_CEP)</th>
+                            <td>@Html.DisplayFor(model => model.Con_EndPro_CEP, new { htmlAttributes = new { @class = "form-control", id = "Cond_End_CEP" } })</td>
+                            <td>@Html.HiddenFor(model => model.Con_EndPro_CEP)</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Con_Telefone)</th>
+                            <td>@Html.DisplayFor(model => model.Con_Telefone, new { htmlAttributes = new { @class = "form-control", id = "Con_Telefone" } })</td>
+                            <td>@Html.HiddenFor(model => model.Con_Telefone)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Con_Email)</th>
+                            <td>@Html.DisplayFor(model => model.Con_Email, new { htmlAttributes = new { @class = "form-control", id = "Con_Email" } })</td>
+                            <td>@Html.HiddenFor(model => model.Con_Email)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-md-6">
+                <h3>Informações do Requerente</h3>
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_CPF_CNPJ)</th>
+                            <td>@Html.DisplayFor(model => model.Ptr_CPF_CNPJ, new { htmlAttributes = new { @class = "form-control", id = "Ptr_CPF_CNPJ" } })</td>
+                            <td>@Html.HiddenFor(model => model.Ptr_CPF_CNPJ)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Nome)</th>
+                            <td>@Html.DisplayFor(model => model.Ptr_Nome, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Nome" } })</td>
+                            <td>@Html.HiddenFor(model => model.Ptr_Nome)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_RegistroCNH)</th>
+                            <td>@Html.DisplayFor(model => model.Ptr_RegistroCNH, new { htmlAttributes = new { @class = "form-control", id = "Ptr_RegistroCNH" } })</td>
+                            <td>@Html.HiddenFor(model => model.Ptr_RegistroCNH)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_CNHValidade)</th>
+                            <td>@Html.DisplayFor(model => model.Ptr_CNHValidade, new { htmlAttributes = new { @class = "form-control", id = "Ptr_CNHValidade" } })</td>
+                            <td>@Html.HiddenFor(model => model.Ptr_CNHValidade)</td>
+                        </tr>                       
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Logradouro)</th>
+                            <td>@Html.DisplayFor(model => model.Ptr_EndPro_Logradouro, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Logradouro" } })</td>
+                            <td>@Html.HiddenFor(model => model.Ptr_EndPro_Logradouro)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Bairro)</th>
+                            <td>@Html.DisplayFor(model => model.Ptr_EndPro_Bairro, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Bairro" } })</td>
+                            <td>@Html.HiddenFor(model => model.Ptr_EndPro_Bairro)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Complemento)</th>
+                            <td>@Html.DisplayFor(model => model.Ptr_EndPro_Complemento, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Complemento" } })</td>
+                            <td>@Html.HiddenFor(model => model.Ptr_EndPro_Complemento)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Cidade)</th>
+                            <td>@Html.DisplayFor(model => model.Ptr_EndPro_Cidade, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Cidade" } })</td>
+                            <td>@Html.HiddenFor(model => model.Ptr_EndPro_Cidade)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Estado)</th>
+                            <td>@Html.DisplayFor(model => model.Ptr_EndPro_Estado, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Estado" } })</td>
+                            <td>@Html.HiddenFor(model => model.Ptr_EndPro_Estado)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Pais)</th>
+                            <td>@Html.DisplayFor(model => model.Ptr_EndPro_Pais, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Pais" } })</td>
+                            <td>@Html.HiddenFor(model => model.Ptr_EndPro_Pais)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_CEP)</th>
+                            <td>@Html.DisplayFor(model => model.Ptr_EndPro_CEP, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_CEP" } })</td>
+                            <td>@Html.HiddenFor(model => model.Ptr_EndPro_CEP)</td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Telefone)</th>
+                            <td>@Html.DisplayFor(model => model.Ptr_Telefone, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Telefone" } })</td>
+                            <td>@Html.HiddenFor(model => model.Ptr_Telefone)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Email)</th>
+                            <td>@Html.DisplayFor(model => model.Ptr_Email, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Email" } })</td>
+                            <td>@Html.HiddenFor(model => model.Ptr_Email)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Informações do Veículo</h3>
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Placa)</th>
+                            <td>@Html.DisplayFor(model => model.Vec_Placa, new { htmlAttributes = new { @class = "form-control", id = "Vec_Placa" } })</td>
+                            <td>@Html.HiddenFor(model => model.Vec_Placa)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Vec_RENAVAN)</th>
+                            <td>@Html.DisplayFor(model => model.Vec_RENAVAN, new { htmlAttributes = new { @class = "form-control", id = "Vec_RENAVAN" } })</td>
+                            <td>@Html.HiddenFor(model => model.Vec_RENAVAN)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Ano)</th>
+                            <td>@Html.DisplayFor(model => model.Vec_Ano, new { htmlAttributes = new { @class = "form-control", id = "Vec_Ano" } })</td>
+                            <td>@Html.HiddenFor(model => model.Vec_Ano)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Marca)</th>
+                            <td>@Html.DisplayFor(model => model.Vec_Marca, new { htmlAttributes = new { @class = "form-control", id = "Vec_Marca" } })</td>
+                            <td>@Html.HiddenFor(model => model.Vec_Marca)</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <h3>Informações da Multa</h3>
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Mut_AIT)</th>
+                            <td>@Html.DisplayFor(model => model.Mut_AIT, new { htmlAttributes = new { @class = "form-control", id = "Mut_AIT" } })</td>
+                            <td>@Html.HiddenFor(model => model.Mut_AIT, new { @id = "Mut_AIT", @name = "Mut_AIT" })</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Mut_CodigoInfracao)</th>
+                            <td>@Html.DisplayFor(model => model.Mut_CodigoInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_CodigoInfracao" } })</td>
+                            <td>@Html.HiddenFor(model => model.Mut_CodigoInfracao)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Mut_DataInfracao)</th>
+                            <td>@Html.DisplayFor(model => model.Mut_DataInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_DataInfracao" } })</td>
+                            <td>@Html.HiddenFor(model => model.Mut_DataInfracao)</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> @Html.DisplayNameFor(model => model.Mut_DescricaoInfracao)</th>
+                            <td>@Html.DisplayFor(model => model.Mut_DescricaoInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_DescricaoInfracao" } })</td>
+                            <td>@Html.HiddenFor(model => model.Mut_DescricaoInfracao)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4>ANEXOS DA DOCUMENTAÇÃO</h4>
+            </div>
+
+        </div>
+        <br />
+
+
+        <div class="row">
+            <div class="col-md-1">
+            </div>
+
+            <div class="col-md-2 text-center">
+                <strong>CNH Requerente</strong>
+                <img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "CNH_PROPRIETARIO_"})" height="170" width="140" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
+                <p></p>
+                <p><small style="color:darkgray"> (Clique para visualizar)</small></p>
+            </div>
+            <div class="col-md-2 text-center">
+                <strong>Formulário NAI</strong>
+                <p><img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "FORMULARIO_INDICACAO_"})" height="170" width="140" onclick="openModal();currentSlide(2)" class="hover-shadow cursor"></p>
+                <p><small style="color:darkgray"> (Clique para visualizar)</small></p>
+            </div>
+            <div class="col-md-2 text-center">
+                <strong>CNH Condutor</strong>
+                <p><img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "CNH_CONDUTOR_"})" height="170" width="140" onclick="openModal();currentSlide(3)" class="hover-shadow cursor"></p>
+                <p><small style="color:darkgray"> (Clique para visualizar)</small></p>
+            </div>
+            <div class="col-md-2 text-center">
+                <strong>Comprovante Condutor</strong>
+                <p><img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "COMPROVANTE_CONDUTOR_"})" height="170" width="140" onclick="openModal();currentSlide(4)" class="hover-shadow cursor"></p>
+                <p><small style="color:darkgray"> (Clique para visualizar)</small></p>
+            </div>
+            <div class="col-md-2 text-center">
+                <strong>Condutor com CNH</strong>
+                <p><img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "FOTOCNH_CONDUTOR_"})" height="170" width="140" onclick="openModal();currentSlide(5)" class="hover-shadow cursor"></p>
+                <p><small style="color:darkgray"> (Clique para visualizar)</small></p>
+            </div>
+            <div class="col-md-1">
+            </div>
+
+            <br />
+            @*Imagem Ampliada*@
+            <div id="myModal" class="modal">
+                <span class="close cursor" onclick="closeModal()">&times;</span>
+                <div class="modal-content">
+                    <br />
+
+                    <div class="mySlides  text-center">
+                        <div class="numbertext">1 / 5</div>
+                        <img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "CNH_PROPRIETARIO_"})" height="700" width="630">
+                    </div>
+                    <div class="mySlides text-center">
+                        <div class="numbertext">2 / 5</div>
+                        <img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "FORMULARIO_INDICACAO_"})" height="600" width="630">
+                    </div>
+                    <div class="mySlides text-center">
+                        <div class="numbertext">3 / 5</div>
+                        <img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "CNH_CONDUTOR_"})" height="600" width="630">
+                    </div>
+
+                    <div class="mySlides text-center">
+                        <div class="numbertext">4 / 5</div>
+                        <img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "COMPROVANTE_CONDUTOR_"})" height="600" width="630">
+                    </div>
+
+                    <div class="mySlides text-center">
+                        <div class="numbertext">5 / 5</div>
+                        <img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "FOTOCNH_CONDUTOR_"})" height="600" width="630">
+
+                    </div>
+
+                    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                    <br />
+                    <div class="caption-container">
+                        <p id="caption"></p>
+                    </div>
+
+                    <div class="col-md-1">
+                    </div>
+
+                    <div class="col-md-2 text-center ">
+                        <img class="demo cursor" src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "CNH_PROPRIETARIO_"})" height="190" width="190" onclick="currentSlide(1)">
+                    </div>
+                    <div class="col-md-2 text-center">
+
+                        <img class="demo cursor" src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "FORMULARIO_INDICACAO_"})" height="190" width="190" onclick="currentSlide(2)">
+                    </div>
+                    <div class="col-md-2 text-center">
+
+                        <img class="demo cursor" src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "CNH_CONDUTOR_"})" height="190" width="190" onclick="currentSlide(3)">
+                    </div>
+                    <div class="col-md-2 text-center">
+
+                        <img class="demo cursor" src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "COMPROVANTE_CONDUTOR_"})" height="190" width="190" onclick="currentSlide(4)">
+                    </div>
+                    <div class="col-md-2 text-center">
+
+                        <img class="demo cursor" src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "FOTOCNH_CONDUTOR_"})" height="190" width="190" onclick="currentSlide(5)">
+                    </div>
+                    <div class="col-md-1 text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+
+
+        <div class="modal fade" id="modalConfirmacao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacao"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="col-md-4" style="padding: 0;">
+                    <div class="alerta-atencao text-center">
+                        <img src="~/img/warning.svg" width="120">
+                    </div>
+                </div>
+                <div class="col-md-8" style="padding: 0;">
+                    <div class="mensagem-modal modal-atencao text-center">
+                        <h4 id="idtitulo">Recusar Proceso</h4>
+                        <div class="file-caption-name" id="idtexto">
+                            <p><span>texto</span></p>
+                        </div>
+                        <div class="col-md-12 modal-footer">
+                            <div class="text-center">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="BtnCancelar">Cancelar</button>
+
+                                <button type="button" class="btn btn-primary" id="BtnConfimar" name="BtnConfimar"> Confirmar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+
+
+                <button type="button" class="btn btn-primary btn-lg btn-transalvador" id="BtnModalConfirmar" , name="BtnModalConfirmar" @*data-toggle="modal" data-target="#modalConfirmacao"*@> Confirmar Processo </button>
+                <button type="button" class="btn btn-primary btn-lg btn-transalvador" id="BtnModalRecusar" , name="BtnModalRecusar" @*data-toggle="modal" data-target="#modalConfirmacao"*@> Recusar Processo </button>
+                <button type="button" class="btn btn-primary btn-lg btn-transalvador" id="BtnAvancar" , name="BtnAvancar" onclick="location.href='@Url.Action("multas", "multas")'"> Sair </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<script type='text/javascript'>
+
+    var MyAppUrlSettings = "";
+
+    $("#BtnModalConfirmar").click(function () {
+
+        posLoad();
+        swal({
+            title: "Aceitar Processo?",
+            text: "Você confirma a sua apresentação como condutor infrator do processo? As informações não poderão ser alteradas posteriormente.",
+            icon: "warning",
+            buttons: [
+                'Não',
+                'Sim'
+            ],
+
+        }).then((willDelete) => {
+            if (willDelete) {
+
+                $('#BtnModalConfirmar').prop('disabled', true);
+                $('#BtnModalRecusar').prop('disabled', true);
+                $('#BtnAvancar').prop('disabled', true);
+
+                preLoad();
+
+                var mut_ait = $('#Mut_AIT').val();
+                var numeroprocesso = $("#Pro_Numero").val();
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ pro_numero: numeroprocesso, Mut_ait : mut_ait }),
+                    url: '@Url.Action("aceitarprocesso", "apresentacaocondutor")',
+
+                    success: function (data) {
+                        if (data.error == true) {
+                            posLoad();
+                            swal("Ops!", "Houve uma falha de comunicação, entre em contato com o administrador do sistema", "error");
+                            return false;
+                        } else
+                        if (data.id != "") {
+                            posLoad();
+                            swal("Ops!", data.mensagem_erro, "error")
+                                .then(() => {
+                                   // window.location.href = data.redirectUrl;
+                                    RedirectUrl(data.redirectUrl, mut_ait, numeroprocesso)
+                                });
+                            return false;
+                        } else {
+                            posLoad();
+                            swal("Processo cadastrado com sucesso", "O processo foi encaminhado a Transalvador para triagem.", "success")
+                            .then(() => {
+                                //window.location.href = data.redirectUrl;
+                                RedirectUrl(data.redirectUrl, mut_ait, numeroprocesso)
+                            });
+                        }
+                    },
+                    error: function () {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                        .then(() => {
+                            location.reload();
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+
+
+
+    $("#BtnModalRecusar").click(function () {
+
+        posLoad();
+        swal({
+            title: "Recursar Processo?",
+            text: "Tem certeza que deseja recusar o processo de Apresentação do Condutor Infrator?",
+            icon: "warning",
+            buttons: [
+                'Não',
+                'Sim'
+            ],
+
+        }).then((willDelete) => {
+            if (willDelete) {
+                $("body").css("cursor", "progress");
+                $('#BtnModalConfirmar').prop('disabled', true);
+                $('#BtnModalRecusar').prop('disabled', true);
+                $('#BtnAvancar').prop('disabled', true);
+                preLoad();
+                var mut_ait = $('#Mut_AIT').val();
+                var numeroprocesso = $("#Pro_Numero").val()
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ NumeroProcesso: numeroprocesso, Mut_ait : mut_ait }),
+                    url: '@Url.Action("RecusarProcesso", "apresentacaocondutor")',
+
+                    success: function (data) {
+                        if (data.error == true) {
+                            posLoad();
+                            swal("Ops!", "Houve uma falha de comunicação, entre em contato com o administrador do sistema", "error");
+                            return false;
+                        }
+                       else {
+                             posLoad();
+                            swal("Processo recusado com sucesso.", "", "success")
+                            .then(() => {
+                               window.location.href = data.redirectUrl;
+                            });
+                        }
+                    },
+
+                    error: function () {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                        .then(() => {
+                            location.reload();
+                        });
+                    }
+                });
+            }
+        });
+    });
+
+
+    function RedirectUrl(redirectUrl, mut_ait, pro_Numero) {
+        var form = $('<form action="' + redirectUrl + '" method="post">' +
+            '<input type="hidden" name="mut_ait" value="' + mut_ait + '" />' +
+            '<input type="hidden" name="pro_Numero" value="' + pro_Numero + '" />' +
+            '</form>');
+
+        $('body').append(form);
+        $(form).submit();
+    }
+
+
+    function openModal() {
+        document.getElementById("myModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+
+</script>
+
+
+
+

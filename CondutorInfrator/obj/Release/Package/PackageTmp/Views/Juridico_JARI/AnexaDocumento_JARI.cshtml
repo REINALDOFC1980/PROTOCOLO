@@ -1,0 +1,979 @@
+﻿@model CondutorInfrator.Models.ProcessoViewModel
+
+@{
+    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+    var Pes_TipoPessoa = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+}
+
+<div class="container">
+
+
+    @*<div class="row">
+        <div class="col-md-12 text-center">
+            <p class="numero-protocolo">
+                N° Processo: @Html.DisplayFor(model => model.Pro_Numero, new { htmlAttributes = new { @class = "form-control", id = "Pro_Numero" } })
+                @Html.EditorFor(model => model.Pro_Numero, new { htmlAttributes = new { @class = "form-control", id = "Pro_Numero", style = "display:none" } })
+            </p>
+        </div>
+    </div>*@
+
+
+    <div class="conteudo">
+        <div class="row">
+            <div class="col-md-1 text-center">
+                <img src="~/img/Assitente.png" />
+            </div>
+            <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+                <h5>
+                    <strong>
+                        Etapa Final!  Agora é anexar os documentos e finalizar o processo.  Antes de anexar, realize a impressão do formulário.
+                    </strong>
+                </h5>
+
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            @{
+                var status = Model.StsPro_Descricao;
+                if (status == "Liberado para Correção")
+
+                {<div class="row">
+                        <div class="col-md-9">
+                            <div class="lista-situacao">
+                                <ul>
+                                    <li class="ativo">
+                                        <span>#</span>
+                                        <h2>Status Atual do Processo:</h2>
+                                        <p>
+                                            <a href="http://www.transalvador.salvador.ba.gov.br/conteudo/index.php/multa/consultaProcessoMulta" id="mytooltip" data-toggle="tooltip" title="@Html.DisplayFor(model => model.StsPro_Orientacao, new { htmlAttributes = new { @class = "form-control", id = "StsPro_Orientacao", } })"
+                                               data-placement="right">@Html.DisplayFor(model => model.StsPro_Descricao, new { htmlAttributes = new { @class = "form-control", id = "StsPro_Descricao", } })</a>
+                                            <br>
+                                            <strong> @Html.DisplayFor(model => model.Mot_Descricao, new { htmlAttributes = new { @class = "form-control", id = "Mot_Descricao" } })</strong>
+
+                                        </p>
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <h3>PJ - Anexar Documento</h3>
+            </div>
+            @*<div class="col-md-3 text-right text-danger" style="font-style: italic">
+                <h5>
+                    <img src="~/img/Assitente (1).png" />  <strong>Mais informações? @Html.ActionLink("Clique aqui!", "informacao_importante", "pessoa")</strong>
+                </h5>
+            </div>*@
+        </div>
+        <br />
+
+
+        @using (Html.BeginForm("", "", FormMethod.Post, new { id = "form", name = "form" }))
+        {
+            <div class="row">
+
+                <div class="col-md-6">
+                    <h3>Informações do Requerente</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_CPF_CNPJ)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_CPF_CNPJ, new { htmlAttributes = new { @class = "form-control", id = "Ptr_CPF_CNPJ" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_CPF_CNPJ, new { id = "Ptr_CPF_CNPJ", name = "Ptr_CPF_CNPJ" })</td>
+                                @Html.HiddenFor(model => model.Con_ConfirmarAceite)
+                                @Html.HiddenFor(model => model.Con_Cadastrado)
+                                @Html.HiddenFor(model => model.Ptr_TipoEmpresa)
+                                @Html.HiddenFor(model => model.AnexoPendente)
+                                @Html.HiddenFor(model => model.StsPro_Descricao)
+                                @Html.HiddenFor(model => model.ativarmensagem, new { id = "ativarmensagem", name = "ativarmensagem" })
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Nome)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_Nome, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Nome" } })</td>
+                                <td>@Html.HiddenFor(model => model.Pro_Numero, new { id = "Pro_Numero", name = "Pro_Numero" })</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Logradouro)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Logradouro, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Logradouro" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Logradouro)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Bairro)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Bairro, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Bairro" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Bairro)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Complemento)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Complemento, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Complemento" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Complemento)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Cidade)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Cidade, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Cidade" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Cidade)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Estado)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Estado, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Estado" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Estado)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_CEP)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_CEP, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_CEP" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_CEP)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Telefone)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_Telefone, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Telefone" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_Telefone)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Email)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_Email, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Emai" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_Email)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h3>Informações do Veículo</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Placa)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_Placa, new { htmlAttributes = new { @class = "form-control", id = "Vec_Placa" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_Placa)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_RENAVAN)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_RENAVAN, new { htmlAttributes = new { @class = "form-control", id = "Vec_RENAVAN" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_RENAVAN)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Ano)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_Ano, new { htmlAttributes = new { @class = "form-control", id = "Vec_Ano" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_Ano)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Marca)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_Marca, new { htmlAttributes = new { @class = "form-control", id = "Vec_Marca" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_Marca)</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h3>Informações da Multa</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_AIT)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_AIT, new { htmlAttributes = new { @class = "form-control", id = "Mut_AIT" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_AIT, new { @id = "Mut_AIT", @name = "Mut_AIT" })</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_CodigoInfracao)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_CodigoInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_CodigoInfracao" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_CodigoInfracao)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_DataInfracao)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_DataInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_DataInfracao" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_DataInfracao)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_DescricaoInfracao)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_DescricaoInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_DescricaoInfracao" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_DescricaoInfracao)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <div class="text-left">
+                <p><strong>Tipo de Pessoas Jurídicas(Proprietário do Veículo)</strong></p>
+                <label class="pure-material-checkbox">
+                    <input type="checkbox" name="Chk_Socio" , id="Chk_Socio" onclick="Func_desmarcar2()">
+                    <span>Sócio/Proprietário</span>
+                </label>
+                <br />
+                <label class="pure-material-checkbox">
+                    <input type="checkbox" name="Veiculo_chk" , id="Veiculo_chk" onclick="Func_desmarcar1()">
+                    <span>Veículo em nome de Órgão Público</span>
+                </label>
+            </div>
+
+            <div class="row">
+                <h3>Anexo</h3>
+                <div class="col-md-12" style="padding:0;">
+                    <div class="row" style="font-size:80%;">
+
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <p>
+                                <strong>
+                                    <span style="color:red">
+                                        Prezado cidadão, certifique-se que o formato original seja PDF (obrigatório) e o tamanho máximo do arquivo é de 2.0 MB. Caso o sistema não aceite o anexo é possível que o arquivo esteja corrompido. Sugerimos salvar o arquivo novamente em formato PDF e tentar o reenvio.<br />
+                                        É obrigatório para abrir o processo anexar o pedido de recurso devendo escolher abaixo se petição própria ou requerimento padrão.<br />
+                                        A falta de documentos obrigatórios, legibilidade, erros de preenchimento, falta de assinatura poderá ter a análise prejudicada pelo julgador.<br />
+                                        <strong>
+                                            Ao finalizar o registro do processo, caso apareça mensagem de erro, será necessário anexar toda documentação novamente.<br />
+                                            Antes de finalizar a abertura conferir se os documentos anexados estão completos, no tamanho e formato permitidos, legíveis (nunca posicionados de cabeça para baixo).
+                                        </strong><br />
+                                    </span>
+                                </strong>
+                            </p>
+                            <br />
+                            <label> Deseja imprimir o Requerimento do Recurso?</label>
+                            <button type="button" class="btn btn-primary btn-transalvador" id="BtnFormulario" onclick="ImpressaoAgendamento()"> Imprimir Requerimento do Recurso</button>
+                            <br />
+                            <br />
+
+                            <div class="text-left">
+                                <label class="pure-material-checkbox">
+                                    <input type="checkbox" name="ConfirmarPeticao" , id="ConfirmarPeticao" onclick="habilitarPeticao()">
+                                    <span>Desejo anexar Petição.</span>
+                                </label>
+                            </div>
+
+                            @*<p><div id="DivPETICAO">Requerimento de Recurso Padrão constando assinatura original do Requerente ou Petição constando os dados mínimos exigidos pela legislação / Formato(PDF) <span style="color:red">*</span><input type="file" class="filestyle" id="PETICAO" , name="PETICAO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vPETICAO">Campo Petição Obrigatório</div>*@
+
+                            <p><div id="DivREQDEFESA">Requerimento de Recurso Padrão constando assinatura original do Requerente ou Petição constando os dados mínimos exigidos pela legislação / Formato(PDF) <span style="color:red">*</span> <input type="file" class="filestyle" id="REQDEFESA" , name="REQDEFESA" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vREQDEFESA">Campo Requerimento Obrigatório</div>
+
+                            <p><div id="DivFORMULARIO_INDICACAO">Notificação de Imposição de Penalidade - NIP / Formato(PDF) Tamanho: 2.0 Mb.<input type="file" class="filestyle" id="NOTIFICACAO_PENALIDADE" , name="NOTIFICACAO_PENALIDADE" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)" required></div></p>
+                            <div class="alert-box failure text text-center" id="vNOTIFICACAO_PENALIDADE">Notificação de Imposição de Penalidade - NIP </div>
+
+                            <p><div id="DivCRLV">Documento do Veículo - CRLV / Formato(PDF) Tamanho: 2.0 Mb.<input type="file" class="filestyle" id="CRLV" , name="CRLV" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)" required></div></p>
+                            <div class="alert-box failure text text-center" id="vCRLV">Documento do Veículo - CRLV</div>
+
+                            <p><div id="DivDOC_DIRIGENTE">Documento de Identificação (RG, CNH ou outro documento que comprove assinatura) do Dirigente do órgão / Formato(PDF) Tamanho: 2.0 Mb.<input type="file" class="filestyle" id="DOC_DIRIGENTE" , name="DOC_DIRIGENTE" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)" required></div></p>
+                            <div class="alert-box failure text text-center" id="vDOC_DIRIGENTE">Documento de Identificação (RG, CNH ou outro documento que comprove assinatura) do Dirigente do órgão</div>
+
+                            <p><div id="DivPORTARIA_NOMEACAO">Portaria de nomeação comprovando o cargo de direção no órgão / Formato(PDF) Tamanho: 2.0 Mb.<input type="file" class="filestyle" id="PORTARIA_NOMEACAO" , name="PORTARIA_NOMEACAO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)" required></div></p>
+                            <div class="alert-box failure text text-center" id="vPORTARIA_NOMEACAO">Portaria de nomeação comprovando o cargo de direção no órgão</div>
+
+                            <p><div id="DivCONTRATO_SOCIAL">Contrato Social / Formato(PDF) Tamanho: 2.0 Mb.<input type="file" class="filestyle" id="CONTRATO_SOCIAL" , name="CONTRATO_SOCIAL" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)" required></div></p>
+                            <div class="alert-box failure text text-center" id="vCONTRATO_SOCIAL">Contrato Social</div>
+
+                            <p><div id="DivDOC_SOCIO">Documento de Identificação (RG, CNH ou outro documento que comprove assinatura) do sócio/proprietário que figura no Contrato Social / Formato(PDF) Tamanho: 2.0 Mb. <input type="file" class="filestyle" id="DOC_SOCIO" , name="DOC_SOCIO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)" required></div></p>
+                            <div class="alert-box failure text text-center" id="vDOC_SOCIO">Documento de Identificação (RG, CNH ou outro documento que comprove assinatura) do sócio/proprietário que figura no Contrato Social / Formato(PDF) Tamanho: 2.0 Mb.</div>
+
+                            <p><div id="DivCOMPROBATORIOS">Documentos comprobatórios do alegado do Recurso / Formato(PDF) Tamanho: 2.0 Mb.<input type="file" class="filestyle" id="COMPROBATORIOS" , name="COMPROBATORIOS" data-buttonText="Multiplos Anexo" accept="application/pdf" onchange="ValidateSizePDF(this)" multiple></div></p>
+                            <p><strong><small><span style="color:red">Caso deseja enviar mais de um anexo, recomendamos que adicione todos em uma unica pasta, dessa forma você poderá selecionar vários arquivos, pressione a tecla Ctrl e clique em cada item desejado.</span></small></strong></p>
+                            <br />
+                            <p>
+                                <div id="DivPROCURACAO">Procuração Pública, quando for o caso / Formato(PDF) Tamanho: 2.0 Mb. <span style="color:red">*</span><input type="file" class="filestyle" id="PROCURACAO" , name="PROCURACAO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)" ></div>
+                            </p>
+                            <div class="alert-box failure text text-center" id="vPROCURACAO">Campo Procuração Obrigatório.</div>
+
+                            <p><div id="DivDOC_PROCURACAO">Documento oficial com foto do procurador, quando for o caso / Formato(PDF)  Tamanho: 2.0 Mb. <span style="color:red">*</span> <input type="file" class="filestyle" id="DOC_PROCURACAO" , name="DOC_PROCURACAO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vDOC_PROCURACAO">Campo Documento do Procurador Obrigatório.</div>
+
+
+                        </div>
+                        <br />
+                        <div class="text-left">
+                            <label class="pure-material-checkbox">
+                                <input type="checkbox" name="ConfirmarProcuracao" , id="ConfirmarProcuracao" onclick="habilitarProcuracao()">
+                                <span>
+                                    Procuração/habilitar campo para anexar, quando for o caso.
+                                </span>
+                            </label>
+                        </div>
+                        <br />
+                        <strong><small>(<span style="color:red"> *</span> ) Campo obrigatório.</small></strong>
+
+                        <br />
+
+
+                        <a href="~/img/exemplo-pdf.pdf"></a>
+                        <div class="text-left" style="font-size:12px;">
+                            @*<br>- O proprietário do veículo responde nas esferas penal, cível e administrativa pela veracidade das informações e dos documentos fornecidos.
+                              <br>- O comprovante de residência do proprietário anexado deve ser o atual (até três meses).*@
+                            @*<br>- O endereço do comprovante de residência do proprietário deve ser o mesmo informado no cadastro.*@
+                            <br>- Os documentos anexados devem ser originais, não serão aceitas cópias autenticadas.
+                            <br>- O documento de identificação do sócio/proprietário deve figurar no Contrato Social.
+                            <br>- O procurador deve representar o sócio/proprietário ou a empresa (neste caso representando todos os sócios/proprietários) e somente será aceito mediante documento comprobatório (Procuração lavrada em cartório).
+                            <br />
+                            <p>
+                                - Ao selecionar a opção "Eu concordo", você concorda com os Termos da Superintendência de Trânsito de Salvador (TRANSALVADOR).
+                            </p>
+                        </div>
+                        <label for="">Política de Privacidade</label>
+                        <p>
+                            • Declaro para os devidos fins, que as informações referentes ao cadastro para adesão ao TRANSALVADOR Digital são
+                            verdadeiras, sob pena de ser responsabilizado(a) cível, penal e administrativamente.
+                        </p>
+                        @*<div class="text-left">
+                            <label class="pure-material-checkbox">
+                                <input type="checkbox" name="ConfirmarChk" , id="ConfirmarChk" onchange="habilitar()">
+                                <span>Eu concordo</span>
+                            </label>
+                        </div>*@
+                        <br />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-primary" id="BtSair" data-dismiss="modal">Sair</button>
+                                    <button type="button" class="btn btn-primary btn-lg btn-transalvador" data-toggle="modal" id="BtDesejaConfirmar">Próximo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        <!-- Modal -->
+
+        <div class="modal fade" id="modalConfirmacao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacao"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="col-md-4" style="padding: 0;">
+                    <div class="alerta-atencao text-center">
+                        <img src="~/img/warning.svg" width="120">
+                    </div>
+                </div>
+                <div class="col-md-8" style="padding: 0;">
+                    <div class="mensagem-modal modal-atencao text-center">
+                        @*<h4>Finalizar Registro do Processo</h4>
+                        <p>
+                            Deseja finalizar o registro do processo de Recurso JARI? Nenhuma informação ou documentação poderá ser modificada após a confirmação.<br />
+                            <strong> Acompanhe seu processo no site da TRANSALVADOR.</strong>
+                        </p>*@
+
+                        <h4>Recomendação!</h4>
+                        <p>
+                            Na proxima pagina revise toda documentação anexada, o cumprimento das regras e legislação,
+                            pois uma vez encaminhado não será possível fazer modificações, seguindo o processo imediatamente para análise.<br />
+                        </p>
+
+                        <div class="col-md-12 modal-footer">
+                            <div class="text-center">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" id="BtGerarProcesso" name="BtGerarProcesso"> Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    window.onload = function () {
+        noBack();
+    }
+    function noBack() {
+        window.history.forward();
+    }
+
+
+    $('#BtSair').click(function () {
+         window.location.href = '@Url.Action("processosabertos", "processo")';
+
+    });
+
+    //document.getElementById('BtDesejaConfirmar').setAttribute("disabled", "disabled");
+    document.getElementById('Chk_Socio').checked = 1
+    $("#ativarmensagem").val(0)
+
+   /* $("#DivPETICAO").hide();*/
+    $("#DivPROCURACAO").hide();
+    $("#DivDOC_PROCURACAO").hide();
+
+    //style botão file
+    $('.btnArquivo').on('click', function () {
+        $('.arquivo').trigger('click');
+    });
+
+    $('.arquivo').on('change', function () {
+        var fileName = $(this)[0].files[0].name;
+        $('#file').val(fileName);
+    });
+
+
+
+  
+    function habilitarPeticao() {
+        if (document.getElementById('ConfirmarPeticao').checked) {
+          /*  $("#DivPETICAO").show();*/
+            $("#DivREQDEFESA").show();
+        } else {
+           /* $("#DivPETICAO").hide();*/
+            $("#DivREQDEFESA").show();
+        }
+    }
+    function habilitarProcuracao() {
+        if (document.getElementById('ConfirmarProcuracao').checked) {
+            $("#DivPROCURACAO").show();
+            $("#DivDOC_PROCURACAO").show();
+
+        } else {
+            $("#DivPROCURACAO").hide();
+            $("#DivDOC_PROCURACAO").hide();
+        }
+    }
+
+
+    anexoocuto();
+
+    $("#DivCOMPROBATORIOS").show();
+    $("#DivREQDEFESA").show();
+    $("#DivFORMULARIO_INDICACAO").show();
+    $("#DivCRLV").show();
+    $("#DivCONTRATO_SOCIAL").show();
+    $("#DivDOC_SOCIO").show();
+
+
+    function anexoocuto() {
+        $("#DivCOMPROBATORIOS").hide();
+        $("#DivFORMULARIO_INDICACAO").hide();
+        $("#DivREQDEFESA").hide();
+        $("#DivCRLV").hide();
+        $("#DivDOC_DIRIGENTE").hide();
+        $("#DivPORTARIA_NOMEACAO").hide();
+        $("#DivCONTRATO_SOCIAL").hide();
+        $("#DivDOC_SOCIO").hide();
+        $("#DivDOC_REQUERENTE").hide();
+
+        $('.bootstrap-filestyle :input').val('');
+
+        $("#COMPROBATORIOS").val('');
+        $("#NOTIFICACAO_PENALIDADE").val('');
+        $("#REQDEFESA").val('');
+        $("#CRLV").val('');
+        $("#COMPROVANTE_EMPRESA").val('');
+        $("#DOC_DIRIGENTE").val('');
+        $("#PORTARIA_NOMEACAO").val('');
+        $("#CONTRATO_SOCIAL").val('');
+        $("#DOC_SOCIO").val('');
+        $("#DOC_REQUERENTE").val('');
+    }
+
+
+                                            //Veículo em nome de Órgão Público
+    function Func_desmarcar1() {
+        $("#ativarmensagem").val(0);
+        if (document.getElementById('Veiculo_chk').checked) {
+
+            //document.getElementById('Veiculo_chk').checked = 1
+            document.getElementById('Chk_Socio').checked = 0
+            //document.getElementById('Chk_Procurado').checked = 0
+
+            anexoocuto();
+            $("#DivCOMPROBATORIOS").show();
+            if (document.getElementById('ConfirmarPeticao').checked == 0) {
+                $("#DivREQDEFESA").show();
+            }
+           // $("#DivREQDEFESA").show();
+            $("#DivFORMULARIO_INDICACAO").show();
+            //$("#DivCOMPROVANTE_EMPRESA").show();
+            $("#DivCRLV").show();
+            $("#DivDOC_DIRIGENTE").show();
+            $("#DivPORTARIA_NOMEACAO").show();
+
+        } else {
+            document.getElementById('Veiculo_chk').checked = 1;
+        }
+    }
+
+
+    //Sócio/Proprietário
+    function Func_desmarcar2() {
+        $("#ativarmensagem").val(0);
+        if (document.getElementById('Chk_Socio').checked) {
+
+            //document.getElementById('Chk_Socio').checked = 1
+            document.getElementById('Veiculo_chk').checked = 0
+            //document.getElementById('Chk_Procurado').checked = 0
+
+            anexoocuto();
+            if (document.getElementById('ConfirmarPeticao').checked == 0) {
+                $("#DivREQDEFESA").show();
+            }
+            $("#DivCOMPROBATORIOS").show();
+            $("#DivFORMULARIO_INDICACAO").show();
+            //$("#DivCOMPROVANTE_EMPRESA").show();
+            $("#DivCRLV").show();
+            $("#DivCONTRATO_SOCIAL").show();
+            $("#DivDOC_SOCIO").show();
+
+
+        } else
+            document.getElementById('Chk_Socio').checked = 1;
+    }
+
+    
+    //function habilitar() {
+    //    if (document.getElementById('ConfirmarChk').checked) {
+    //        document.getElementById('BtDesejaConfirmar').removeAttribute("disabled");
+    //    }
+    //    else {
+    //        document.getElementById('BtDesejaConfirmar').setAttribute("disabled", "disabled");
+    //    }
+    //}
+
+
+    function bloquearCampos(status) {
+
+        if (status == "sim") {
+            $('#BtGerarProcesso').prop('disabled', true);
+            $("#BtnDocumento").prop("disabled", true);
+            $('#BtGerarCancelar').prop('disabled', true);
+            $('#BtnFormulario').prop('disabled', true);
+
+            preLoad();
+        }
+        else {
+            $('#BtGerarProcesso').prop('disabled', false);
+            $("#BtnDocumento").prop("disabled", false);
+            $('#BtGerarCancelar').prop('disabled', false);
+            $('#BtnFormulario').prop('disabled', false);
+
+            posLoad();
+        }
+
+    }
+    var mut_ait = $('#Mut_AIT').val();
+    var con_cpf = $('#Con_CPF').val();
+
+
+    function ValidateSizeIMG(file) {
+
+        var qtde = file.files.length; // CONTA QUANTOS TEM
+        var tamanho = 0;
+
+        for (i = 0; i < qtde; i++) {
+            tamanho += file.files[i].size / 1024 / 1024 //Mb
+        }
+
+        if (tamanho > 2) {
+            swal("Tamanho inválido!", "A soma de todos os arquivos não pode ultrapassar 2 MB.", "warning");
+            $(file).val('')
+            return false;
+        }
+
+        for (i = 0; i < qtde; i++) {
+            var formato = file.files[i].type;
+            if (formato != "image/jpeg") {
+                swal("Formato inválido!", "Apenas imagem no formato (Jpeg ou JPG).", "warning");
+                $(file).val('')
+                return false;
+            }
+        }
+    }
+
+    function ValidateSizeIMGPDF(file) {
+
+        var qtde = file.files.length; // CONTA QUANTOS TEM
+        var tamanho = 0;
+
+        for (i = 0; i < qtde; i++) {
+            tamanho += file.files[i].size / 1024 / 1024 //Mb
+        }
+
+        if (tamanho > 2) {
+            if (formato == "image/jpeg") {
+                swal("Tamanho inválido!", "A soma de todos os arquivos não pode ultrapassar 2 MB.", "warning");
+                $(file).val('')
+                return false;
+            }
+
+        }
+
+        for (i = 0; i < qtde; i++) {
+            var formato = file.files[i].type;
+            if (formato != "image/jpeg" && formato != "application/pdf") {
+                swal("Formato inválido!", "Apenas imagem no formato (PDF, Jpeg ou JPG).", "warning");
+                $(file).val('')
+                return false;
+            }
+        }
+    }
+
+
+    $('#COMPROBATORIOS').change(function () {
+
+        var files = this.files; // SELECIONA OS ARQUIVOS
+        var qtde = files.length; // CONTA QUANTOS TEM
+        var tamanho = 0;
+
+        for (i = 0; i < qtde; i++) {
+            tamanho += files[i].size / 1024 / 1024 //Mb
+        }
+
+        if (tamanho > 5) {
+            swal("Tamanho inválido!", "A soma de todos os arquivos não pode ultrapassar 5 MB.", "warning");
+            $('#COMPROBATORIOS').val("");
+            return false;
+        }
+    });
+
+
+    function ValidateSizePDF(file) {
+
+        var formato = file.files[0].type;
+        if (formato != "application/pdf") {
+            swal("Formato invalido!", "Apenas arquivo no formato (PDF).", "warning");
+            $(file).val('')
+            return false;
+        }
+
+        var FileSize = file.files[0].size / 1024 / 1024; // in MB
+        if (FileSize > 2) {
+            swal("Tamanho inválido!", "Apenas arquivo até 2 MB.", "warning");
+            $(file).val('')
+            return false;
+        }
+    }
+
+    //mensagemAnexo
+    function Func_mensagem_anexo(texto ) {
+
+        $('#AnexoPendente').val("6");
+        var content = document.createElement('div');
+        content.innerHTML = texto;
+
+        swal({
+            title: 'Aviso importante!',
+            content: content,
+            icon: "warning",
+            buttons: [
+                'Não',
+                'Sim'
+            ],
+        }).then((willDelete) => {
+            if (willDelete) {
+                $('#modalConfirmacao').modal('show');
+            }
+            else//finaliza caso nao deseje alterar a senha
+            {
+                var is_empty = false;
+                var campo;
+                $('[required]').each(function (idx, elem) {
+                    is_empty = is_empty || ($(elem).val() == '');
+                    if ($(elem).val() == '') {
+
+                        campo = $(elem).attr('id');
+
+                        if (campo == "NOTIFICACAO_PENALIDADE")
+                            campo_obrigatorio('#vNOTIFICACAO_PENALIDADE', '#DivNOTIFICACAO_PENALIDADE', '#NOTIFICACAO_PENALIDADE');
+                        else if (campo == "CRLV")
+                            campo_obrigatorio('#vCRLV', '#DivCRLV', '#CRLV');
+                        if (document.getElementById('Chk_Socio').checked) {
+                            if (campo == "CONTRATO_SOCIAL")
+                                campo_obrigatorio('#vCONTRATO_SOCIAL', '#DivCONTRATO_SOCIAL', '#CONTRATO_SOCIAL');
+                            else if (campo == "DOC_SOCIO")
+                                campo_obrigatorio('#vDOC_SOCIO', '#DivDOC_SOCIO', '#DOC_SOCIO');
+
+                        } else {
+                            if (campo == "PORTARIA_NOMEACAO")
+                                campo_obrigatorio('#vPORTARIA_NOMEACAO', '#DivPORTARIA_NOMEACAO', '#PORTARIA_NOMEACAO');
+                            if (campo == "DOC_DIRIGENTE")
+                                campo_obrigatorio('#vDOC_DIRIGENTE', '#DivDOC_DIRIGENTE', '#DOC_DIRIGENTE');
+                        }
+                    }
+                });
+
+                posLoad();
+                return false;
+            }
+        });
+
+    }
+
+
+
+
+
+
+        //    if ($('#NOTIFICACAO_PENALIDADE').val() == "")
+        //        Func_mensagem_anexo("Formulário de Indiciação")
+        //    else if ($('#DOC_REQUERENTE').val() == "")
+        //        Func_mensagem_anexo("Documento do Requerente")
+        //    else if ($('#CRLV').val() == "")
+        //        Func_mensagem_anexo("CRLV")
+        //    else if ($('#CONTRATO_SOCIAL').val() == "")
+        //        Func_mensagem_anexo("Contrato Social")
+        //    else AnalisarAIT()            
+        //} else {
+        //    if ($('#NOTIFICACAO_PENALIDADE').val() == "")
+        //        Func_mensagem_anexo("Formulário de Indiciação")
+        //    else if ($('#DOC_REQUERENTE').val() == "")
+        //        Func_mensagem_anexo("Documento do Requerente")
+        //    else if ($('#CRLV').val() == "")
+        //        Func_mensagem_anexo("CRLV")
+        //    else if ($('#PORTARIA_NOMEACAO').val() == "")
+        //        Func_mensagem_anexo("Portaria de nomeação")
+        //    else AnalisarAIT()
+
+
+
+    function Func_validar_anexo() {
+
+        //if (($('#PETICAO').val()) == "" && (document.getElementById('ConfirmarPeticao').checked)) {
+        //    campo_obrigatorio('#vPETICAO', '#DivPETICAO', '#PETICAO');
+        //    return false;
+        //}
+
+        if (($('#REQDEFESA').val()) == "" && (document.getElementById('ConfirmarPeticao').checked == 0)) {
+            campo_obrigatorio('#vREQDEFESA', '#DivREQDEFESA', '#REQDEFESA');
+            return false;
+        }
+
+        if (($('#PROCURACAO').val()) == "" && (document.getElementById('ConfirmarProcuracao').checked)) {
+            campo_obrigatorio('#vPROCURACAO', '#DivPROCURACAO', '#PROCURACAO');
+            return false;
+        }
+
+        if (($('#DOC_PROCURACAO').val()) == "" && (document.getElementById('ConfirmarProcuracao').checked)) {
+            campo_obrigatorio('#vDOC_PROCURACAO', '#DivDOC_PROCURACAO', '#DOC_PROCURACAO');
+            return false;
+        }
+
+        var is_empty = false;
+        var campo;
+        var texto = "";
+        $('[required]').each(function (idx, elem) {
+            is_empty = is_empty || ($(elem).val() == '');
+            if ($(elem).val() == '') {
+
+                campo = $(elem).attr('id');
+
+                if (campo == "NOTIFICACAO_PENALIDADE")
+                    texto = "Notificação de Imposição de Penalidade (NIP)";
+                else if (campo == "CRLV")
+                    texto = texto + " - " + "Documento do veículo (CRLV)";
+
+                if (document.getElementById('Chk_Socio').checked) {
+                    if (campo == "CONTRATO_SOCIAL")
+                        texto = texto + " - " + " Contrato Social";
+                    else if (campo == "DOC_SOCIO")
+                        texto = texto + " - " + " Documento de Identificação (RG, CNH ou outro documento que comprove a assinatura)";
+
+                } else {
+                    if (campo == "PORTARIA_NOMEACAO")
+                        texto = texto + " - " + "Portaria de nomeação";
+                    if (campo == "DOC_DIRIGENTE")
+                        texto = texto + " - " + "Documento de Identificação (RG, CNH ou outro documento que comprove o Dirigente)";
+                }
+            }
+        });
+        
+        if (texto != "") {
+            var textofinal = ("Prezado (a), informamos que <strong> " + texto + "</strong>  documento(s) previsto(s) na Resolução 299/2008, caso não sejam anexado(s), o processo poderá ser julgado com prejuízo. Deseja finalizar o registro do processo?");
+            Func_mensagem_anexo(textofinal);
+        } else {
+                AnalisarAIT();
+        }          
+    }
+    
+
+
+    $(document).ready(function () {
+
+        $('#BtDesejaConfirmar').click(function () {
+
+            Func_validar_anexo();
+        })
+
+        $("#BtGerarProcesso").click(function () {
+
+            $('#modalConfirmacao').modal('hide');
+            finalizarprocesso();
+       });
+    });
+
+
+
+     function AnalisarAIT() {
+
+        var form = $('form')[0];
+        var fileData = new FormData(form);
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AnalisarAIT", "jari")',
+            dataType: "json",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: fileData,
+            success: function (data) {
+                if (data.id == 'JA_Erro_1') {
+                    swal({
+                        title: "Aviso!",
+                        text: data.mensagem_erro,
+                        icon: "warning",
+                        Html: true,
+                        textAlign: "left",
+
+                        buttons: [
+                            'Não',
+                            'Sim'
+                        ],
+
+                    }).then((willDelete) => {
+                        if (willDelete)
+                            $('#modalConfirmacao').modal('show');
+                        else {
+                            posLoad();
+                            return false;
+                        }
+                    });
+                } else if (data.id == 'JA_Erro') {
+                             posLoad();
+                             swal("Ops!", data.mensagem_erro, "warning").then(() => {
+                             window.location.href = '@Url.Action("processosabertos", "processo")';
+                             return false;
+                            });
+                } else{
+                        $('#modalConfirmacao').modal('show');
+                       }
+
+            },
+            error: function () {
+                posLoad();
+                swal("Ops!", "Houve uma falha de comunicação. Retorne ao status anterior, anexe novamente os documentos e reenvie. ", "error");
+                bloquearCampos('não');
+                return false;
+            }
+        });
+    }
+
+
+
+    function finalizarprocesso() {
+
+        if (document.getElementById('Veiculo_chk').checked)
+            $("#Ptr_TipoEmpresa").val("Orgão")
+        else if (document.getElementById('Chk_Socio').checked)
+            $("#Ptr_TipoEmpresa").val("Sócio")
+        else if (document.getElementById('Chk_Procurado').checked)
+            $("#Ptr_TipoEmpresa").val("Procurador");
+
+            var form = $('form')[0];
+            var fileData = new FormData(form);
+
+            preLoad();
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("FinalizarAberturaJARI", "Juridico_Jari")',
+                dataType: "json",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+
+                success: function (data) {
+                    if (data.img == true) {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, um ou mais documentos não foram anexados, anexe novamente os documentos e reenvie. ", "error")
+                            .then(() => {
+                                location.reload();
+                            });
+                    } else
+                    if (data.error == true) {
+                        posLoad();
+                        bloquearCampos('não');
+                        swal("Ops!", "Houve uma falha de comunicação. Retorne ao status anterior, anexe novamente os documentos e reenvie.", "error");
+                        return false;
+                    } else
+                    if (data.formatoimg == false) {
+                        posLoad();
+                        swal("Erro Anexo!", "O anexo: " + data.imagemerro + " está corrompido ou em um formato errado, o sistema só aceita formato JPEG ou JPG.", "error");
+                        return false;
+                    } else {
+                      
+
+                        posLoad();
+                        RedirectUrl(data.redirectUrl, data.pro_numero, data.Restricao, data.tempestivo)
+
+                        //posLoad();
+                        //var TextFinal = "Seu processo foi gerado e distribuído automaticamente para julgamento. Acompanhe seu processo pelo site da TRANSALVADOR."
+                        //var content = document.createElement('div');
+                        //content.innerHTML = '<strong>' + TextFinal + '</strong>';
+
+                        //swal({
+                        //    title: 'Procedimento realizado com sucesso!',
+                        //    content: content,
+                        //    icon: "success",
+                        //})
+                        //.then(() => {
+                        //  //  window.location.href = data.redirectUrl;
+                        //    RedirectUrl(data.redirectUrl, data.pro_numero)
+                        //});
+                    }
+                },
+            error: function () {
+                posLoad();
+                bloquearCampos('não');
+                swal("Ops!", "Houve uma falha de comunicação. Retorne ao status anterior, anexe novamente os documentos e reenvie. ", "error")
+                .then(() => {
+                    location.reload();
+                });
+            }
+            });
+
+    }
+
+    function RedirectUrl(redirectUrl, pro_numero, Restricao, tempestivo) {
+        var form = $('<form action="' + redirectUrl + '" method="post">' +
+            '<input type="hidden" name="pro_Numero" value="' + pro_numero + '" />' +
+            '<input type="hidden" name="Restricao" value="' + Restricao + '" />' +
+            '<input type="hidden" name="tempestivo" value="' + tempestivo + '" />' +
+            '</form>');
+
+        $('body').append(form);
+        $(form).submit();
+    }
+
+    function ImpressaoAgendamento() {
+        swal({
+            title: "Deseja imprimir o requerimento? ",
+            text: "As informações do Formulário de Requerimento somente poderão ser modificadas enquanto o registro do processo não for finalizado. Para atualizar as informações do requerimento deve ser solicitado um nova impressão.",
+            icon: "warning",
+            Html: true,
+            textAlign: "left",
+
+            buttons: [
+                'Não',
+                'Sim'
+            ],
+
+        }).then((willDelete) => {
+            if (willDelete) {
+
+                var peticao = "";
+                var numeroait = $('#Mut_AIT').val();
+
+                var URL = '@Url.Action("ImprimirFormulario", "Juridico_jari")?numeroait=' + numeroait + '&peticao=' + peticao;
+                window.open(URL, '_blank');
+
+            }
+            else//finaliza caso nao deseje alterar a senha
+            {
+
+                posLoad();
+                return false;
+            }
+        });
+    }
+
+
+</script>

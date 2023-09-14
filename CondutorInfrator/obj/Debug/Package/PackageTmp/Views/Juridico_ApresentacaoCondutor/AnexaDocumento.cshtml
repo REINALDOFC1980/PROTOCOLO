@@ -1,0 +1,1020 @@
+﻿@model CondutorInfrator.Models.ProcessoViewModel
+
+@{
+    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+    var Pes_TipoPessoa = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+}
+
+<div class="container">
+
+
+
+
+    <div class="conteudo">
+        <div class="row">
+            <div class="col-md-1 text-center">
+                <img src="~/img/Assitente.png" />
+            </div>
+            <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+                <h5>
+                    <strong>
+                        Etapa Final!  Agora é anexar os documentos e finalizar o processo.  Antes de anexar, realize a impressão do formulário.
+                    </strong>
+                </h5>
+
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            @{
+            var status = Model.StsPro_Descricao;
+            if (status == "Liberado para Correção")
+
+            {
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="lista-situacao">
+                            <ul>
+                                <li class="ativo">
+                                    <span>#</span>
+                                    <h2>Status Atual do Processo:</h2>
+                                    <p>
+                                        <br>
+                                        <a href="#" id="mytooltip" data-toggle="tooltip" title="@Html.DisplayFor(model => model.StsPro_Orientacao, new { htmlAttributes = new { @class = "form-control", id = "StsPro_Orientacao", } })"
+                                            data-placement="right">@Html.DisplayFor(model => model.StsPro_Descricao, new { htmlAttributes = new { @class = "form-control", id = "StsPro_Descricao", } })</a>
+                                        <br>
+                                        <strong> @Html.DisplayFor(model => model.Motivo_reprovacao, new { htmlAttributes = new { @class = "form-control", id = "Motivo_reprovacao" } })</strong>
+                                    </p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            }
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Anexar Documento</h3>
+            </div>
+            @*<div class="col-md-4 text-right text-danger">
+                <h5>
+                    <small style="color:red">INFORMAÇÕES IMPORTANTES!</small><br />
+                    <strong>LEIA ANTES DE INICIAR O PROCESSO <label id="LabelPassoaPasso" class="text-primary" style="cursor: pointer"> Clique Aqui </label> </strong>
+                </h5>
+            </div>*@
+        </div>
+        <br />
+
+
+        @using (Html.BeginForm("", "", FormMethod.Post, new { id = "form", name = "form" }))
+        {
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Informações do Condutor Infrator</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Con_CPF)</th>
+                                <td>@Html.DisplayFor(model => model.Con_CPF, new { htmlAttributes = new { @class = "form-control", id = "Con_CPF" } })</td>
+                                <td>@Html.HiddenFor(model => model.Con_CPF, new { id = "Con_CPF", name = "Con_CPF" })</td>
+                                <td>@Html.HiddenFor(model => model.StsPro_Descricao)</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Con_Nome)</th>
+                                <td>@Html.DisplayFor(model => model.Con_Nome, new { htmlAttributes = new { @class = "form-control", id = "Con_Nome" } })</td>
+                                <td>@Html.HiddenFor(model => model.Con_Nome)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Con_RegistroCNH)</th>
+                                <td>@Html.DisplayFor(model => model.Con_RegistroCNH, new { htmlAttributes = new { @class = "form-control", id = "Con_RegistroCNH" } })</td>
+                                <td>@Html.HiddenFor(model => model.Con_RegistroCNH)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Con_CNHValidade)</th>
+                                <td>@Html.DisplayFor(model => model.Con_CNHValidade, new { htmlAttributes = new { @class = "form-control", id = "Con_CNHValidade" } })</td>
+                                <td>@Html.HiddenFor(model => model.Con_CNHValidade)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Con_EndPro_Logradouro)</th>
+                                <td>@Html.DisplayFor(model => model.Con_EndPro_Logradouro, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Logradouro" } })</td>
+                                <td>@Html.HiddenFor(model => model.Con_EndPro_Logradouro)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Con_EndPro_Bairro)</th>
+                                <td>@Html.DisplayFor(model => model.Con_EndPro_Bairro, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Bairro" } })</td>
+                                <td>@Html.HiddenFor(model => model.Con_EndPro_Bairro)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Con_EndPro_Complemento)</th>
+                                <td>@Html.DisplayFor(model => model.Con_EndPro_Complemento, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Complemento" } })</td>
+                                <td>@Html.HiddenFor(model => model.Con_EndPro_Complemento)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Con_EndPro_Cidade)</th>
+                                <td>@Html.DisplayFor(model => model.Con_EndPro_Cidade, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Cidade" } })</td>
+                                <td>@Html.HiddenFor(model => model.Con_EndPro_Cidade)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Con_EndPro_Estado)</th>
+                                <td>@Html.DisplayFor(model => model.Con_EndPro_Estado, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Estado" } })</td>
+                                <td>@Html.HiddenFor(model => model.Con_EndPro_Estado)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Con_EndPro_CEP)</th>
+                                <td>@Html.DisplayFor(model => model.Con_EndPro_CEP, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_CEP" } })</td>
+                                <td>@Html.HiddenFor(model => model.Con_EndPro_CEP)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Con_Telefone)</th>
+                                <td>@Html.DisplayFor(model => model.Con_Telefone, new { htmlAttributes = new { @class = "form-control", id = "Con_Telefone" } })</td>
+                                <td>@Html.HiddenFor(model => model.Con_Telefone)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Con_Email)</th>
+                                <td>@Html.DisplayFor(model => model.Con_Email, new { htmlAttributes = new { @class = "form-control", id = "Con_Email" } })</td>
+                                <td>@Html.HiddenFor(model => model.Con_Email)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h3>Informações do Requerente</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_CPF_CNPJ)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_CPF_CNPJ, new { htmlAttributes = new { @class = "form-control", id = "Ptr_CPF_CNPJ" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_CPF_CNPJ, new { id = "Ptr_CPF_CNPJ", name = "Ptr_CPF_CNPJ" })</td>
+                                @Html.HiddenFor(model => model.Con_ConfirmarAceite)
+                                @Html.HiddenFor(model => model.Con_Cadastrado)
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Nome)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_Nome, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Nome" } })</td>
+                                <td>@Html.HiddenFor(model => model.Pro_Numero, new { id = "Pro_Numero", name = "Pro_Numero" })</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Logradouro)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Logradouro, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Logradouro" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Logradouro)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Bairro)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Bairro, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Bairro" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Bairro)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Complemento)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Complemento, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Complemento" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Complemento)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Cidade)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Cidade, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Cidade" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Cidade)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Estado)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Estado, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Estado" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Estado)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_CEP)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_CEP, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_CEP" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_CEP)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Telefone)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_Telefone, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Telefone" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_Telefone)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Email)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_Email, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Emai" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_Email)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Informações do Veículo</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Placa)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_Placa, new { htmlAttributes = new { @class = "form-control", id = "Vec_Placa" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_Placa)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_RENAVAN)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_RENAVAN, new { htmlAttributes = new { @class = "form-control", id = "Vec_RENAVAN" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_RENAVAN)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Ano)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_Ano, new { htmlAttributes = new { @class = "form-control", id = "Vec_Ano" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_Ano)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Marca)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_Marca, new { htmlAttributes = new { @class = "form-control", id = "Vec_Marca" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_Marca)</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h3>Informações da Multa</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_AIT)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_AIT, new { htmlAttributes = new { @class = "form-control", id = "Mut_AIT" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_AIT, new { @id = "Mut_AIT", @name = "Mut_AIT" })</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_CodigoInfracao)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_CodigoInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_CodigoInfracao" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_CodigoInfracao)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_DataInfracao)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_DataInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_DataInfracao" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_DataInfracao)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_DescricaoInfracao)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_DescricaoInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_DescricaoInfracao" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_DescricaoInfracao)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_StatusAIT)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_StatusAIT, new { htmlAttributes = new { @class = "form-control", id = "Mut_StatusAIT" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_StatusAIT)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="text-left">
+
+                <p><strong>Selecione o tipo de pessoa jurídica</strong></p>
+                <label class="pure-material-checkbox">
+                    <input type="checkbox" name="Chk_Socio" , id="Chk_Socio" onclick="Func_desmarcar2()">
+                    <span>Sócio/Proprietário</span>
+                </label>
+                <br />
+                <label class="pure-material-checkbox">
+                    <input type="checkbox" name="Veiculo_chk" , id="Veiculo_chk" onclick="Func_desmarcar1()">
+                    <span>Veículo em nome de Órgão Público</span>
+                </label>
+                <hr />
+                <button type="button" class="btn btn-primary btn-lg btn-transalvador" id="BtnFormulario" onclick="ImpressaoAgendamento()"> Imprimir Formulário</button>
+                <span class="text-danger"><strong> ATENÇÃO!</strong></span> Imprimir o formulário NA eletrônico caso não possua a Notificação de Autuação original ( NA via amarela).
+
+                <br />
+                <hr />
+                <label class="pure-material-checkbox">
+                    <input type="checkbox" name="Chk_Assinatura" , id="Chk_Assinatura" onclick="Chk_Assinar()">
+                    <span>Apresentação de condutor infrator registrada sem constar assinatura do condutor no Formulário de Notificação de Autuação – NA</span>
+                </label>
+                <br />
+                <br />
+
+            </div>
+            <div class="row">
+                <h3>Anexo</h3>
+                <div class="col-md-12" style="padding:0;">
+                    <div class="row" style="font-size:80%;">
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <p><strong><span style="color:red">Prezado Cidadão, certifique-se que o formato original é o JPEG ou JPG. Caso o sistema não aceite a imagem é possível que o arquivo esteja corrompido. Sugerimos salvar o arquivo novamente em formato JPEG ou JPG e tentar o reenvio. Não alterar a extensão original de um arquivo, pois o sistema acusará erro.</span></strong></p>
+                            <br />
+                            <p><div id="DivCNH_CONDUTOR">CNH do condutor/ Formato(JPEG) Tamanho: 2.0 Mb. <span style="color:red">*</span><input type="file" class="filestyle" id="CNH_CONDUTOR" , name="CNH_CONDUTOR" data-buttonText="Anexo" accept="image/jpeg" onchange="ValidateSizeIMG(this) "></div></p>
+                            <div class="alert-box failure text text-center" id="vCNH_CONDUTOR">Campo Obrigatório</div>
+
+                            <p><div id="DivCOMPROVANTE_CONDUTOR">Comprovante de residência do condutor / Formato(JPEG) Tamanho: 2.0 Mb.<input type="file" class="filestyle" id="COMPROVANTE_CONDUTOR" , name="COMPROVANTE_CONDUTOR" data-buttonText="Anexar" accept="image/jpeg" onchange="ValidateSizeIMG(this)"></div></p>
+
+                            <p><div id="DivFORMULARIO_INDICACAO">Notificação de Autuação - NA/ Formato(JPEG)Tamanho: 2.0 Mb. <span style="color:red">*</span><input type="file" class="filestyle" id="FORMULARIO_INDICACAO" , name="FORMULARIO_INDICACAO" data-buttonText="Anexar" accept="image/jpeg" onchange="ValidateSizeIMG(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vFORMULARIO_INDICACAO">Campo Obrigatório</div>
+
+                            <p><div id="DivDOC_DIRIGENTE">Documento de Identificação (RG, CNH ou outro documento que comprove assinatura) do Dirigente do órgão / Formato(JPEG) Tamanho: 2.0 Mb. <span style="color:red">*</span><input type="file" class="filestyle" id="DOC_DIRIGENTE" , name="DOC_DIRIGENTE" data-buttonText="Anexar" accept="image/jpeg" onchange="ValidateSizeIMG(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vDOC_DIRIGENTE">Campo Obrigatório</div>
+
+                            <p><div id="DivDOC_COMPPUBLICO">Documento que comprove a condução do veículo no cometimento da infração / Formato(PDF) Tamanho: 2.0 Mb.<span style="color:red">*</span><input type="file" class="filestyle" id="DOC_COMPPUBLICO" , name="DOC_COMPPUBLICO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vDOC_COMPPUBLICO">Campo Obrigatório</div>
+
+                            <p><div id="DivCONTRATO_SOCIAL">Contrato Social da Empresa / Formato(PDF) Tamanho: 2.0 Mb.<span style="color:red">*</span><input type="file" class="filestyle" id="CONTRATO_SOCIAL" , name="CONTRATO_SOCIAL" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vCONTRATO_SOCIAL">Campo Obrigatório</div>
+
+                            <p><div id="DivDOC_SOCIO">RG, CNH ou outro documento que comprove a assinatura de representante legal / Formato(JPEG) Tamanho: 2.0 Mb.<span style="color:red">*</span><input type="file" class="filestyle" id="DOC_SOCIO" , name="DOC_SOCIO" data-buttonText="Anexar" accept="image/jpeg" onchange="ValidateSizeIMG(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vDOC_SOCIO">Campo Obrigatório</div>
+
+                            <p><div id="DivPROCURACAO">Procuração Pública, quando for o caso, quando for o caso / Formato(PDF) Tamanho: 2.0 Mb.<span style="color:red">*</span><input type="file" class="filestyle" id="PROCURACAO" , name="PROCURACAO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vPROCURACAO">Campo Obrigatório</div>
+
+                            <p><div id="DivDOC_PROCURACAO">Documento oficial com foto do procurado, quando for o caso / Formato(JPEG) Tamanho: 2.0 Mb.<span style="color:red">*</span><input type="file" class="filestyle" id="DOC_PROCURACAO" , name="DOC_PROCURACAO" data-buttonText="Anexar" accept="image/jpeg" onchange="ValidateSizeIMG(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vDOC_PROCURACAO">Campo Obrigatório</div>
+
+                            <p><div id="DivPORTARIA_NOMEACAO">Portaria de nomeação comprovando o cargo de direção no órgão / Formato(PDF) Tamanho: 2.0 Mb. <span style="color:red">*</span><input type="file" class="filestyle" id="PORTARIA_NOMEACAO" , name="PORTARIA_NOMEACAO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vPORTARIA_NOMEACAO">Campo Obrigatório</div>
+
+                            <p><div id="DivDOC_OFICIO">Ofício do Representante Legal do Órgão ou Entidade identificando o condutor infrator / Formato(PDF) Tamanho: 2.0 Mb.<span style="color:red">*</span><input type="file" class="filestyle" id="DOC_OFICIO" , name="DOC_OFICIO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vDOC_OFICIO">Campo Obrigatório</div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <label class="pure-material-checkbox">
+                    <input type="checkbox" name="Chk_Procurado" , id="Chk_Procurado" onclick="Chk_Procurador()">
+                    <span>Procuração/habilitar campo para anexar, quando for necessário</span>
+                </label>
+                <p><strong> ( <span style="color:red">*</span> ) Campos obrigatórios</strong></p>
+                <p></p>
+                <p></p>
+                <br />
+
+
+
+                <div class="text-left" style="font-size:12px;">
+                    <span style="color:red"> Politica de Privacidade </span>
+                    <br>- Condutor infrator e o proprietário do veículo respondem nas esferas penais, cíveis e administrativa pela veracidade das informações e dos documentos fornecidos.
+                    <br>- O representante legal / proprietário que figura no contrato social deve apresentar documento de identificação e a assinatura da NA igual ao referido documento. 
+                    O condutor infrator identificado deve apresentar sua CNH com assinatura igual ao documento apresentado (ambos com assinaturas originais).
+                    <br>- No caso da impossibilidade de assinatura do condutor na NA, devem ser observadas as regras estabelecidas pela resolução CONTRAN 918/2022, para Órgãos Públicos e demais pessoas jurídicas.
+                    <br>- Declaro ter lido as regras contidas no canto superior direito da tela “anexar documentos” no campo “informações importantes”.
+                    <br>- Cada campo de anexo tem individualizado o tipo de documento a ser anexado, devendo o proprietário seguir essa regra. O sistema não aceita finalizar sem os anexo.
+                    <br>- <strong>O sistema disponibiliza a pré-visualização de todos os documentos anexados pelo usuário, permitindo uma revisão antes do envio. Faça a revisão antes do envio.</strong>
+                    <br>- Ao selecionar a opção “eu concordo”, você concorda com os Termos da Superintendência de Trânsito de Salvador (TRANSALVADOR).
+                </div>
+                <hr />
+
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <button type="button" class="btn btn-secondary btn-lg " data-dismiss="modal" id="BtDesejaSair">Sair</button>
+                        <button type="button" class="btn btn-primary btn-lg " data-toggle="modal" id="BtDesejaConfirmar">Próximo</button>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+
+
+        <div class="modal fade" id="modalConfirmacao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacao"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="col-md-4" style="padding: 0;">
+                    <div class="alerta-atencao text-center">
+                        <img src="~/img/warning.svg" width="120">
+                    </div>
+                </div>
+                <div class="col-md-8" style="padding: 0;">
+                    <div class="mensagem-modal modal-atencao text-center">
+                        <h4>Aviso importante!</h4>
+                        <p>
+                            Na proxima pagina revise toda documentação anexada, o cumprimento das regras e legislação,
+                            pois uma vez encaminhado não será possível fazer modificações, seguindo o processo imediatamente para análise.
+                        </p>
+                        <div class="col-md-12 modal-footer">
+                            <div class="text-center">
+                                <button type="button" class="btn btn-default" id="BtSair" data-dismiss="modal">Sair</button>
+                                <button type="button" class="btn btn-primary" id="BtGerarProcesso" name="BtGerarProcesso"> Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade bd-example-modal-lg" id="modalOrientacao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacao"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">PASSO A PASSO</h4>
+
+                    </div>
+                    <div class="modal-body" style="margin-bottom: 90px;">
+                        <h5>
+                            PROPRIETÁRIO DO VEÍCULO PESSOA JURÍDICA COMUM, E ORGÃO PÚBLICO
+                        </h5>
+                        <p>
+                            <strong>É necessário que os documentos anexados ao pedido estejam completos conforme Resolução CONTRAN 918/2022, sem rasuras e legíveis, caso o contrário será reprovado.</strong>
+                        </p>
+                        <p>
+                            1 – Preencha os dados completos no Sistema e ao finalizar imprima o formulário de indicação do condutor infrator, o proprietário (veículo em nome de Órgão Público
+                            o responsável é o dirigente) deverá assinar, colher assinatura do condutor (condutor e proprietário com assinaturas originais e semelhantes aos documentos de identificação
+                            apresentados). Caso não possua a NA (via amarela) o formulário NA eletrônico substitui a mesma;
+                        </p>
+                        <p>
+                            2 – RG ou CNH do sócio da empresa que assina no Contrato Social (demais pessoas jurídicas), ou identificação do dirigente do órgão para veículos em nome de órgão público;
+                        </p>
+                        <p>
+                            3 – Contrato Social (última alteração) / no caso de órgão público apresentar Portaria de nomeação de dirigente;
+                        </p>
+                        <p>
+                            4 – Cópia da CNH do condutor, legível e assinatura visível;
+                        </p>
+                        <p>
+                            5 – Procuração Pública e RG do procurador quando for o caso.
+                        </p>
+                        <p>
+                            6 – Foto do perfil é a foto do condutor segurando a CNH ao lado do rosto. Essa foto é dispensada quando o condutor não possui cadastro no sistema ou não for possível o proprietário colher a sua assinatura.
+                        </p>
+                        <p>
+                            Na impossibilidade de coleta da assinatura do condutor infrato complementar com seguinte documentação:
+                        </p>
+                        <br />
+                        <p><strong>Veículo em nome de Pessoa Jurídica</strong></p>
+
+                        <p>
+                            a) Documento onde conste cláusula de responsabilidade por infração cometidas pelo condutor e comprove a posse de veículo no momento do cometimento da infração;
+                        </p>
+                        <p><strong>Veículo em nome de Pessoa Jurídica ÓRGÃO PUBLICO:</strong></p>
+                        <p>
+                            a) Ofício do representante legal do Órgão ou Entidade identificando o condutor:
+                        </p>
+                        <p>
+                            b) Documento que comprove a posse de veículo no momento do cometimento da infração.
+                        </p>
+                        <br />
+                        <strong>OBSERVAÇÃO:</strong> Os dados de condutor e veículo de ambos os documentos especificados nas alíneas “a” e “b” devem coincidir, e conter assinatura do responsável do órgão, caso contrário não serão aceitos como válidos.
+
+                        <br />
+                        <br />
+                       
+
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="~/Scripts/Funcoes_gr.js"></script>
+
+
+<script type="text/javascript">
+
+
+        window.onload = function () {
+            noBack();
+        }
+        function noBack() {
+            window.history.forward();
+        }
+
+    $('#BtDesejaSair').click(function () {
+         window.location.href = '@Url.Action("processosabertos", "processo")';
+    });
+
+    $('#LabelPassoaPasso').click(function () {
+        $('#modalOrientacao').modal('show');
+        //colocar na view de confirmação uma verificação para nao processar novamente
+    });
+
+    $(window).on('load', function () {
+        $('#modalOrientacao').modal('show');
+    });
+
+    function RemoverRequired() {
+        $("#CNH_CONDUTOR").removeAttr('required');
+        $("#COMPROVANTE_CONDUTOR").removeAttr('required');
+        $("#FORMULARIO_INDICACAO").removeAttr('required');
+        $("#DOC_DIRIGENTE").removeAttr('required');
+        $("#PORTARIA_NOMEACAO").removeAttr('required');
+        $("#CONTRATO_SOCIAL").removeAttr('required');
+        $("#DOC_SOCIO").removeAttr('required');
+        $("#DOC_PROCURACAO").removeAttr('required');
+        $("#PROCURACAO").removeAttr('required');
+        $("#DOC_OFICIO").removeAttr('required');
+        $("#DOC_COMPPUBLICO").removeAttr('required');
+        $("#COMPROVANTE_CONDUTOR").removeAttr('required');
+    }
+
+
+
+    anexoocuto();
+    $("#DivCNH_CONDUTOR").show();
+    $("#DivCOMPROVANTE_CONDUTOR").show();
+    $("#DivFORMULARIO_INDICACAO").show();
+    $("#DivCONTRATO_SOCIAL").show();
+    $("#DivDOC_SOCIO").show();
+
+    RemoverRequired()
+
+
+    $("#CNH_CONDUTOR").attr("required", true);
+    //$("#COMPROVANTE_CONDUTOR").attr("required", true);
+    $("#FORMULARIO_INDICACAO").attr("required", true);
+    $("#CONTRATO_SOCIAL").attr("required", true);
+    $("#DOC_SOCIO").attr("required", true);
+
+
+    function anexoocuto() {
+        $("#DivCNH_CONDUTOR").hide();
+        $("#DivCOMPROVANTE_CONDUTOR").hide();
+        $("#DivFORMULARIO_INDICACAO").hide();
+        $("#DivDOC_DIRIGENTE").hide();
+        $("#DivPORTARIA_NOMEACAO").hide();
+        $("#DivCONTRATO_SOCIAL").hide();
+        $("#DivDOC_SOCIO").hide();
+        $("#DivDOC_PROCURACAO").hide();
+        $("#DivPROCURACAO").hide();
+        $("#DivDOC_OFICIO").hide();
+        $("#DivDOC_COMPPUBLICO").hide();
+
+        $('.bootstrap-filestyle :input').val('');
+
+        $("#CNH_CONDUTOR").val('');
+        $("#COMPROVANTE_CONDUTOR").val('');
+        $("#FORMULARIO_INDICACAO").val('');
+        $("#DOC_DIRIGENTE").val('');
+        $("#PORTARIA_NOMEACAO").val('');
+        $("#CONTRATO_SOCIAL").val('');
+        $("#DOC_SOCIO").val('');
+        $("#DOC_PROCURACAO").val('');
+        $("#PROCURACAO").val('');
+        $("#DOC_OFICIO").val('');
+        $("#DOC_COMPPUBLICO").val('');
+
+    }
+
+
+
+    //function habilitar() {
+    //    if (document.getElementById('ConfirmarChk').checked) {
+    //        document.getElementById('BtDesejaConfirmar').removeAttribute("disabled");
+    //    }
+    //    else {
+    //        document.getElementById('BtDesejaConfirmar').setAttribute("disabled", "disabled");
+    //    }
+    //}
+
+    var Cadastrado = $('<span/>').html($("#Con_Cadastrado").val()).text();
+    var Con_ConfirmarAceite = $('<span/>').html($("#Con_ConfirmarAceite").val()).text();
+
+
+    $("#DivPETICAO").hide();
+/*    document.getElementById('BtDesejaConfirmar').setAttribute("disabled", "disabled");*/
+    document.getElementById('Chk_Socio').checked = 1
+
+    //Veículo em nome de Órgão Público
+
+
+
+    function Chk_Procurador()
+    {
+            if (document.getElementById('Chk_Procurado').checked == 1) {
+                $("#DivPROCURACAO").show();
+                $("#DivDOC_PROCURACAO").show();
+
+                $("#PROCURACAO").attr("required", true);
+                $("#DOC_PROCURACAO").attr("required", true);
+
+            } else {
+
+                $("#DivPROCURACAO").hide();
+                $("#DivDOC_PROCURACAO").hide();
+
+                $("#PROCURACAO").removeAttr('required');
+                $("#DOC_PROCURACAO").removeAttr('required');
+            }
+    }
+
+    function Chk_Assinar()
+    {
+        if (document.getElementById('Chk_Assinatura').checked == 1) {
+            $("#DivDOC_COMPPUBLICO").show();
+            $("#DOC_COMPPUBLICO").attr("required", true);
+        } else {
+            $("#DivDOC_COMPPUBLICO").hide();
+            $("#DOC_COMPPUBLICO").removeAttr('required');
+        }
+    }
+
+
+    function Func_desmarcar0() {
+
+
+        if (/*Cadastrado == "SIM" &&*/
+            document.getElementById('Veiculo_chk').checked == 1)
+        {
+            anexoocuto();
+            $("#DivCNH_CONDUTOR").show();
+            //$("#DivCOMPROVANTE_CONDUTOR").show();
+            $("#DivFORMULARIO_INDICACAO").show();
+            $("#DivDOC_DIRIGENTE").show();
+            $("#DivPORTARIA_NOMEACAO").show();
+            $("#DivDOC_OFICIO").show();
+
+            RemoverRequired();
+            $("#CNH_CONDUTOR").attr("required", true);
+            //$("#COMPROVANTE_CONDUTOR").attr("required", true);
+            $("#FORMULARIO_INDICACAO").attr("required", true);
+            $("#DOC_DIRIGENTE").attr("required", true);
+            $("#PORTARIA_NOMEACAO").attr("required", true);
+            $("#DOC_OFICIO").attr("required", true);
+            document.getElementById('Chk_Procurado').setAttribute("disabled", "disabled");
+
+
+
+
+        }
+
+        else
+        if (/*Cadastrado == "SIM" && */                              //USUARIO  CADASTRADO
+            document.getElementById('Chk_Socio').checked == 1 )//NA ASSINADA = 0
+        {
+            anexoocuto();
+            $("#DivCNH_CONDUTOR").show();
+            $("#DivCOMPROVANTE_CONDUTOR").show();
+            $("#DivFORMULARIO_INDICACAO").show();
+            $("#DivCONTRATO_SOCIAL").show();
+            $("#DivDOC_SOCIO").show();
+
+            RemoverRequired();
+
+            $("#CNH_CONDUTOR").attr("required", true);
+            $("#COMPROVANTE_CONDUTOR").attr("required", true);
+            $("#FORMULARIO_INDICACAO").attr("required", true);
+            $("#CONTRATO_SOCIAL").attr("required", true);
+            $("#DOC_SOCIO").attr("required", true);
+            document.getElementById('Chk_Procurado').removeAttribute("disabled");
+
+        }
+    }
+
+
+    function Func_desmarcar1() {
+
+        if (document.getElementById('Veiculo_chk').checked) {
+
+            document.getElementById('Chk_Socio').checked = 0
+            document.getElementById('Chk_Procurado').checked = 0
+            Func_desmarcar0();
+
+        } else {
+            document.getElementById('Veiculo_chk').checked = 1
+
+        }
+    }
+
+        //Sócio/Proprietário
+    function Func_desmarcar2() {
+        if (document.getElementById('Chk_Socio').checked) {
+
+            document.getElementById('Veiculo_chk').checked = 0
+            document.getElementById('Chk_Procurado').checked = 0
+            Func_desmarcar0();
+
+        } else
+            document.getElementById('Chk_Socio').checked = 1
+    }
+
+    //Procurador
+    function Func_desmarcar3() {
+        if (document.getElementById('Chk_Procurado').checked) {
+
+            document.getElementById('Chk_Socio').checked = 0
+            document.getElementById('Veiculo_chk').checked = 0
+            Func_desmarcar0();
+
+        } else
+            document.getElementById('Chk_Procurado').checked = 1
+    }
+
+
+    //mensagemAnexo
+    function Func_mensagem_anexo() {
+        posLoad();
+
+        var content = document.createElement('div');
+        content.innerHTML = ' <strong class=text-danger> * </strong> Campos obrigatórios.';
+
+        swal({
+            title: 'Anexo Obrigatório!',
+            content: content,
+            icon: "warning",
+        })
+
+
+
+        return false;
+
+    }
+
+    //aviso de campo em branco
+    function Func_validar_anexo() {
+
+
+        //pegando os campos obrigatórios
+        var is_empty = false;
+        var campo;
+        $('[required]').each(function (idx, elem) {
+            is_empty = is_empty || ($(elem).val() == '');
+            if (is_empty) {
+                campo = $(elem).attr('id');
+                $(elem).focus();
+                return false
+            }
+        });
+
+
+        if (is_empty) {
+
+            if (document.getElementById('Veiculo_chk').checked == 1) {
+
+                if ($("#DivCNH_CONDUTOR").val() == ""
+                    || $("#DivCOMPROVANTE_CONDUTOR").val() == ""
+                    || $("#DivFORMULARIO_INDICACAO").val() == ""
+                    || $("#DivDOC_DIRIGENTE").val() == ""
+                    || $("#DivPORTARIA_NOMEACAO").val() == ""
+                    || $("#DivDOC_OFICIO").val() == "") {
+                    campo_obrigatorio('#v' + campo, '#Div' + campo, campo);
+                }
+            }
+
+            ////////////socio
+            else
+                if (document.getElementById('Chk_Socio').checked == 1) {
+
+                    if ($("#CNH_CONDUTOR").val() == ""
+                        || $("#COMPROVANTE_CONDUTOR").val() == ""
+                        || $("#FORMULARIO_INDICACAO").val() == ""
+                        || $("#CONTRATO_SOCIAL").val() == ""
+                        || $("#DOC_SOCIO").val() == "") {
+                        campo_obrigatorio('#v' + campo, '#Div' + campo, campo);
+                    }
+                }
+
+                    if (document.getElementById('Chk_Procurado').checked == 1) {
+
+                        if (   $("#PROCURACAO").val() == ""
+                            || $("#DOC_PROCURACAO").val() == "") {
+                            campo_obrigatorio('#v' + campo, '#Div' + campo, campo);
+                        }
+                    }
+
+                    if (document.getElementById('Chk_Socio').checked == 1) {
+
+                        if ($("#DOC_COMPPUBLICO").val() == "") {
+                            campo_obrigatorio('#v' + campo, '#Div' + campo, campo);
+                        }
+                    }
+
+        } else {
+   
+            AnalisarAIT()
+        }
+    }
+
+    function bloquearCampos(status) {
+
+        if (status == "sim") {
+            $('#BtGerarProcesso').prop('disabled', true);
+            $("#BtnDocumento").prop("disabled", true);
+            $('#BtGerarCancelar').prop('disabled', true);
+            $('#BtnFormulario').prop('disabled', true);
+
+            preLoad();
+        }
+        else {
+            $('#BtGerarProcesso').prop('disabled', false);
+            $("#BtnDocumento").prop("disabled", false);
+            $('#BtGerarCancelar').prop('disabled', false);
+            $('#BtnFormulario').prop('disabled', false);
+
+            posLoad();
+        }
+
+    }
+
+
+    var mut_ait = $('#Mut_AIT').val();
+    var con_cpf = $('#Con_CPF').val();
+
+
+    function AnalisarAIT() {
+
+
+        var form = $('form')[0];
+        var fileData = new FormData(form);
+        preLoad();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AnalisarAIT", "ApresentacaoCondutor")',
+            dataType: "json",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: fileData,
+            success: function (data) {
+                if (data.id == 'CI_Erro_1') {
+                    posLoad();
+                    swal({
+                        title: "Aviso!",
+                        text: data.mensagem_erro,
+                        icon: "warning",
+                        Html: true,
+                        textAlign: "left",
+
+                        buttons: [
+                            'Não',
+                            'Sim'
+                        ],
+
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            posLoad();
+                            $('#modalConfirmacao').modal('show');
+                        }
+
+                        else {
+                            posLoad();
+                            return false;
+                        }
+                    });
+                } else
+                    if (data.id == 'CI_Erro') {
+                        posLoad();
+         
+                        swal("Ops!", data.mensagem_erro, "warning").then(() => {
+                                window.location.href = '@Url.Action("processosabertos", "processo")';
+                                return false;
+                        });
+                    } else {
+                        posLoad();
+                        $('#modalConfirmacao').modal('show');
+                    }
+
+            },
+            error: function () {
+                posLoad();
+                swal("Ops!", "Houve uma falha de comunicação. Retorne ao status anterior, anexe novamente os documentos e reenvie. ", "error")
+                    .then(() => {
+                        location.reload();
+                    });
+            }
+        });
+    }
+
+    function ValidateSizeIMG(file) {
+
+        var qtde = file.files.length; // CONTA QUANTOS TEM
+        var tamanho = 0;
+
+        for (i = 0; i < qtde; i++) {
+            tamanho += file.files[i].size / 1024 / 1024 //Mb
+        }
+
+        if (tamanho > 2) {
+            swal("Tamanho inválido!", "A soma de todos os arquivos não pode ultrapassar 2 MB.", "warning");
+            $(file).val('')
+            return false;
+        }
+
+        for (i = 0; i < qtde; i++) {
+            var formato = file.files[i].type;
+            if (formato != "image/jpeg") {
+                swal("Formato inválido!", "Apenas imagem no formato (Jpeg ou JPG).", "warning");
+               $(file).val('')
+                return false;
+            }
+        }
+    }
+
+    function ValidateSizePDF(file) {
+
+        var formato = file.files[0].type;
+        if (formato != "application/pdf") {
+            swal("Formato invalido!", "Apenas arquivo no formato (PDF).", "warning");
+            $(file).val('')
+            return false;
+        }
+
+        var FileSize = file.files[0].size / 1024 / 1024; // in MB
+        if (FileSize > 2) {
+            swal("Tamanho inválido!", "Apenas arquivo até 2 MB.", "warning");
+            $(file).val('')
+            return false;
+        }
+    }
+
+
+    $(document).ready(function () {
+
+        $('#BtDesejaConfirmar').click(function () {
+    
+            Func_validar_anexo();
+        })
+
+        $("#BtGerarProcesso").click(function () {
+            $('#modalConfirmacao').modal('hide');
+
+            finalizarprocesso();
+       });
+    });
+
+    function finalizarprocesso() {
+
+        var form = $('form')[0];
+        var fileData = new FormData(form);
+
+        preLoad();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("FinalizarAberturaDefesa", "Juridico_ApresentacaoCondutor")',
+            dataType: "json",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: fileData,
+
+            success: function (data) {
+
+      
+                if (data.error == true) {
+                    posLoad();
+                    bloquearCampos('não');
+                    swal("Ops!", "Houve uma falha de comunicação. Retorne ao status anterior, anexe novamente os documentos e reenvie.", "error");
+                    return false;
+                } else
+                    if (data.id != "") {
+                        posLoad();
+                        swal("Ops!", data.mensagem_erro, "warning")
+                            .then(() => {
+                                window.location.href = data.redirectUrl;
+                            });
+                        return false;
+                    } else
+                        if (data.formatoimg == false) {
+                        
+                            posLoad();
+                            swal("Erro Anexo!", "O anexo: " + data.imagemerro + " está corrompido ou em um formato errado, o sistema só aceita formato JPEG ou JPG.", "error");
+                            return false;
+                        } else {
+                            posLoad();
+                 
+                            RedirectUrl(data.redirectUrl, data.pro_numero)
+                                                   }
+            },
+            error: function () {
+                posLoad();
+                swal("Ops!", "Houve uma falha de comunicação. Retorne ao status anterior, anexe novamente os documentos e reenvie. ", "error");
+                bloquearCampos('não');
+                return false;
+
+            }
+        });
+
+    }
+
+
+
+    function RedirectUrl(redirectUrl, pro_numero) {
+        var form = $('<form action="' + redirectUrl + '" method="post">' +
+            '<input type="hidden" name="pro_Numero" value="' + pro_numero + '" />' +
+            '</form>');
+
+        $('body').append(form);
+        $(form).submit();
+    }
+
+
+    function ImpressaoAgendamento() {
+        var numeroait = $('#Mut_AIT').val();
+        swal("Atenção!", "A assinatura do Requerente e condutor devem ser iguais aos dos documentos apresentados.", "warning")
+            .then(() => {
+                var URL = '@Url.Action("imprimirNA", "Juridico_ApresentacaoCondutor")?numeroait=' + numeroait;
+                window.open(URL, '_blank');
+            });
+    }
+
+
+</script>

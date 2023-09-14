@@ -1,0 +1,128 @@
+﻿@model CondutorInfrator.Models.MultasModel
+
+<br />
+
+@{
+    try
+    {
+
+        if (TempData["vloTotal"].ToString() == "1")
+        {
+
+            <div class="alert alert-warning" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4> <strong>Atenção! </strong> Existe processo aguardando a confirmaçao do condutor. <a href="~/Processo/Processo" alert-link">Clique aqui pra ter acesso.</a>.</h4>
+            </div>
+        }
+    }
+    catch
+    {
+
+    }
+
+
+    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+    var Pes_TipoPessoa = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+}
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "form", name = "form" }))
+{
+    <div class="row">
+        <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+            <h5> <img src="~/img/Assitente.png" style="margin-left:20px;" /><strong> Para realizar a abertura do processo digite o AIT e a Placa do veículo e clique em pesquisar  </strong></h5>
+        </div>
+    </div>
+    <hr>
+
+    <br />
+
+    <br />
+    <br />
+
+    <div class="row">
+        <div class="col-md-5">
+            <Label for="">AIT</Label>
+            @Html.EditorFor(model => model.Mut_AIT, new { htmlAttributes = new { @class = "form-control", id = "Mut_AIT", placeholder = "Digite aqui o número do AIT", @maxlength = 50 } })
+        </div>
+        <div class="col-md-5">
+            <Label for="">Placa</Label>
+            @Html.EditorFor(model => model.Mut_PlacaVeiculo, new { htmlAttributes = new { @class = "form-control", id = "Mut_PlacaVeiculo", placeholder = "Digite aqui a placa do veículo", @maxlength = 50 } })
+        </div>
+
+        <br />
+
+        <div class="col-md-2">
+            <button type="button" class="btn btn-primary btn-busca" id="BtnPesquisa" onclick="Abrir()">Pesquisar</button>
+        </div>
+    </div>
+
+
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />    
+    <br />
+    <br />
+}
+@section scripts{
+    <script src="~/Scripts/jquery.bootgrid.js"></script>
+    <script type="text/javascript">
+
+
+
+
+
+        function Abrir() {
+
+            mut_ait = $("#Mut_AIT").val();
+            placa = $("#Mut_PlacaVeiculo").val();
+            Tipopessoa = $('<span/>').html('@Pes_TipoPessoa').text();
+
+            preLoad();
+            $.ajax({
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ mut_ait: mut_ait, tipopessoa: Tipopessoa, placa: placa }),
+                url: '@Url.Action("Json_TipoProcesso", "processo")',
+                success: function (data) {
+
+                    if (data.error == true) {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error")
+                            .then(() => {
+                                $('#Mut_AIT').val("");
+                                $('#Mut_PlacaVeiculo').val("");
+                                $('#Mut_AIT').focus();
+                                return false;
+                            });
+                    }else
+                    if (data.resultado == false) {
+                        posLoad();
+                        swal("Ops!", "Não foi possível localizar o AIT digitado.", "warning")
+                            .then(() => {
+                                $('#Mut_AIT').focus();
+                                return false;
+                            });
+                    } else {
+                        window.location.href = data.redirectUrl;
+                    }
+                },
+
+                error: function () {
+                    posLoad();
+                    swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                    .then(() => {
+                        location.reload();
+                    });
+                },
+
+            });
+
+        }
+
+    </script>
+
+
+
+}

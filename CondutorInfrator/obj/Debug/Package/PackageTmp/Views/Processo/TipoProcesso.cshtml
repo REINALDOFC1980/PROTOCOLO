@@ -1,0 +1,223 @@
+﻿
+
+@model CondutorInfrator.Models.MultasModel
+<br />
+<br />
+<h4><strong>Autuação</strong></h4>
+@Html.EditorFor(model => model.Rec_Veiculo_UF, new { htmlAttributes = new { @class = "form-control", id = "Rec_Veiculo_UF_", style = "display:none" } })
+<div class="row h5">
+    <div class="col-lg-2"><strong><small>Numero AIT:</small></strong>  @Html.DisplayFor(model => model.Mut_AIT, new { htmlAttributes = new { @class = "form-control", id = "Mut_AIT_", @readonly = "readonly" } })</div>
+    <div class="col-lg-3"><strong><small>Data da infração:</small></strong>  @Html.DisplayFor(model => model.Mut_DataInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_DataInfracao", @readonly = "readonly" } })</div>
+    <div class="col-lg-2"><strong><small>Placa:</small></strong>  @Html.DisplayFor(model => model.Mut_PlacaVeiculo, new { htmlAttributes = new { @class = "form-control", id = "Mut_PlacaVeiculo", @readonly = "readonly" } })</div>
+    <div class="col-lg-2"><strong><small>Situação:</small></strong>  @Html.DisplayFor(model => model.Mut_StatusAIT, new { htmlAttributes = new { @class = "form-control", id = "Mut_StatusAIT", @readonly = "readonly" } })</div>
+    @Html.EditorFor(model => model.Rec_Veiculo_UF, new { htmlAttributes = new { @class = "form-control", id = "Rec_Veiculo_UF", style = "display:none" } })
+    @Html.HiddenFor(model => model.Mut_AIT, new { htmlAttributes = new { @class = "form-control", id = "Mut_AIT", style = "display:none" } })
+
+</div>
+<p></p>
+<div class="row h5">
+    <p>
+        <div class="col-lg-2"><strong><small>Código da infração:</small></strong>  @Html.DisplayFor(model => model.Mut_CodigoInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_AIT", @readonly = "readonly" } })</div>
+    </p>
+    <p>
+        <div class="col-lg-10"><strong><small>Descrição da infração:</small></strong>  @Html.DisplayFor(model => model.Mut_DescricaoInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_DataInfracao", @readonly = "readonly" } })</div>
+    </p>
+</div>
+<div class="row">
+
+    <form class="form-signin login tipo-cadastro text-left">
+        <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+            <h4> <img src="~/img/Assitente.png" style="margin-left:20px;" /><strong> O que deseja fazer? </strong></h4>
+        </div>
+        <br />
+    </form>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <p class="text-justify">
+            <small>
+                <strong>Apresentação de Condutor Infrator é possível até a data limite de vencimento da Notificação da Autuação – NA.</strong><br />
+                O proprietário do veículo deve acompanhar o serviço de  apresentação de condutor WEB junto ao condutor indicado. <br />
+                O condutor apresentado tem um <strong>prazo de (3) três </strong>dias a contar da data de envio da solicitação, desde que não ultrapasse a
+                data de vencimento da Notificação da Autuação – NA, para acessar o sistema e aceitar a indicação. Ao aceitar a indicação 
+                o CI segue para análise da Triagem.<br />
+                                                   <u>Caso seja reprovado, os motivos da reprovação ficam disponíveis na tela do sistema WEB e o CI é arquivado imediatamente. </u>
+                <strong>
+                    Na falta de aceite ou reprovação, o proprietário poderá fazer nova solicitação em uma das vias de abertura disponíveis
+                    (via WEB, via presencial, ou postagem Correios), desde que não ultrapasse a data limite de vencimento previsto na
+                    Notificação da Autuação – NA.<br />
+                    Considerando o prazo do aceite do condutor limitado ao vencimento da NA, estando próximo do vencimento da mesma,
+                    é recomendado que a abertura seja realizada de forma presencial ou envio postagem Correios, evitado prejuízo na abertura.
+                    ATENÇÃO:  <u>Abertura de nova CI na data de vencimento da NA o aceite deve ocorrer na mesma data.</u>
+                </strong><br />
+                Ver regas no site da TRANSALVADOR para vias de abertura presencial e postagem Correios.<br />
+                Se aprovado o CI, o mesmo é convertido em processo com número de protocolo de apresentação de condutor web.
+
+
+            </small>
+        </p>
+        <br />
+        <button type="button" class="btn btn-lg btn-primary btn-block" id="BtnConvite1" onclick="proc_Condutor()">Condutor Infrator</button>
+
+
+    </div>
+    <div class="col-md-4">
+        <p class="text-justify">
+            <small>
+                A Defesa é cabível na fase da autuação (via amarela), antes de penalizar. Caso indique condutor infrator o mesmo 
+                deverá apresentar a defesa. Veja as regras contidas na resolução CONTRAN 900/2022 e siga o passo a passo do site.
+            </small>
+        </p>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <button type="button" class="btn btn-lg btn-primary btn-block" id="BtnConvite2" onclick="proc_Defesa()">Defesa de Autuação</button>
+
+    </div>
+    <div class="col-md-4">
+        <p class="text-justify">
+            <small>
+                Ocorrendo o indeferimento da defesa ou a não apresentação desta até o vencimento da notificação haverá a penalização do auto.
+                O Recurso somente é cabível após penalização (via verde). Veja as regras contidas na resolução CONTRAN 900/2022 e siga o
+                passo a passo do site.
+            </small>
+        </p>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <button type="button" class="btn btn-lg btn-primary btn-block" id="BtnConvite3" onclick="proc_Jari()">Recurso Jari</button>
+    </div>
+
+</div>
+
+
+<br />
+<br />
+<p> <button type="button" class="btn btn-lg btn-default btn-block" id="BtnVoltar">Voltar</button></p>
+<input type="hidden" id="hdnSession" data-value='asdasd' />
+
+
+
+
+
+
+<script type='text/javascript'>
+
+
+
+    function aberturaprocesso(url) {
+
+        var Mut_ait = $("#Mut_AIT").val();
+        var Vec_Placa = $("#Mut_PlacaVeiculo").val();
+        var TipoPessoa = $('<span/>').html('@ViewData["tipopessoa"].ToString()').text();
+
+        preLoad();
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                mut_ait: Mut_ait,
+                tipopessoa: TipoPessoa,
+                vec_Placa: Vec_Placa
+            }),
+            url: url,
+
+            success: function (data) {
+                if (data.error == true) {
+                    posLoad();
+                    swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error");
+                    return false;
+                }else
+                if (data.id != "") {
+                    if (data.id == "13" || data.id == "21" || data.id == 'CI_Erro_1' || data.id == 'DA_Erro_1' || data.id == 'JA_Erro_1' ) {
+                        swal({
+                            title: "Aviso",
+                            text: data.mensagem_erro,
+                            icon: "warning",
+                            Html: true,
+                            textAlign: "left",
+
+                            buttons: [
+                                'Não',
+                                'Sim'
+                            ],
+
+                        }).then((willDelete) => {
+                            if (willDelete) {
+                                preLoad();
+                                RedirectUrl(data.redirectUrl, Mut_ait, Vec_Placa, TipoPessoa, data.pro_Numero)
+                                }
+
+                            else {
+                                posLoad();
+                                return false;
+                            }
+                        });
+                    } else {
+                        posLoad();
+                        swal("Ops!", data.mensagem_erro, "warning");
+                        return false;
+                    }
+                } else
+                   // window.location.href = data.redirectUrl;
+                    RedirectUrl(data.redirectUrl, Mut_ait, Vec_Placa, TipoPessoa, data.pro_Numero)
+            },
+            error: function () {
+                posLoad();
+                swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                    .then(() => {
+                        location.reload();
+                    });
+            }
+        });
+
+    }
+    //CONDUTOR//
+    function proc_Condutor() {
+        aberturaprocesso('@Url.Action("Proc_CondutorInfrator", "processo")')
+    }
+    function proc_Defesa() {
+        aberturaprocesso('@Url.Action("Proc_Defesa", "processo")')
+    }
+    function proc_Jari() {
+        aberturaprocesso('@Url.Action("Proc_Jari", "processo")')
+    }
+    $("#BtnVoltar").click(function () {
+        history.back();
+    });
+
+    function RedirectUrl(redirectUrl, mut_ait, placa, Tipopessoa, pro_Numero) {
+            var form = $('<form action="' + redirectUrl + '" method="post">' +
+                '<input type="hidden" name="mut_ait" value="' + mut_ait + '" />' +
+                '<input type="hidden" name="placa" value="' + placa + '" />' +
+                '<input type="hidden" name="Tipopessoa" value="' + Tipopessoa + '" />' +
+                '<input type="hidden" name="pro_Numero" value="' + pro_Numero + '" />' +
+                '</form>');
+
+            $('body').append(form);
+            $(form).submit();
+        }
+
+
+
+
+</script>

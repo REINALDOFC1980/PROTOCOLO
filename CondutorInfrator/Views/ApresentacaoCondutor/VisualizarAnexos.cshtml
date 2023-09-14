@@ -1,0 +1,354 @@
+﻿@model CondutorInfrator.Models.ProcessoViewModel
+
+@{
+    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+    var Pes_TipoPessoa = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+}
+
+
+
+<link href="~/Content/Imagem.css" rel="stylesheet" />
+<div class="container">
+    <div class="conteudo">
+
+
+        @*<div class="row">
+                <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+                    <h2></h2>
+                    <h5> <img src="~/img/Assitente.png" style="margin-left:20px;" /><strong> Revise toda documentação anexada e o cumprimento das regras e legistação, pois uma vez encaminhado não será possível fazer modificações, seguindo o processo imediatamente para analise.</strong> </h5>
+                </div>
+            </div>
+            <hr>*@
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="lista-situacao">
+                    <ul>
+                        <li class="ativo">
+                            <span>#</span>
+                            <h2>PRÉ VISUALIZAÇÃO DOS ANEXOS</h2>
+                            <p>
+                                @using (Html.BeginForm("", "", FormMethod.Post, new { id = "form", name = "form" }))
+                                {
+                                    @Html.HiddenFor(model => model.StsPro_Descricao, new { id = "StsPro_Descricao", name = "StsPro_Descricao" })
+                                    @Html.HiddenFor(model => model.Con_Email, new { id = "Con_Email", name = "Con_Email" })
+                                    @Html.HiddenFor(model => model.Ptr_Nome, new { id = "Ptr_Nome", name = "Ptr_Nome" })
+                                    @Html.HiddenFor(model => model.Vec_Placa, new { id = "Vec_Placa", name = "Vec_Placa" })
+                                    @Html.HiddenFor(model => model.Pro_Numero, new { id = "Pro_Numero", name = "Pro_Numero" })
+                                    @Html.HiddenFor(model => model.Mut_AIT, new { id = "Mut_AIT", name = "Mut_AIT" })
+
+                                }
+
+
+                                <br>
+                                <strong>
+                                    Revise toda documentação anexada, o cumprimento das regras e legislação,
+                                    pois uma vez encaminhado não será possível fazer modificações, seguindo o processo imediatamente para análise.
+                                </strong>
+
+
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br />
+
+            <hr>
+
+
+            <br />
+
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-2 text-center">
+                    <strong>CNH Requerente</strong>
+                    <img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "CNH_PROPRIETARIO_" })" height="170" width="140" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
+                    <p></p>
+                    <p><small style="color:darkgray"> (Clique para visualizar)</small></p>
+                </div>
+                <div class="col-md-2 text-center">
+                    <strong>Formulário NA </strong>
+                    <p><img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "FORMULARIO_INDICACAO_" })" height="170" width="140" onclick="openModal();currentSlide(2)" class="hover-shadow cursor"></p>
+                    <p><small style="color:darkgray"> (Clique para visualizar)</small></p>
+                </div>
+                <div class="col-md-2 text-center">
+                    <strong>CNH Condutor</strong>
+                    <p><img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "CNH_CONDUTOR_" })" height="170" width="140" onclick="openModal();currentSlide(3)" class="hover-shadow cursor"></p>
+                    <p><small style="color:darkgray"> (Clique para visualizar)</small></p>
+                </div>
+                <div class="col-md-2 text-center">
+                    <strong>Comprovante Condutor</strong>
+                    <p><img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "COMPROVANTE_CONDUTOR_" })" height="170" width="140" onclick="openModal();currentSlide(4)" class="hover-shadow cursor"></p>
+                    <p><small style="color:darkgray"> (Clique para visualizar)</small></p>
+                </div>
+                <div class="col-md-2 text-center">
+                    <strong>Condutor com CNH</strong>
+                    <p><img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "FOTOCNH_CONDUTOR_" })" height="170" width="140" onclick="openModal();currentSlide(5)" class="hover-shadow cursor"></p>
+                    <p><small style="color:darkgray"> (Clique para visualizar)</small></p>
+                </div>
+                <div class="col-md-1">
+                </div>
+
+                <br />
+                @*Imagem Ampliada*@
+                <div id="myModal" class="modal">
+                    <span class="close cursor" onclick="closeModal()">&times;</span>
+                    <div class="modal-content">
+                        <br />
+
+                        <div class="mySlides  text-center">
+                            <div class="numbertext">1 / 5</div>
+                            <img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "CNH_PROPRIETARIO_" })" height="800" width="830">
+                        </div>
+
+                        <div class="mySlides text-center">
+                            <div class="numbertext">2 / 5</div>
+                            <img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "FORMULARIO_INDICACAO_" })" height="600" width="630">
+                        </div>
+                        <div class="mySlides text-center">
+                            <div class="numbertext">3 / 5</div>
+                            <img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "CNH_CONDUTOR_" })" height="600" width="630">
+                        </div>
+
+                        <div class="mySlides text-center">
+                            <div class="numbertext">4 / 5</div>
+                            <img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "COMPROVANTE_CONDUTOR_" })" height="600" width="630">
+                        </div>
+
+                        <div class="mySlides text-center">
+                            <div class="numbertext">5 / 5</div>
+                            <img src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "FOTOCNH_CONDUTOR_" })" height="600" width="630">
+
+                        </div>
+
+                        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                        <br />
+                        <div class="caption-container">
+                            <p id="caption"></p>
+                        </div>
+
+                        <div class="col-md-1">
+                        </div>
+
+
+
+                        <div class="col-md-2 text-center ">
+
+                            <img class="demo cursor" src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "CNH_PROPRIETARIO_" })" height="190" width="190" onclick="currentSlide(1)">
+                        </div>
+                        <div class="col-md-2 text-center">
+
+                            <img class="demo cursor" src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "FORMULARIO_INDICACAO_" })" height="190" width="190" onclick="currentSlide(2)">
+                        </div>
+                        <div class="col-md-2 text-center">
+
+                            <img class="demo cursor" src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "CNH_CONDUTOR_" })" height="190" width="190" onclick="currentSlide(3)">
+                        </div>
+                        <div class="col-md-2 text-center">
+
+                            <img class="demo cursor" src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "COMPROVANTE_CONDUTOR_" })" height="190" width="190" onclick="currentSlide(4)">
+                        </div>
+                        <div class="col-md-2 text-center">
+
+                            <img class="demo cursor" src="@Url.Action("buscaranexo", "apresentacaocondutor", new { pro_numero = Model.Pro_Numero, anexo = "FOTOCNH_CONDUTOR_" })" height="190" width="190" onclick="currentSlide(5)">
+                        </div>
+                        <div class="col-md-1 text-center">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <br />
+            <br />
+            <div class="title_box" id="subject">
+                <div id="title" class="text-danger"><strong>INFORMAÇÃO IMPORTANTE</strong> </div>
+                <div id="content">
+                    <strong>Faça a pré-visualização dos anexo antes do envio: </strong>
+                    a identificação do condutor infrator somente será acatada e produzirá efeitos legais se estiver com toda documentação obrigatória legível,
+                    o formulário de requerimento corretamente preenchido, sem rasuras, com assinaturas originais do condutor e do proprietário do veículo, ,
+                    semelhantes às dos documentos de identificação apresentados.
+                    <br />
+                    <br />
+                    <p>
+                        • Ao selecionar a opção abaixo, você concorda com os Termos da Superintendência de Trânsito de Salvador (TRANSALVADOR).
+                    </p>
+                    <label for="">Política de Privacidade</label>
+                    <p>
+                        • Declaro para os devidos fins, que as informações referentes ao cadastro para adesão ao TRANSALVADOR Digital são verdadeiras, 
+                        sob pena de ser responsabilizado(a) cível, penal e administrativamente.
+
+                    </p>
+
+                    <br />
+                </div>
+            </div>
+            <br />
+
+            <label class="pure-material-checkbox">
+                <input type="checkbox" name="ConfirmarChk" , id="ConfirmarChk" onchange="habilitar()">
+                <span>Declaro que li e estou ciente das informações acima.</span>
+            </label>
+            <br />
+            <div class="text-center">
+                <strong>Para dúvidas e esclarecimentos:</strong>
+                <br />
+                <br />
+                <strong>Setor de Atendimento ao Público – SETAP: e-mail:</strong> setap.transalvador@salvador.ba.gov.br (71) 3202-9188<br />
+      
+            </div>
+            <br />
+            <div class="col-md-12">
+                <div class="text-center">
+                    <button type="button" class="btn btn-success btn-lg" id="BtnAvancar" name="BtnAvancar" onclick="location.href='@Url.Action("AnexaDocumento", "ApresentacaoCondutor", new { pro_numero = Model.Pro_Numero })'"> Voltar </button>
+                    <button type="button" class="btn btn-primary btn-lg btn-transalvador" id="BtnConcluir" , name="BtnConcluir" onclick="EncaminharProcesso()"> Finalizar </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="~/Scripts/Funcoes_gr.js"></script>
+<script>
+
+
+    function EncaminharProcesso() {
+        console.log('1')
+
+
+        var form = $('form')[0];
+        var fileData = new FormData(form);
+
+        ///Analisar Foto e situação do AIT
+        $.ajax({           
+            type: "POST",
+            url: '@Url.Action("EncaminharParaCondutor", "apresentacaocondutor")',
+            dataType: "json",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: fileData,
+            success: function (data) {
+                if (data.error == true) {
+                    posLoad();
+                    swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde", "error");
+                    return false;
+                } else {
+                    swal("Procedimento concluido com sucesso", "Um e-mail de comunicação da indicação foi encaminhado para o Condutor Infrator, o mesmo deve acessar o sistema WEB e aceitar a indicação no prazo de três dias corridos para que este seja enviado à Triagem na Transalvador. O proprietário deve acompanhar todas etapas do serviço até sua finalização.", "success")
+                        .then(() => {
+                            RedirectUrl(data.redirectUrl, data.pro_numero)
+                        });
+                    posLoad();
+                }
+            },
+
+            error: function (exception) {
+                posLoad();
+                bloquearCampos('não');
+                swal("Ops!", "Houve uma falha de comunicação. ", "error")
+                .then(() => {
+                        location.reload();
+                });
+            }
+
+        });
+    };
+
+    function RedirectUrl(redirectUrl, pro_numero, Restricao) {
+        var form = $('<form action="' + redirectUrl + '" method="post">' +
+            '<input type="hidden" name="pro_Numero" value="' + pro_numero + '" />' +
+            '<input type="hidden" name="Restricao" value="' + Restricao + '" />' +
+            '</form>');
+
+        $('body').append(form);
+        $(form).submit();
+    }
+
+    window.onload = function () {
+        noBack();
+    }
+    function noBack() {
+        window.history.forward();
+    }
+
+    document.getElementById('BtnConcluir').setAttribute("disabled", "disabled");
+    function habilitar() {
+        if (document.getElementById('ConfirmarChk').checked) {
+            document.getElementById('BtnConcluir').removeAttribute("disabled");
+        }
+        else {
+            document.getElementById('BtnConcluir').setAttribute("disabled", "disabled");
+        }
+    }
+
+
+
+    $(document).ready(function () {
+        $('#mytooltip').tooltip();
+
+        //var texto = "";
+        //if ($('#StsPro_Descricao').val() == 'Aguardando aceite do condutor')
+        //    texto = "Prezado(a) seu processo foi gerado com sucesso e está aguardando o aceite do condutor,"
+        //else
+        //    texto = "Prezado(a) seu processo foi aberto com sucesso,"
+
+        //var content = document.createElement('div');
+        //content.innerHTML = texto + ' a relação de documentos anexados encontra-se disponível na parte inferior da tela <strong> “Documento(s) anexado(s) pelo requerente”</strong>. <br \><br \>' +
+        //    '<strong>Para dúvidas e esclarecimentos:</strong> <br \><br \>' +
+        //    '<strong>Setor de Atendimento ao Público – SETAP:</strong> e-mail: setap.transalvador@salvador.ba.gov.br  (71) 3202-9188 / 9189 <br> ' +
+        //    '<strong>Ouvidoria Transalvador:</strong> e-mail: ouvidoria.transalvador@salvador.ba.gov.br';
+
+        //swal({
+        //    title: 'TELA DE SITUAÇÃO DO PROCESSO',
+        //    content: content,
+        //    icon: "warning",
+        //});
+
+    });
+
+    function openModal() {
+        document.getElementById("myModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    var slideIndex = 1
+        showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+
+
+
+</script>

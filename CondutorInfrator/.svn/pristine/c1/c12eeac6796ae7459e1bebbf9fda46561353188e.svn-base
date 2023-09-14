@@ -1,0 +1,43 @@
+
+	<table width="100%" style="background-color:#00539c;" cellpadding="0" cellspacing="0">
+		<tbody>
+		<tr>
+			<td>
+				<table width="700" border="0" align="center" cellpadding="0" cellspacing="0">
+					<tbody><tr>
+						<td width="700" height="200">
+							<img src="http://simplifica.salvador.ba.gov.br/mpro/gr/img/simplifica-cabeca-email_n.png" style="width: 100%; max-height: 200px;">
+							<p style="text-align: right; padding-right:25px; color:#fff; margin-top: -57px;">Salvador, #dia# de #mes# de #ano#</p>
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor="#FFFFFF" style="padding:10%; font-size: 14px;">
+							<!-- área do conteúdo -->
+							<h3>#titulo#</h3>
+							#conteudoEmail#
+							<!-- área do conteúdo -->
+							
+							<br /><br /><br />
+						<p align="center" style="background: #fff; font-size:12px; color:#F00; text-align: center; padding: 10px;"><strong>Esta mensagem é apenas uma notificação, favor não responder.</strong></p>
+						</td>
+					</tr>
+					
+					<tr>
+						
+					</tr>
+					<tr>
+						<td width="463" style="color:#fff; font-size:12px; padding:20px; text-align:center;">
+							<p>SEDUR - Secretaria Municipal de Desenvolvimento e Urbanismo<br>
+								Av. Antônio Carlos Magalhães, 3244 - Caminho das Árvores, Edf. Emp. Thomé de Souza 19º andar<br>
+								CEP: 41.820-000 <br> <a href="http://www.simplifica.salvador.ba.gov.br" style="color:#fff;">www.simplifica.salvador.ba.gov.br</a> <br>
+							</td>	
+						</tr>
+					</tbody>
+				  </table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+				

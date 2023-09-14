@@ -1,0 +1,1154 @@
+﻿@model CondutorInfrator.Models.ProcessoViewModel
+
+@{
+    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+    var Pes_TipoPessoa = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form", name = "form" }))
+{
+
+    <div class="container">
+        <div class="conteudo">
+
+
+            <div class="row">
+                <div class="col-md-1 text-center">
+                    <img src="~/img/Assitente.png" />
+                </div>
+                <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+                    <h5>
+                        <strong>
+                            Digite o CPF do condutor e clique em Pesquisar, caso não encontre o condutor envie um convite clicando no botão ao lado do campo Documento.
+                            <br />- Caso o condutor não possua cadastro no sistema, marque a opção abaixo.
+                        </strong>
+                    </h5>
+
+                    <h5><strong>Você pode alterar seus dados cadastrados antes de avançar no registro do processo, clicando no menu acima na opção Perfil  <span class="glyphicon glyphicon-menu-hamburger " style="color:royalblue" aria-hidden="true"></span> ou no local indicado no formulário abaixo. </strong></h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>PJ - Apresentação Condutor Infrator</h3>
+                </div>
+                <div class="col-md-4 text-right text-danger">
+                    <h5>
+                        @*<small style="color:red">INFORMAÇÕES IMPORTANTES!</small><br />
+                        <strong>LEIA ANTES DE INICIAR O PROCESSO @Html.ActionLink("Clique aqui!", "Infor_CondutorInfrator", "InformacaoImportantes")</strong>*@
+                        <small style="color:red">INFORMAÇÕES IMPORTANTES!</small><br />
+                        <strong>LEIA ANTES DE INICIAR O PROCESSO <label id="LabelPassoaPasso" class="text-primary" style="cursor: pointer"> Clique Aqui </label> </strong>
+                    </h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="margin-top: 25px;">
+                    <label class="pure-material-checkbox">
+                        <input type="checkbox" name="chk_UsuarioExistente" , id="chk_UsuarioExistente" onchange="habilitar()">
+                        <span>Condutor não cadastrado no sistema</span>
+                    </label>
+                </div>
+            </div>
+            <br />
+
+            <div class="barra-busca">
+                <div class="row">
+
+                    <div class="col-md-5" id="DivCPF">
+                        <p></p>
+                        <Label for="">Documentos do condutor (CPF / Passaporte)</Label>
+                        @Html.EditorFor(model => model.Con_CPF, new { htmlAttributes = new { @class = "form-control", id = "Con_CPF", placeholder = "Digite aqui o documento do condutor", @maxlength = 50 } })
+                    </div>
+                    <div class="col-md-7" style="margin-top: 25px;">
+                        <button type="button" class="btn btn-primary btn-busca" id="BtnPesquisa">Pesquisar</button> <small> <strong>Somente para condutor devidamente cadastrado.</strong></small><br />
+                        <button type="button" class="btn btn-primary btn-busca" id="BtnConvite">Convite via email</button> <small><strong> Se o condutor não possuir cadastro.</strong></small>
+                    </div>
+                    <br />
+
+                </div>
+
+            </div>
+            <br>
+            <div class="row" id="DivEstrangeiro">
+                <div class="col-md-12">
+                    <label class="pure-material-checkbox">
+                        <input type="checkbox" name="chk_UsuarioEstrangeiro" , id="chk_UsuarioEstrangeiro" onchange="Click_ChkEstrangero()">
+                        <span>Condutor Estrangeiro</span>
+                    </label>
+                </div>
+                <br />
+            </div>
+
+            <div class="row">
+                <p></p>
+                <div class="col-md-2" id="DivEditCon_CPF">
+                    CPF / Passaporte
+                    @Html.EditorFor(model => model.Con_CPF, new { htmlAttributes = new { @class = "form-control", id = "EditCon_CPF" } })
+                    @Html.HiddenFor(model => model.Con_ConfirmarAceite)
+                    @Html.HiddenFor(model => model.Con_Cadastrado)
+                    @Html.HiddenFor(model => model.Con_Estrangeiro)
+                    <div class="alert-box failure text text-center" id="vEditCon_CPF">Campo Obrigatório</div>
+                </div>
+                <div class="col-md-3" id="DivCon_Nome">
+                    @Html.DisplayNameFor(model => model.Con_Nome)
+                    @Html.EditorFor(model => model.Con_Nome, new { htmlAttributes = new { @class = "form-control", id = "Con_Nome" } })
+                    <div class="alert-box failure text text-center" id="vCon_Nome">Campo Obrigatório</div>
+                </div>
+                <div class="col-md-2" id="DivCon_RegistroCNH">
+                    @Html.DisplayNameFor(model => model.Con_RegistroCNH)
+                    @Html.EditorFor(model => model.Con_RegistroCNH, new { htmlAttributes = new { @class = "form-control", id = "Con_RegistroCNH" } })
+                    <div class="alert-box failure text text-center" id="vCon_RegistroCNH">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-2" id="DivCon_CNHValidade">
+                    @Html.DisplayNameFor(model => model.Con_CNHValidade)
+                    @Html.EditorFor(model => model.Con_CNHValidade, new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "form-control",
+                            id = "Con_CNHValidade",
+                            attrname = "Date",
+                            maxlength = 10
+                        }
+                    })
+                    <div class="alert-box failure text text-center" id="vCon_CNHValidade">Campo Obrigatório</div>
+                </div>
+                <div class="col-md-2">
+
+                    @Html.DisplayNameFor(model => model.Con_Telefone)
+                    @Html.EditorFor(model => model.Con_Telefone, new { htmlAttributes = new { @class = "form-control", id = "Con_Telefone", attrname = "telephone2" } })
+                </div>
+
+                <div class="col-md-1" id="DivCon_UF_CNH">
+                    @Html.DisplayNameFor(model => model.Con_UF_CNH)
+                    @Html.EditorFor(model => model.Con_UF_CNH, new { htmlAttributes = new { @class = "form-control", id = "Con_UF_CNH", maxlength = 2, } })
+                    <div class="alert-box failure text text-center" id="vCon_UF_CNH">Campo Obrigatório</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3" id="DivCon_EndPro_CEP">
+                    @Html.DisplayNameFor(model => model.Con_EndPro_CEP)
+                    @Html.EditorFor(model => model.Con_EndPro_CEP, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_CEP", attrname = "CEP", maxlength = 10, } })
+                    <div class="alert-box failure text text-center" id="vCon_EndPro_CEP">Campo Obrigatório</div>
+                </div>
+                <div class="col-md-5" id="DivCon_EndPro_Logradouro">
+                    @Html.DisplayNameFor(model => model.Con_EndPro_Logradouro)
+                    @Html.EditorFor(model => model.Con_EndPro_Logradouro, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Logradouro" } })
+                    <div class="alert-box failure text text-center" id="vCon_EndPro_Logradouro">Campo Obrigatório</div>
+                </div>
+                <div class="col-md-1" id="DivCon_EndPro_Numero">
+                    @Html.DisplayNameFor(model => model.Con_EndPro_Numero)
+                    @Html.EditorFor(model => model.Con_EndPro_Numero, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Numero" } })
+                    <div class="alert-box failure text text-center" id="vCon_EndPro_Numero">Campo Obrigatório</div>
+                </div>
+                <div class="col-md-3" id="DivCon_EndPro_Bairro">
+                    @Html.DisplayNameFor(model => model.Con_EndPro_Bairro)
+                    @Html.EditorFor(model => model.Con_EndPro_Bairro, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Bairro" } })
+                    <div class="alert-box failure text text-center" id="vCon_EndPro_Bairro">Campo Obrigatório</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Con_EndPro_Cidade)
+                    @Html.EditorFor(model => model.Con_EndPro_Cidade, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Cidade", @readonly = "readonly" } })
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayNameFor(model => model.Con_EndPro_Complemento)
+                    @Html.EditorFor(model => model.Con_EndPro_Complemento, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Complemento" } })
+                </div>
+                <div class="col-md-1">
+                    @Html.DisplayNameFor(model => model.Con_EndPro_Estado)
+                    @Html.EditorFor(model => model.Con_EndPro_Estado, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Estado", @readonly = "readonly" } })
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayNameFor(model => model.Con_EndPro_Pais)
+                    @Html.EditorFor(model => model.Con_EndPro_Pais, new { htmlAttributes = new { @class = "form-control", id = "Con_EndPro_Pais", Value = "BRASIL", @readonly = "readonly" } })
+                </div>
+            </div>
+            <br>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Informações do Requerente</h3>
+                </div>
+                <div class="col-md-6 text-right text-danger " style="font-style: italic">
+                    <div class="row"><h5> <img src="~/img/Assitente (1).png" /> <strong>Deseja alterar seu cadastro? @Html.ActionLink("Clique aqui!", "juridico_perfil", "juridico_perfil")</strong></h5></div>
+
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <div class="col-md-2">
+                    CPF / CNPJ
+                    @Html.EditorFor(model => model.Ptr_CPF_CNPJ, new { htmlAttributes = new { @class = "form-control", id = "Ptr_CPF_CNPJ", @readonly = "readonly" } })
+                    <span id="resposta"></span>
+                </div>
+
+                <div class="col-md-5">
+                    @Html.DisplayNameFor(model => model.Ptr_Nome)
+                    @Html.EditorFor(model => model.Ptr_Nome, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Nome", @readonly = "readonly" } })
+                </div>
+
+                <div class="col-md-5">
+                    @Html.DisplayNameFor(model => model.Ptr_NomeFantasia)
+                    @Html.EditorFor(model => model.Ptr_NomeFantasia, new { htmlAttributes = new { @class = "form-control", id = "Ptr_NomeFantasia", @readonly = "readonly" } })
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(model => model.Ptr_EndPro_CEP)
+                    @Html.EditorFor(model => model.Ptr_EndPro_CEP, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_CEP", @readonly = "readonly" } })
+                </div>
+                <div class="col-md-7">
+                    @Html.DisplayNameFor(model => model.Ptr_EndPro_Logradouro)
+                    @Html.EditorFor(model => model.Ptr_EndPro_Logradouro, new { htmlAttributes = new { @class = "form-control", id = "End_Logradouro", @readonly = "readonly" } })
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Ptr_EndPro_Bairro)
+                    @Html.EditorFor(model => model.Ptr_EndPro_Bairro, new { htmlAttributes = new { @class = "form-control", id = "End_Bairro", @readonly = "readonly" } })
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Ptr_EndPro_Cidade)
+                    @Html.EditorFor(model => model.Ptr_EndPro_Cidade, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Cidade", @readonly = "readonly" } })
+                </div>
+                <div class="col-md-4">
+                    @Html.DisplayNameFor(model => model.Ptr_EndPro_Complemento)
+                    @Html.EditorFor(model => model.Ptr_EndPro_Complemento, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Complemento", @readonly = "readonly" } })
+                </div>
+                <div class="col-md-1">
+                    @Html.DisplayNameFor(model => model.Ptr_EndPro_Estado)
+                    @Html.EditorFor(model => model.Ptr_EndPro_Estado, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Estado", @readonly = "readonly" } })
+                </div>
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(model => model.Ptr_EndPro_Pais)
+                    @Html.EditorFor(model => model.Ptr_EndPro_Pais, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Pais", @readonly = "readonly" } })
+                </div>
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(model => model.Ptr_Telefone)
+                    @Html.EditorFor(model => model.Ptr_Telefone, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Telefone", @readonly = "readonly" } })
+                </div>
+            </div>
+
+
+
+
+            <br>
+            <h3>Informações do Veículo</h3>
+            <hr>
+            <div class="row">
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(model => model.Vec_Placa)
+                    @Html.EditorFor(model => model.Vec_Placa, new { htmlAttributes = new { @class = "form-control", id = "Vec_Placa", @readonly = "readonly" } })
+                </div>
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(model => model.Vec_RENAVAN)
+                    @Html.EditorFor(model => model.Vec_RENAVAN, new { htmlAttributes = new { @class = "form-control", id = "Vec_RENAVAN", @readonly = "readonly" } })
+                </div>
+                <div class="col-md-2">
+                    @Html.DisplayNameFor(model => model.Vec_Ano)
+                    @Html.EditorFor(model => model.Vec_Ano, new { htmlAttributes = new { @class = "form-control", id = "Vec_Ano", @readonly = "readonly" } })
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Vec_Marca)
+                    @Html.EditorFor(model => model.Vec_Marca, new { htmlAttributes = new { @class = "form-control", id = "Vec_Marca", @readonly = "readonly" } })
+                </div>
+
+            </div>
+            <br>
+            <h3>Informações da Multa</h3>
+            <hr>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Mut_AIT)
+                    @Html.EditorFor(model => model.Mut_AIT, new { htmlAttributes = new { @class = "form-control", id = "Mut_AIT", @readonly = "readonly" } })
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Mut_CodigoInfracao)
+                    @Html.EditorFor(model => model.Mut_CodigoInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_CodigoInfracao", @readonly = "readonly" } })
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Mut_DataInfracao)
+                    @Html.EditorFor(model => model.Mut_DataInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_DataInfracao", @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-9">
+                    @Html.DisplayNameFor(model => model.Mut_DescricaoInfracao)
+                    @Html.TextAreaFor(model => model.Mut_DescricaoInfracao, new { @class = "form-control", @rows = 3, id = "Mut_DescricaoInfracao", @readonly = "readonly" })
+                </div>
+
+                <br>
+            </div>
+            <div class="row">
+                <div class=""></div>
+                <p><strong class="text-danger">ATENÇÃO!</strong> Caso o condutor infrator possa assinar o formulário ou a NAI (Via amarela), clique abaixo para o condutor dar o aceite.</p>
+            </div>
+            <div class="row">
+                <label class="pure-material-checkbox">
+                    <input type="checkbox" name="Chk_Aceite" , id="Chk_Aceite" onchange="AceiteCondutor()">
+                    <span>
+                        Solicitar aceite do condutor via e-mail.
+                    </span>
+                </label>
+            </div>
+            <br />
+            <div class="row">
+                - Na impossibilidade da coleta da assinatura do condutor infrator, deverá ser anexado documento complementar que comprove a condução do veículo no
+                momento do cometimento da infração. Confira aqui documentação especifica de comprovação segundo resolução 619 do CONTRAN.
+
+            </div>
+
+            <div class="row">
+                <div class="text-center">
+                    <input type="button" value="Próximo" class="btn btn-primary btn-lg btn-transalvador" id="BtnAvancar" @*onclick="ConferirDados() "*@ />
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    //Modal
+
+
+                <div class="modal fade bd-example-modal-lg" id="modalOrientacao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacao" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+
+                            <div class="modal-header">
+                                <h4 class="modal-title"> PASSO A PASSO</h4>
+
+                            </div>
+                            <div class="modal-body" style="margin-bottom: 90px;">
+                                <div class="lista-importante" id="Apresentacao">
+
+
+
+                                    <div class="row text-center">
+                                        <h4>APRESENTAÇÃO DE CONDUTOR INFRATOR</h4>
+                                        <strong><small><h5>INFORMAÇÕES IMPORTANTES / LEIA COM ATENÇÃO</h5></small></strong>
+                                    </div>
+
+                                    <br />
+
+
+                                    <h4><strong>• 1 - Registrar Solicitação de Processo Condutor Infrator</strong></h4>
+                                    <div class="text-justify">
+                                        Ao logar no Sistema de Protocolo Online, o cidadão tem acesso a listagem de autos de infração de trânsito - AITs de sua propriedade (CPF ou CNPJ).<br />
+                                        <strong>O registro da solicitação de processo de Apresentação de Condutor Infrator online pode ser realizado apenas através do proprietário do veículo.</strong><br />
+                                        Para registrar a solicitação do Processo de Apresentação de Condutor Infrator, o cidadão que será apresentado como infrator deve possuir cadastro no sistema.<br />
+
+                                        Contudo, se o proprietário do veículo for Pessoa Jurídica com impossibilidade de coleta da assinatura do condutor infrator, pode apresentar como condutor um
+                                        cidadão que não possui cadastro, informando o CPF, Nome Completo, Registro CNH e Telefone (opcional), para estes casos, a foto selfie do condutor não constará
+                                        como documentação anexada ao pedido.
+
+                                        <br />
+
+
+
+                                        <h4><strong>• 2 - Juntar Documentação</strong></h4>
+
+                                        Nesta etapa o cidadão irá anexar a documentação obrigatória que deve estar completa, legível e em bom estado para obter aprovação.
+                                        <br />
+                                        A falta de assinatura na NAI e/ou de documentos comprobatórios, assinatura divergente do documento apresentado ou em cópia, erros de preenchimento,
+                                        não legitimidade do requerente implicam no indeferimento do pedido. Neste caso, o proprietário do veículo será considerado o responsável pela infração e
+                                        terá registrado no histórico da sua CNH a pontuação correspondente a infração.
+                                        <br />
+                                        <br />
+                                        <strong>
+                                            É obrigatório identificar o condutor infrator de veículos de propriedade de Pessoa Jurídica, sob pena de incorrer na aplicação de nova multa, conforme
+                                            parágrafo 8° do art. 257 do CTB
+                                        </strong>
+                                        <br />
+                                        <br />
+                                        <strong>
+                                            Apresentar condutor infrator diferente do que conduzia o veículo configura crime de falsidade ideológica, previsto no artigo 299 do Código Penal,
+                                            com pena de 1 a 5 anos e multa.
+                                        </strong>
+                                        <br />
+
+
+
+                                        <h4><strong>Os documentos obrigatórios para registro do processo são:</strong></h4>
+                                        <strong>• Para Veículos Em Nome De Pessoa Física</strong>
+                                        <br />
+                                        a. RG ou CNH do proprietário do veículo;
+                                        <br />
+                                        b. CNH do condutor infrator (caso esteja vencida na época da infração será lavrada outra multa);
+                                        <br />
+                                        c. Comprovante de residência do condutor infrator (dos últimos 3 meses);
+                                        <br />
+                                        d. Formulário NAI, preenchido sem rasuras, assinado pelo proprietário e condutor infrator (assinaturas originais preferencialmente utilizando caneta azul);
+                                        <br />
+                                        e. Foto do rosto do condutor infrator segurando a CNH aberta ao lado (documento anexado ao processo automaticamente, pois está cadastrada no perfil do cidadão.
+                                        <br />
+                                        <br />
+                                        É necessário que a foto esteja utilizada de acordo com a vigência do documento CNH e com legibilidade para visualizar as informações).
+                                        <br />
+
+                                        <br />
+
+                                        <h4><strong>• Para Veículos Em Nome De Pessoa Jurídica Órgão Público</strong></h4>
+                                        a. RG ou CNH do Dirigente do Órgão ou outro documento que comprove assinatura;
+                                        <br />
+                                        b. Portaria de Nomeação;
+                                        <br />
+                                        c. CNH do Condutor Infrator (caso esteja vencida na época da infração será lavrada outra multa);
+                                        <br />
+                                        d. Formulário NAI assinado pelo proprietário e condutor infrator (assinaturas originais preferencialmente com caneta azul);
+                                        <br />
+                                        e. Foto do rosto do condutor infrator segurando a CNH aberta ao lado (documento anexado ao processo automaticamente, caso cadastrado no perfil do cidadão.
+                                        É necessário que a foto esteja utilizada de acordo com a vigência do documento CNH e com legibilidade para visualizar as informações).
+                                        <br />
+                                        <br />
+
+                                        A Apresentação do Condutor Infrator por proprietários
+                                        <strong>Pessoa Jurídica Órgão Público, com impossibilidade do registro da assinatura do condutor infrator</strong>
+                                        apresentado no Formulário NAI, torna-se obrigatório complementar a documentação com:
+                                        <br />
+                                        a. Ofício do representante legal do Órgão ou Entidade
+                                        <strong>identificando o condutor infrator;</strong>
+                                        <br />
+                                        b. Documento que comprove a posse do veículo no momento do cometimento da infração
+                                        (exemplo: escala de serviço com o nome do condutor, data e horário coincidindo com os dados da infração lavrada atrelada à placa do veículo).
+                                        <br />
+                                        <br />
+
+                                        <h4><strong>• Para Veículos Em Nome De Demais Pessoas Jurídica</strong></h4>
+                                        a - Contrato Social;
+                                        <br />
+                                        b - RG ou CNH do Sócio da Empresa que assina no Contrato Social ou outro documento que comprove assinatura.
+                                        <br />
+                                        c. CNH do condutor infrator (caso esteja vencida na época da infração será lavrada outra multa);
+                                        <br />
+                                        d. Formulário NAI assinado pelo proprietário e condutor infrator (assinaturas originais preferencialmente com caneta azul,
+                                        semelhantes ao documento de identificação);
+                                        <br />
+                                        e. Foto do rosto do condutor infrator segurando a CNH aberta ao lado (documento anexado ao processo automaticamente, caso cadastrado no perfil do cidadão.
+                                        É necessário que a foto esteja utilizada de acordo com a vigência do documento CNH e com legibilidade para visualizar as informações).
+                                        <br />
+                                        f) O proprietário sendo Demais Pessoas Jurídicas pode indicar além de um sócio/proprietário, um procurador como representante legal da empresa.
+                                        O procurador deve representar o sócio/proprietário ou a empresa (neste caso representando todos os sócios/proprietários). A indicação do procurador
+                                        torna obrigatório complementar com os seguintes anexos:
+                                        <br />
+                                        1 - Documento de Procuração Pública;
+                                        <br />
+                                        2 - RG ou CNH do Procurador ou outro documento que comprove assinatura.
+                                        <br />
+                                        <br />
+
+                                        A Apresentação do Condutor Infrator por proprietários
+                                        <strong> Demais Pessoas Jurídicas, com impossibilidade do registro da assinatura do condutor infrator</strong>
+                                        apresentado no Formulário NAI, torna-se obrigatório complementar a documentação com:
+                                        <br />
+
+                                        a. Documento onde conste cláusula de responsabilidade por infrações cometidas pelo condutor e comprove a posse do veículo no momento do cometimento da infração
+                                        (exemplo: Locadoras – opção de apresentar contrato de locação com termo de responsabilidade, constando os dados do locador e locatário, veículo, horário e
+                                        data de saída e devolução do veículo, assinatura do condutor e sua identificação / caso haja substituição do veículo ou renovação deve conter assinatura do
+                                        condutor no documento aditivo, da empresa e os dados mínimos para comprovação).
+                                        <br />
+                                        <strong>IMPORTANTE: </strong> O documento referido na alínea “a” deverá conter, no mínimo, a identificação do veículo, do proprietário e condutor,
+                                        cláusula de responsabilidade pelas infrações e período em que o veículo esteve na posse do condutor apresentado, podendo esta última informação constar
+                                        em documento separado assinado pelo condutor.
+                                        <br />
+                                        <br />
+
+                                        <strong>• Disposições Gerais / Condutor Habilitado no Exterior</strong>
+                                        <br />
+
+                                        Nos casos de condutor habilitado no exterior, além dos requisitos obrigatórios acima, deverá observar a Resolução CONTRAN nº360/2010,
+                                        exigindo-se cópia do documento de habilitação estrangeira dentro do prazo de validade e cópia do passaporte comprovando a identidade e a data de entrada no Brasil,
+                                        que não poderá ser superior a 180 (cento e oitenta) dias.
+                                        <br />
+                                        <br />
+
+
+
+                                        <h4><strong>• 3 - Anexar Documentação</strong></h4>
+                                        Os documentos necessários de acordo com as regras descritas no tópico Juntar Documentação.
+                                        <br />
+                                        É necessário que os documentos anexados ao processo estejam completos e conforme o indicativo do campo anexar, legislação, sem rasuras será reprovado e arquivado definitivamente.
+                                        <br />
+                                        <br />
+
+
+                                        <h4><strong>• 3 - Enviar a documentação</strong></h4>
+                                        Para finalizar o registro é necessário realizar o upload dos documentos, concordar com os termos da TRANSALVADOR no local indicado clicando em
+                                        “Finalizar Registro do Processo” ou “Enviar Documentação”. Revise toda documentação e o cumprimento das regras e legislação pois uma vez encaminhado
+                                        não será possível fazer modificações, seguindo o processo imediatamente para análise.
+                                        <br />
+                                        <br />
+
+                                        <h4><strong>• 5 - Aceite do condutor infrator</strong></h4>
+                                        Após anexar a documentação e finalizar o registro, é enviado um e-mail com solicitação de aceite de apresentação ao condutor infrator apresentado,
+                                        com número de controle interno – CI. O cidadão que foi indicado como condutor, notificado por e-mail (cadastrado no perfil), deve confirmar os dados e documentação.
+                                        <br />
+                                        <br />
+
+                                        O condutor apresentado tem um
+                                        <strong> prazo de (3) três dias </strong>a contar da data de envio da solicitação, desde que não ultrapasse a data de vencimento da
+                                        Notificação de Auto de Infração – NAI, para acessar o sistema e aceitar a indicação.
+                                        <strong>
+                                            Ao aceitar a indicação o Controle Interno é convertido em processo com número de
+                                            protocolo de apresentação de condutor web e segue para análise da Triagem.
+                                        </strong>
+                                        <br />
+                                        <br />
+                                        A triagem após o aceite do condutor analisa o processo gerado, e estando dentro dos requisitos legais, procede pela
+                                        <strong>APROVAÇÃO.</strong> Neste ato,
+                                        <strong>o cadastro de condutor infrator ocorre de forma IMEDIATA e segue as informações automaticamente para o DETRAN.</strong>
+                                        <br />
+                                        <br />
+
+                                        No caso de
+                                        <strong>REPROVAÇÃO</strong> por descumprimento das regras e legislação, o processo será ARQUIVADO definitivamente.
+                                        <br />
+                                        <br />
+                                        <strong>
+                                            ATENÇÃO: O Proprietário deverá acompanhar toda etapa da abertura online, principalmente a que trata do aceite pelo condutor, considerando que na falta
+                                            do aceite do condutor haverá o arquivamento definitivo.
+                                        </strong>
+                                        <br />
+                                        <br />
+
+                                        <strong>
+                                            Se o condutor infrator não der o aceite na indicação no período estabelecido (três dias), o prazo de aceite será expirado e não será permitido dar seguimento
+                                            ao serviço on-line, havendo o arquivamento imediato da CI, entretanto, poderá ser feito presencialmente (mediante agendamento) até o vencimento da notificação da autuação - NAI.
+                                        </strong>
+                                        Neste caso, o nome do condutor apresentado no serviço on-line deverá ser mantido pelo proprietário no momento da apresentação presencial, ou apresentação com encaminhamento via Correios,
+                                        sob pena de configurar falsidade ideológica.
+                                        <br />
+                                        <br />
+
+                                        Sendo o proprietário Pessoa Jurídica, pode escolher durante o registro da demanda, se é necessário enviar solicitação de aceite de apresentação para o condutor acatar a indicação
+                                        (apenas nos casos em que o cidadão apresentado como condutor possuir cadastro no sistema) ou se o processo será enviado diretamente para a Triagem na Transalvador.
+                                        <br />
+                                        <br />
+
+                                        O envio direto pelo proprietário Pessoa Jurídica à Triagem deverá ocorrer somente quando não for possível colher assinatura do condutor infrator
+                                        (decorre da previsão legal da Resolução CONTRAN 619/2016, art. 5º, parágrafo 1º).
+                                        <br />
+                                        <br />
+
+                                        Havendo a recusa do condutor no aceite, sendo o veículo de propriedade de pessoa jurídica, o processo será arquivado, entretanto, o representante da empresa poderá fazer a
+                                        apresentação sem assinatura do condutor, conforme legislação, até o prazo estipulado na Notificação da Autuação - NAI. Neste caso, o condutor a ser indicado presencialmente
+                                        deverá ser o mesmo da demanda recusada sob risco de configurar falsidade ideológica.
+                                        <br />
+                                        <br />
+
+
+
+
+                                        <h4><strong>• 6 Duvida</strong></h4>
+                                        Em caso que não seja possível finalizar o cadastro do processo mantenha contato com www.ouvidoria.transalvador@salvador.ba.gov.br,
+                                        ou efetue o agendamento obrigatório no site da TRANSALVADOR para fazer a apresentação de condutor presencialmente (ver regras no site)
+                                        permitido até a data limite de vencimento das Notificação de Autuação - NAI.
+                                        <br />
+                                        Os documentos podem ser encaminhados também via Correios através de carta registrada, devendo numerar todas as páginas e autenticar a
+                                        CNH do condutor e reconhecer a assinatura deste na NAI (ver regras na notificação ou site).
+                                        <br />
+                                        <br />
+
+
+                                        <h4><strong>• 7 Documentação Necessária para Dirigir-se a Transalvador</strong></h4>
+                                        Para atendimento presencial será necessário agendamento prévio obrigatório no site, especificando o serviço de Apresentação de Condutor.
+                                        <strong>O agendamento deve ser feito no nome de quem vai comparecer ao Atendimento Presencial, sendo necessário apresentar documento de identificação original. </strong>
+                                        Apresentar todos os documentos informados de acordo com as regras descritas no tópico Juntar Documentação, exceto a Foto selfie do condutor infrator
+                                        (
+                                        <strong>ver demais exigências no site de agendamento, principalmente no tocante a autenticação dos documentos do condutor</strong>).
+                                        Qualquer orientação complementar manter contato com o Setor de Atendimento ao Público – SETAP nos telefones (71)3202-9188/9189.
+
+
+                                        <br />
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                }
+
+                <script src="~/Scripts/Funcoes_gr.js"></script>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+                <script src="~/Scripts/gr_ValidadorCPF.js"></script>
+                <script type='text/javascript'>
+
+
+    $(window).on('load', function () {
+        $('#modalOrientacao').modal('show');
+    });
+
+    $('#LabelPassoaPasso').click(function () {
+        $('#modalOrientacao').modal('show');
+        //colocar na view de confirmação uma verificação para nao processar novamente
+    });
+
+
+
+    $(document).ready(function () {
+
+        var DataMask = ['99/99/9999'];
+        var Data = document.querySelector('input[attrname=Date]');
+        VMasker(Data).maskPattern(DataMask[0]);
+        Data.addEventListener('input', func_inputHandler.bind(undefined, DataMask, 10), false);
+
+        var telMask2 = ['+99 (99) 9999-99999', '+99 (99) 99999-9999'];
+
+        var tel2 = document.querySelector('input[attrname=telephone2');
+        VMasker(tel2).maskPattern(telMask2[0]);
+        tel2.addEventListener('input', func_inputHandler.bind(undefined, telMask2, 14), false);
+
+        var CepMask = ['99.999-999',];
+        var Cep = document.querySelector('input[attrname=CEP');
+        VMasker(Cep).maskPattern(CepMask[0]);
+        Cep.addEventListener('input', func_inputHandler.bind(undefined, CepMask, 10), false);
+
+
+        $("#DivEstrangeiro").hide();
+        LimparCampo();
+    });
+
+    document.getElementById('EditCon_CPF').setAttribute("disabled", "disabled");
+    document.getElementById('Con_Nome').setAttribute("disabled", "disabled");
+    document.getElementById('Con_RegistroCNH').setAttribute("disabled", "disabled");
+    document.getElementById('Con_CNHValidade').setAttribute("disabled", "disabled");
+    document.getElementById('Con_Telefone').setAttribute("disabled", "disabled");
+    document.getElementById('Con_UF_CNH').setAttribute("disabled", "disabled");
+
+    document.getElementById('Con_EndPro_CEP').setAttribute("disabled", "disabled");
+    document.getElementById('Con_EndPro_Logradouro').setAttribute("disabled", "disabled");
+    document.getElementById('Con_EndPro_Bairro').setAttribute("disabled", "disabled");
+    document.getElementById('Con_EndPro_Numero').setAttribute("disabled", "disabled");
+
+
+    $('#Con_CNHValidade').blur(function () {
+        if ($('#Con_CNHValidade').val() != "") {
+            if ($('#Con_CNHValidade').val().length < 10) {
+                swal("Formato inválido!", "Favor preencher o campo corretamente.", "").then(() => {
+                    $('#Con_CNHValidade').focus();
+                });
+                return false;
+            };
+            //validando DATA
+            if (verificaData($('#Con_CNHValidade').val()) == false) {
+                swal("Data inexistente!", "Favor preencher o campo corretamente.", "").then(() => {
+                    $('#Con_CNHValidade').focus();
+                });
+            };
+
+        }
+    });
+
+
+    function habilitar() {
+
+        LimparCampo();
+        if (document.getElementById('chk_UsuarioExistente').checked) {
+            swal("Atenção!", "Caso seja Condutor Estrangeiro, marque a caixinha abaixo Condutor estrangeiro.", "warning");
+
+
+            document.getElementById('BtnPesquisa').setAttribute("disabled", "disabled");
+            document.getElementById('BtnConvite').setAttribute("disabled", "disabled");
+            document.getElementById('Con_CPF').setAttribute("disabled", "disabled");
+
+            $("#DivEstrangeiro").show();
+            document.getElementById('EditCon_CPF').removeAttribute("disabled");
+            document.getElementById('Con_Nome').removeAttribute("disabled");
+            document.getElementById('Con_RegistroCNH').removeAttribute("disabled");
+            document.getElementById('Con_UF_CNH').removeAttribute("disabled");
+            document.getElementById('Con_CNHValidade').removeAttribute("disabled");
+            document.getElementById('Con_Telefone').removeAttribute("disabled");
+            //endereço
+            document.getElementById('Con_EndPro_CEP').removeAttribute("disabled");
+            document.getElementById('Con_EndPro_Logradouro').removeAttribute("disabled");
+            document.getElementById('Con_EndPro_Bairro').removeAttribute("disabled");
+            document.getElementById('Con_EndPro_Numero').removeAttribute("disabled");
+
+
+            $('#EditCon_CPF').focus();
+            document.getElementById('Chk_Aceite').checked = 0;
+            document.getElementById('Chk_Aceite').setAttribute("disabled", "disabled");
+
+        }
+        else {
+
+            $("#DivEstrangeiro").hide();
+            document.getElementById('EditCon_CPF').setAttribute("disabled", "disabled");
+
+            document.getElementById('BtnPesquisa').removeAttribute("disabled");
+            document.getElementById('BtnConvite').removeAttribute("disabled");
+            document.getElementById('Con_CPF').removeAttribute("disabled");
+            document.getElementById('Chk_Aceite').removeAttribute("disabled");
+
+            document.getElementById('EditCon_CPF').setAttribute("disabled", "disabled");
+            document.getElementById('Con_Nome').setAttribute("disabled", "disabled");
+            document.getElementById('Con_RegistroCNH').setAttribute("disabled", "disabled");
+            document.getElementById('Con_UF_CNH').setAttribute("disabled", "disabled");
+            document.getElementById('Con_CNHValidade').setAttribute("disabled", "disabled");
+            document.getElementById('Con_Telefone').setAttribute("disabled", "disabled");
+
+            //endereço
+            document.getElementById('Con_EndPro_CEP').setAttribute("disabled", "disabled");
+            document.getElementById('Con_EndPro_Logradouro').setAttribute("disabled", "disabled");
+            document.getElementById('Con_EndPro_Bairro').setAttribute("disabled", "disabled");
+            document.getElementById('Con_EndPro_Numero').setAttribute("disabled", "disabled");
+
+            $('#Con_CPF').focus();
+        }
+    }
+
+    function Click_ChkEstrangero() {
+        LimparCampo();
+    }
+
+
+    function AceiteCondutor() {
+        if (document.getElementById('Chk_Aceite').checked) {
+            swal("Informação Importante", "Ao selecionar que o processo precisa do fluxo do Aceite do Condutor para ser enviado a Triagem na Transalvador, caso o Condutor recuse o processo este " +
+                "não será enviado a triagem e estando o AIT no prazo para apresentação de condutor, o registro do processo poderá ser realizado presencialmente.", "warning");
+        }
+    }
+
+    function cnhvencida() {
+        window.chnvencida = false
+    }
+    //Limpar campos
+    function LimparCampo() {
+
+        //$('#DivCPF').addClass('has-error');
+        $('#Con_CPF').focus();
+        $('#Con_CPF').val("");
+        $('#Con_Nome').val("");
+        $('#Con_RegistroCNH').val("");
+        $('#Con_CNHValidade').val("");
+        $('#Con_Telefone').val("");
+        $('#Con_EndPro_CEP').val("");
+        $('#Con_EndPro_Logradouro').val("");
+        $('#Con_EndPro_Bairro').val("");
+        $('#Con_EndPro_Cidade').val("");
+        $('#Con_EndPro_Complemento').val("");
+        $('#Con_EndPro_Estado').val("");
+        $('#Con_UF_CNH').val("");
+        $('#EditCon_CPF').val("");
+    }
+    // Validando os campos em brancos
+
+        //Validando CPF
+        $("#EditCon_CPF").blur(function () {
+
+            if ($("#EditCon_CPF").val() != "") {
+
+                var validador_cpf = new func_validador_cpf();
+                var result = validador_cpf.valida($(this).val())
+                if (result == "False" && document.getElementById('chk_UsuarioEstrangeiro').checked == 0) {
+                    posLoad();
+                    swal("CPF Inválido!", "Necessário preencher o CPF corretamente.", "warning")
+                        .then(function () {
+                            swal.close();
+                            LimparCampo();
+                            $('#EditCon_CPF').val('')
+                            $('#EditCon_CPF').focus();
+                        });
+                    return false;
+                }
+                else {
+
+                    var cpf_cond = $("#EditCon_CPF").val();
+                    $("#Con_CPF").val(cpf_cond);
+
+                    preLoad();
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify({ _cpf: cpf_cond }),
+                        url: '@Url.Action("PesquisarCNH", "pessoa")',//verifica se existe e pegando os dados da CHN na base do Detran
+
+                        success: function (data) {
+                            $(data.Resultado).each(function () {
+                                $("#Con_Nome").val(this.nome);
+                                $("#Con_RegistroCNH").val(this.registro);
+                                $("#Con_CNHValidade").val(this.validade);
+                                $("#Con_UF_CNH").val(this.enderecoUF);
+                                $('#Con_Telefone').focus();
+
+                                $("#Con_CPF").val($("#EditCon_CPF").val())
+
+                            });
+                            posLoad();
+                        },
+
+                        error: function () {
+                            posLoad();
+                            swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                            .then(() => {
+                                location.reload();
+                            });
+                        }
+                    });
+                }
+            };
+        });
+
+        //------------------------------------------------
+
+        //ENVIO DO CONVITE
+        $("#BtnConvite").click(function () {
+            swal("Digite o e-mail do condutor. O mesmo receberá por e-mail um link de acesso para que possa realizar o cadastro.", { content: "input", })
+                .then((value) => {
+                    if (value != "" && value != null) {
+                        //validando o email
+                        var resultado = func_validandoemail(value);
+                        if (resultado == false) {
+                            swal("E-mail inválido", "Necessário informar um e-mail válido.", "warning").
+                                then(() => {
+                                    $("#BtnConvite").click();
+                                });
+                            return false
+                        }
+                        else {
+
+                            var TipoEmail = "Convite";
+                            var Nome = $('#Ptr_Nome').val();
+                            var CPF_CNPJ = $('#Ptr_CPF_CNPJ').val();
+
+                            $.ajax({
+                                type: "POST",
+                                contentType: "application/json; charset=utf-8",
+                                data: JSON.stringify({ email: value, tipoEmail: TipoEmail, nome: Nome, vlo1: CPF_CNPJ }),
+                                url: '@Url.Action("encaminharemail", "email")',
+                                success: function (data) {
+                                    if (data.error == true) {
+                                        posLoad();
+                                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error");
+                                        return false;
+                                    }
+                                    else {
+                                        swal("E-mail encaminhado com sucesso!", "", "success");
+                                    }
+                                },
+
+                                error: function () {
+                                    posLoad();
+                                    swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                                    .then(() => {
+                                        location.reload();
+                                    });
+                                }
+                            })
+                        }
+
+                    };
+                });
+            return false;
+        });
+        //fim do envio
+
+
+        //Apenas Numero
+        $('#Con_CPF').keyup(function () {
+            $(this).val(this.value.replace(/\D/g, ''));
+        });
+
+        //LIMPANDO CAMPO CASO APAGUE O CPF DIGITADO NA BUSCA
+        var input = $("#Con_CPF").val();// document.getElementById('Con_CPF');
+        input.onkeydown = function () {
+            var key = event.keyCode || event.charCode;
+
+            if (key == 8 || key == 46) {
+                LimparCampo();
+            };
+        };
+
+        //VALIDAÇÃO
+
+        function Validacao() {
+
+
+            var Condutor = $("#Con_CPF").val();
+            var Propietario = $("#Ptr_CPF_CNPJ").val();
+
+            //Verificando se o campo está em branco
+            if (Condutor == "") {
+                posLoad();
+                swal("Atenção!", "Digite o documento do condutor pra realizar a pesquisa.", "warning")
+                    .then(() => {
+                        $('#DivCPF').addClass('has-error');
+                        $('#Con_CPF').focus();
+                        $('#Con_CPF').val("");
+                        LimparCampo();
+                    });
+                return false;
+            } else
+                //verificnado se o condutor é o mesmo proprietario
+                if (Condutor == Propietario) {
+                    posLoad();
+                    swal("Ops!", "O condutor não pode ser o Requerente.", "warning")
+                        .then(() => {
+                            LimparCampo();
+                        });
+                    return false;
+                }
+                else { return true };
+
+        }
+        //FIM DA VALIDAÇÃO
+
+        //Realiza a pesquisa do condutor
+        $("#BtnPesquisa").click(function () {
+            preLoad();
+            document.getElementById('chk_UsuarioExistente').checked = 0;
+            if (Validacao() == true) {
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ _cpf: $("#Con_CPF").val(), _ait: $("#Mut_AIT").val() }),//variavel de pesquisa
+                    url: '@Url.Action("pesquisarCondutor", "apresentacaocondutor")',
+                    success: function (data) {
+
+                        if (data.error == true) {
+                            posLoad();
+                            swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error")
+                                .then(() => {
+                                    $('#Con_CPF').val("");
+                                    $('#Con_CPF').focus();
+                                    LimparCampo();
+                                    return false;
+                                });
+                        } else
+                        if (data.VCM == null) {
+                        posLoad();
+                        swal("Ops! Documento não localizado", "Encaminhe um convite digitando o e-mail do condutor.", "warning")
+                            .then(() => {
+                                $('#Con_CPF').val("");
+                                $('#Con_CPF').focus();
+                                LimparCampo();
+                            });
+                        return false;
+                        }
+                        else {
+                            $(data.VCM).each(function () {
+                                //verificando se retornou a pesquisa
+                                if (this.Con_RegistroCNH == "" || this.Con_RegistroCNH == null) {
+                                    posLoad();
+                                    swal("Ops! Condutor selecionado não pussui CNH", "É obrigatório o condutor apresentar uma CNH.", "warning")
+                                        .then(() => {
+                                            $('#Con_CPF').val("");
+                                            $('#Con_CPF').focus();
+                                            LimparCampo();
+                                        });
+                                    return false;
+                                } else {
+
+                                    //Preenchendo
+
+                                    $("#EditCon_CPF").val($("#Con_CPF").val());
+                                    $("#Con_Nome").val(this.Con_Nome);
+                                    $("#Con_RegistroCNH").val(this.Con_RegistroCNH);
+                                    $("#Con_CNHValidade").val(this.Con_CNHValidade);
+                                    $("#Con_UF_CNH").val(this.Con_UF_CNH);
+
+                                    $("#Con_EndPro_CEP").val(this.Con_EndPro_CEP);
+                                    $("#Con_EndPro_Logradouro").val(this.Con_EndPro_Logradouro);
+                                    $("#Con_EndPro_Bairro").val(this.Con_EndPro_Bairro);
+                                    $("#Con_EndPro_Cidade").val(this.Con_EndPro_Cidade);
+                                    $("#Con_EndPro_Estado").val(this.Con_EndPro_Estado);
+                                    $("#Con_EndPro_Pais").val(this.Con_EndPro_Pais);
+                                    $("#Con_EndPro_Complemento").val(this.Con_EndPro_Complemento);
+                                    $("#Cond_Pes_Telefone").val(this.Cond_Pes_Telefone);
+                                    $("#Con_Telefone").val(this.Con_Telefone);
+                                    window.chnvencida = this.Con_StatusCNH;
+
+
+                                    if (this.Con_UF_CNH == "" || this.Con_UF_CNH == null) {
+                                        posLoad();
+                                        document.getElementById('Con_UF_CNH').removeAttribute("disabled");
+                                        $("#Con_UF_CNH").focus();
+                                        return false
+                                    }
+                                   else {
+                                        document.getElementById('Con_UF_CNH').setAttribute("disabled", "disabled");
+                                    }
+
+
+                                    if (window.chnvencida == "Vencida") {
+                                        posLoad();
+                                        swal("Ops! CNH Vencida", "O processo não poderá ser registrado, pois a CNH do condutor estava vencida na data de autuação da infração.", "warning")
+
+                                            .then(() => {
+                                                $('#Cond_Pes_CPF_CNPJ').val("");
+                                                $('#Cond_Pes_CPF_CNPJ').focus();
+                                                return false;
+                                            });
+                                    } else {
+                                        posLoad();
+                                        swal("Atenção!", "O endereço do condutor infrator registrado no sistema deve ser o mesmo apresentado no comprovante de residência. Contudo, o condutor pode atualizar seus dados quando receber o processo para o aceite.", "warning");
+                                        return true;
+                                    }
+                                };
+                            });
+                        };
+                    },
+                    error: function () {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                        .then(() => {
+                            location.reload();
+                        });
+                    },
+                });
+            }
+        });
+
+
+
+    //BOTAO AVANÇAR
+    //!!!!!!!!!!!!!! verificar se posso hanbilitar ou desabilitar usando o campo CPF do condutor
+    $("#BtnAvancar").click(function () {
+
+        if (window.chnvencida == "Vencida") {
+            posLoad();          
+            swal("Ops! CNH Vencida!", "O processo não poderá ser registrado, pois a CNH do condutor estava vencida na data de autuação da infração.", "warning")
+                .then(() => {
+                    $('#Cond_Pes_CPF_CNPJ').val("");
+                    $('#Cond_Pes_CPF_CNPJ').focus();
+
+                });
+            return false;
+        }
+
+        if ($('#Con_CPF').val() == "") {
+            swal("Atenção!", "Digite o documento do condutor pra realizar a pesquisa.", "warning")
+            return false;
+        };
+
+
+        if ($('#Con_Nome').val() == "") {
+            posLoad();
+            campo_obrigatorio('#vCon_Nome', '#DivCon_Nome', '#Con_Nome');
+            return false;
+        };
+
+
+        if ($("#Con_RegistroCNH").val() == "") {
+            posLoad();
+            campo_obrigatorio('#vCon_RegistroCNH', '#DivCon_RegistroCNH', '#Con_RegistroCNH');
+            return false;
+        };
+
+        if ($("#Con_UF_CNH").val() == "") {
+            posLoad();
+            campo_obrigatorio('#vCon_UF_CNH', '#DivCon_UF_CNH', '#Con_UF_CNH');
+            return false;
+        };
+
+
+
+        if ($("#Con_CNHValidade").val() == "") {
+            posLoad();
+            campo_obrigatorio('#vCon_CNHValidade', '#DivCon_CNHValidade', '#Con_CNHValidade');
+            return false;
+        };
+
+        if ($('#Con_Nome').val() == "") {
+            posLoad();
+            campo_obrigatorio('#vCon_Nome', '#DivCon_Nome', '#Con_Nome');
+            return false;
+        };
+
+        if ($('#Con_EndPro_CEP').val() == "") {
+            posLoad();
+            campo_obrigatorio('#vCon_EndPro_CEP', '#DivCon_EndPro_CEP', '#Con_EndPro_CEP');
+            return false;
+        };
+
+        if ($('#Con_EndPro_Logradouro').val() == "") {
+            posLoad();
+            campo_obrigatorio('#vCon_EndPro_Logradouro', '#DivCon_EndPro_Logradouro', '#Con_EndPro_Logradouro');
+            return false;
+        };
+
+        if ($('#Con_EndPro_Bairro').val() == "") {
+            posLoad();
+            campo_obrigatorio('#vCon_EndPro_Bairro', '#DivCon_EndPro_Bairro', '#Con_EndPro_Bairro');
+            return false;
+        };
+
+
+
+
+        if (Validacao() == true) {
+
+            if (document.getElementById('chk_UsuarioExistente').checked)
+                $("#Con_Cadastrado").val("NÃO");
+            else
+                $("#Con_Cadastrado").val("SIM");
+
+            if (document.getElementById('Chk_Aceite').checked)
+                $('#Con_ConfirmarAceite').val("SIM");
+            else
+                $('#Con_ConfirmarAceite').val("NÃO");
+
+            if (document.getElementById('chk_UsuarioEstrangeiro').checked)
+                $('#Con_Estrangeiro').val("SIM");
+            else
+                $('#Con_Estrangeiro').val("NÃO");
+
+            var form = $('form')[0];
+            var fileData = new FormData(form);
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("procconfirmacaodados", "Juridico_ApresentacaoCondutor")',
+                dataType: "json",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+
+                success: function (data) {
+                    if (data.error == true) {
+                        posLoad();
+                        swal("Atenção!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error");
+                        $('#Ptr_CPF_CNPJ').focus();
+                        $('#Ptr_CPF_CNPJ').val("");
+                        return false;
+                    };
+                    if (data.isRedirect) {
+                        posLoad();
+                        window.location.href = data.redirectUrl;
+                    };
+                },
+                error: function () {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                        .then(() => {
+                            location.reload();
+                        });
+                },
+            });
+        };
+
+    });
+
+
+
+                </script>

@@ -1,0 +1,238 @@
+﻿using System;
+using System.Configuration;
+using System.IO;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
+using System.Web;
+namespace CondutorInfrator.Util
+{
+    public class RotinaEmail
+    {
+        public bool EnvioEmail(string Titulo, string assunto, string nomeUser, string Tipotemplate, string texto, string r, string link, string observacao)
+        {
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
+            Random rand = new Random();
+            rand.Next(10000, 100000);
+
+            bool saida = false;
+            var email_envio = ConfigurationManager.AppSettings["Vlo_Email"];
+            var senha = ConfigurationManager.AppSettings["Vlo_Senha"];
+
+            //Instância classe email
+            MailMessage mail = new MailMessage();
+            mail.To.Add(r);
+            mail.From = new MailAddress(email_envio);
+            mail.Subject = Titulo;
+
+            var path = HttpContext.Current.Server.MapPath("~/Template/") + Tipotemplate;
+            string template = File.ReadAllText(path);
+            var mes = "";
+            mes = System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(DateTime.Now.Date.Month);
+            template = template.Replace("#NomeUser#", nomeUser).
+                       Replace("#titulo#", assunto).
+                       Replace("#conteudoEmail#", texto).
+                       Replace("#link#", link).
+                       Replace("#observacao#", observacao).
+
+                       Replace("#URL_VALIDACAO_USER#", ConfigurationManager.AppSettings["urlValidacaoUser"]).
+                       Replace("#dia#", DateTime.Now.Date.Day.ToString()).
+                       Replace("#mes#", char.ToUpper(mes[0]) + mes.Substring(1)).
+                       Replace("#ano#", DateTime.Now.Date.Year.ToString());
+
+                        mail.Body = template;
+                        mail.IsBodyHtml = true;
+
+            if (email_envio == "atendimento.transalvador@salvador.ba.gov.br")
+            {
+                SmtpClient client = new SmtpClient("smtp.office365.com", 587)
+                {
+                    Timeout = 1000000,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new NetworkCredential(email_envio, senha),
+                };
+                try
+                {
+                    ServicePointManager.ServerCertificateValidationCallback =
+                    delegate (object s, X509Certificate certificate,
+                    X509Chain chain, SslPolicyErrors sslPolicyErrors)
+                    {
+                        return true;
+                    };
+
+
+                    client.Send(mail);
+                    saida = true;
+
+                }
+                catch (Exception ex)
+                {
+                    saida = false;
+
+                }
+                return saida;
+            }
+            else
+            {
+                SmtpClient client = new SmtpClient("smtp.noacidadao.com.br", 587)
+                {
+                    Timeout = 1000000,
+                    EnableSsl = true,
+                    Credentials = new NetworkCredential(email_envio, senha),
+                };
+                try
+                {
+                    ServicePointManager.ServerCertificateValidationCallback =
+                    delegate (object s, X509Certificate certificate,
+                    X509Chain chain, SslPolicyErrors sslPolicyErrors)
+                    {
+                        return true;
+                    };
+
+
+                    client.Send(mail);
+                    saida = true;
+
+                }
+                catch (Exception ex)
+                {
+                    saida = false;
+
+                }
+                return saida;
+            }
+
+
+
+     
+
+            //client.Port = 587; // You can use Port 25 if 587 is blocked (mine is!)
+            //client.Host = "smtp.office365.com";
+
+
+            // };
+
+           
+        }
+
+
+
+
+        public bool EmailEstrutura(string email, string nome, string tipo, string vlo1, string vlo2, string vlo3, string vlo4, string link, string observacao)
+        {
+            try
+            {
+                Funcao funcao = new Funcao();
+                string titulo = "",
+                       assunto = "",
+                       nomeUser = "",
+                       Tipotemplate = "",
+                       texto = "",
+                       r = "";
+                       link = "";
+                       observacao = "";
+
+
+                if (nome == null || nome == "")
+                    nome = "Cliente";
+
+                Tipotemplate = "tPadrao.html";
+
+                if (tipo == "Confirmação" || tipo == "ReenvioConfirmação")
+                {
+                    titulo = "E-mail de confirmação de cadastro";
+                    r = email;
+                    nomeUser = nome;
+                    assunto = "E-mail de confirmação de cadastro";
+                    texto = "Recebemos seu cadastro com sucesso. Para utilizar os nossos serviços confirme seu cadastro clicando no endereço a seguir: " + "\n" + ConfigurationManager.AppSettings["vlo_confirmacaoCadastro"] + funcao.Md5FromStringUTF8(r);
+                };
+
+
+                if (tipo == "Confirmação CNPJ")
+                {
+                    titulo = "E-mail de confirmação de cadastro";
+                    r = email;
+                    nomeUser = nome;
+                    assunto = "E-mail de confirmação de cadastro";
+                    texto = "Recebemos seu cadastro com sucesso. Para utilizar os nossos serviços confirme seu cadastro clicando no endereço a seguir:" + "\n" + ConfigurationManager.AppSettings["vlo_confirmacaoCadastro"] + funcao.Md5FromStringUTF8(r);
+                };
+
+                if (tipo == "Convite")
+                {
+                    r = email;
+                    nomeUser = "Cliente";
+                    titulo = "E-mail de convite de cadastro";
+                    assunto = "E-mail de convite de cadastro";
+                    texto = nome + ", acabou de enviar um e-mail para você com um link de acesso para realizar o cadastro no "
+                                 + " Sistema de Apresentação de Condutor Infrator. Para realizar o cadastro clique no link a seguir:";
+                    link = ConfigurationManager.AppSettings["vlo_conviteCadastro"] + funcao.Md5FromStringUTF8(vlo1);
+                    observacao = "Caso o condutor indicado não consiga acessar o link acima, poderá fazer o cadastro diretamente no site da TRANSALVADOR, seguindo os seguintes passos:  clicar na opção “MULTAS”, " +
+                        "SERVIÇOS ON-LINE” ,  “CADASTRE-SE AQUI”, efetuar o cadastro e acessar o sistema para confirmar os dados e documentação.";
+
+
+                    //"O condutor apresentado tem um prazo de (3) três dias a contar da data de envio da solicitação, desde que não ultrapasse a data de vencimento da Notificação de Autuação de Infração – NAI,"
+                    // + " para acessar o sistema e aceitar a indicação. Ao aceitar a indicação o Controle Interno é convertido em processo com o número de protocolo de apresentação de condutor web e segue para análise da Triagem.";
+
+                };
+
+                if (tipo == "Redefine_Senha")
+                {
+                    r = email;
+                    nomeUser = nome;
+                    titulo = "Redefinir senha";
+                    assunto = "E-mail de orientação de redefinição de senha";
+                    texto = "Recebemos uma solicitação para recuperar a senha de acesso. Você pode criar uma nova senha clicando no endereço a seguir.:  " + "\n" + ConfigurationManager.AppSettings["vlo_redefinirsenha"] + funcao.Md5FromStringUTF8(r);
+                };
+
+                if (tipo == "Confirmação_Processo")
+                {
+                    r = email;
+                    nomeUser = "Cliente";
+                    titulo = "Convite de Aceitação de Processo";
+                    assunto = "Convite de Aceitação de Processo";
+                    texto = nome + " acabou de cadastrar o processo apresentando-o como condutor infrator do AIT " + vlo1 +
+                                       " para o veículo PLACA " + vlo2 + ". Para conferir os dados cadastrados pelo Requerente, os documentos" +
+                                       " anexados e aceitar o processo como condutor infrator clique no endereço a seguir:" + "\n" + ConfigurationManager.AppSettings["vlo_confirmacaoCadastro"] + funcao.Md5FromStringUTF8(r);
+
+
+                };
+
+
+                if (tipo == "Erro_Sistema")
+                {
+                    r = email;
+                    nomeUser = nome;
+                    titulo = "Erro no Sistema";
+                    assunto = "Erro no Sistema";
+                    texto = vlo1;
+
+
+                };
+
+                var result = EnvioEmail(titulo, assunto, nomeUser, Tipotemplate, texto, r,  link,  observacao);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+
+        }
+
+
+
+
+
+
+
+
+
+
+    }
+}

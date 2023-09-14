@@ -1,0 +1,474 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.17.2\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.17.2\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{884F1CA1-4306-4C56-B662-053E193E8ABF}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CondutorInfrator</RootNamespace>
+    <AssemblyName>CondutorInfrator</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <TypeScriptToolsVersion>3.9</TypeScriptToolsVersion>
+    <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
+    <DockerLaunchUrl>http://{ServiceIPAddress}</DockerLaunchUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.9.0.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.9.0\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crystal.Reports.Essentials.13.0.20.2399\lib\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crystal.Reports.Essentials.13.0.20.2399\lib\CrystalDecisions.ReportSource.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\CrystalDecisions.Shared.1.0.0\lib\CrystalDecisions.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
+      <HintPath>..\packages\Crystal.Reports.Essentials.13.0.20.2399\lib\CrystalDecisions.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=1.60.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.60.5\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="SautinSoft.PdfFocus, Version=8.6.1.18, Culture=neutral, PublicKeyToken=0b79b934109b3e9e, processorArchitecture=MSIL">
+      <HintPath>..\packages\sautinsoft.pdffocus.8.6.1.18\lib\net48\SautinSoft.PdfFocus.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=19.2451.0.56, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.19.2.0.56\lib\net451\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Security.Cryptography.Algorithms" />
+    <Reference Include="System.Security.Cryptography.Encoding" />
+    <Reference Include="System.Security.Cryptography.Primitives" />
+    <Reference Include="System.Security.Cryptography.X509Certificates" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CNPJ\Juridico_DefesaAutuacaoController.cs" />
+    <Compile Include="Controllers\CNPJ\Juridico_JARIController.cs" />
+    <Compile Include="Controllers\CPF\ApresentacaoCondutorController.cs" />
+    <Compile Include="Controllers\AutenticacaoController.cs" />
+    <Compile Include="Controllers\CNPJ\Juridico_ApresentadorCondutorController.cs" />
+    <Compile Include="Controllers\CNPJ\Juridico_PerfilController.cs" />
+    <Compile Include="Controllers\CPF\DefesaAutuacaoController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\InformacaoImportantesController.cs" />
+    <Compile Include="Controllers\CPF\JARIController.cs" />
+    <Compile Include="Controllers\CNPJ\Juridico_PessoaController.cs" />
+    <Compile Include="Controllers\MultasController.cs" />
+    <Compile Include="Controllers\CPF\PerfilController.cs" />
+    <Compile Include="Controllers\CPF\PessoaController.cs" />
+    <Compile Include="Controllers\ProcessoController.cs" />
+    <Compile Include="DapperORM\DapperORM.cs" />
+    <Compile Include="Models\AnexoModel.cs" />
+    <Compile Include="Models\DadosExistenteModel.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Models\DadosGetCnhPorCpf.cs" />
+    <Compile Include="Models\ErroModel.cs" />
+    <Compile Include="Models\HistoricoStatusModel.cs" />
+    <Compile Include="Models\JariSipModel.cs" />
+    <Compile Include="Models\MultasModel.cs" />
+    <Compile Include="Models\ParametroModel.cs" />
+    <Compile Include="Util\ConvertPDFtoIMG.cs" />
+    <Compile Include="Util\Detran.cs" />
+    <Compile Include="Models\JsonCnhCpfData.cs" />
+    <Compile Include="Models\AutenticacaoModel.cs" />
+    <Compile Include="Models\PessoaViewModel.cs" />
+    <Compile Include="Models\ProcessoViewModel.cs" />
+    <Compile Include="Models\ResultGetCnhPorCpf.cs" />
+    <Compile Include="Models\UsuarioModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rpt_class\CrystalReport.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Util\AuthorizeActionFilterAtribute.cs" />
+    <Compile Include="Util\Funcao.cs" />
+    <Compile Include="Util\RotinaEmail.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Anexos\bg-transalvador.png" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\site.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="img\bg-upload.jpg" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="img\atencao.png" />
+    <Content Include="img\Contrato_pdf.jpg" />
+    <Content Include="img\locacao.png" />
+    <Content Include="img\semimagens.jpg" />
+    <Content Include="img\sempdf.jpg" />
+    <Content Include="Scripts\bootstrap-filestyle-2.1.0\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\bootstrap-filestyle-2.1.0\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Scripts\bootstrap-filestyle-2.1.0\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Scripts\bootstrap-filestyle-2.1.0\open-iconic\font\fonts\open-iconic.eot" />
+    <Content Include="Scripts\bootstrap-filestyle-2.1.0\open-iconic\font\fonts\open-iconic.otf" />
+    <Content Include="Scripts\bootstrap-filestyle-2.1.0\open-iconic\font\fonts\open-iconic.ttf" />
+    <Content Include="Scripts\bootstrap-filestyle-2.1.0\open-iconic\font\fonts\open-iconic.woff" />
+    <Content Include="Scripts\bootstrap-filestyle-2.1.0\upload\.folder" />
+    <Content Include="Scripts\bootstrap-filestyle.js" />
+    <None Include="Scripts\bootstrap-filestyle.min.js_old" />
+    <Content Include="Content\jquery.bootgrid.css" />
+    <Content Include="Content\jquery.bootgrid.min.css" />
+    <Content Include="Content\StyleSheet1.css" />
+    <Content Include="Content\Imagem.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="img\Assistente2.png" />
+    <Content Include="img\Assitente %281%29.png" />
+    <Content Include="img\Assitente.png" />
+    <Content Include="img\attention.png" />
+    <Content Include="img\bg-transalvador.png" />
+    <Content Include="img\bg-upload_old.jpg" />
+    <Content Include="img\cabeca-email.png" />
+    <Content Include="img\cancel.svg" />
+    <Content Include="img\check.svg" />
+    <Content Include="img\exclamation %281%29.png" />
+    <Content Include="img\exclamation %282%29 %281%29.png" />
+    <Content Include="img\exclamation %282%29.png" />
+    <Content Include="img\habilitacao-modelo.jpg" />
+    <Content Include="img\loader.gif" />
+    <Content Include="img\logo-360-cinza.png" />
+    <Content Include="img\logo-360.png" />
+    <Content Include="img\logo-internas-cor.jpg" />
+    <Content Include="img\logo-internas.png" />
+    <Content Include="img\Logo_GR.png" />
+    <Content Include="img\prefeitura-salvador-cinza.png" />
+    <Content Include="img\prefeitura-salvador.png" />
+    <Content Include="img\preload1.gif" />
+    <Content Include="img\preload2.gif" />
+    <Content Include="img\preload3.gif" />
+    <Content Include="img\Sem-Título-1.png" />
+    <Content Include="img\thumb-up %281%29.png" />
+    <Content Include="img\thumb-up.png" />
+    <Content Include="img\transalvador-branco.png" />
+    <Content Include="img\transalvador-cinza.png" />
+    <Content Include="img\transalvador.png" />
+    <Content Include="img\upload-cinza.svg" />
+    <Content Include="img\upload.svg" />
+    <Content Include="img\warning.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Scripts\bootstrap-filestyle-2.1.0\css\bootstrap.min.css" />
+    <Content Include="Scripts\bootstrap-filestyle-2.1.0\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Scripts\bootstrap-filestyle-2.1.0\js\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap-filestyle-2.1.0\open-iconic\font\css\open-iconic-bootstrap.css" />
+    <Content Include="Scripts\bootstrap-filestyle-2.1.0\open-iconic\font\fonts\open-iconic.svg" />
+    <None Include="Scripts\bootstrap-filestyle.js_old1" />
+    <Content Include="Scripts\bootstrap-filestyle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Funcoes_gr.js" />
+    <Content Include="Scripts\gr_ValidadorCPF.js" />
+    <Content Include="Scripts\ie10-viewport-bug-workaround.js" />
+    <Content Include="Scripts\gr_cep.js" />
+    <None Include="Scripts\jquery-3.5.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.5.0.js" />
+    <Content Include="Scripts\jquery-3.5.0.min.js" />
+    <Content Include="Scripts\jquery-3.5.0.slim.js" />
+    <Content Include="Scripts\jquery-3.5.0.slim.min.js" />
+    <Content Include="Scripts\jquery.redirect.js" />
+    <Content Include="Scripts\notiflix-aio-2.1.3.min.js" />
+    <Content Include="Scripts\notiflix-aio-2.6.0.min.js" />
+    <Content Include="Scripts\Validacao_GR.js" />
+    <Content Include="Scripts\ValidarCadCNPJ.js" />
+    <None Include="Scripts\jquery-3.1.1.min.jss" />
+    <None Include="Scripts\jquery-3.2.1.min.jss" />
+    <None Include="Scripts\jquery-3.3.1.jss" />
+    <Content Include="Scripts\jquery-3.5.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.5.0.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.bootgrid.fa.js" />
+    <Content Include="Scripts\jquery.bootgrid.fa.min.js" />
+    <Content Include="Scripts\jquery.bootgrid.js" />
+    <Content Include="Scripts\jquery.bootgrid.min.js" />
+    <Content Include="Scripts\jquery.mask.js" />
+    <Content Include="Scripts\jquery.mask.min.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\preload.js" />
+    <Content Include="Scripts\sweetalert.js" />
+    <Content Include="Scripts\validacao.js" />
+    <Content Include="Scripts\vanilla-masker.min.js" />
+    <Content Include="Template\tPadrao.html" />
+    <Content Include="Template\tPadraos.html" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\Login_Layout.cshtml" />
+    <Content Include="Views\Pessoa\TipoCadastro.cshtml" />
+    <Content Include="Views\Multas\Multas.cshtml" />
+    <Content Include="Views\ApresentacaoCondutor\Buc_CondutorInfrator.cshtml" />
+    <Content Include="Views\ApresentacaoCondutor\ConfirmacaoDados.cshtml" />
+    <Content Include="Views\Pessoa\ConfirmacaoEmail.cshtml" />
+    <Content Include="Views\ApresentacaoCondutor\AnexaDocumento.cshtml" />
+    <Content Include="Views\Processo\Processo.cshtml" />
+    <Content Include="Views\Autenticacao\ReenvioEmail.cshtml" />
+    <Content Include="Views\ApresentacaoCondutor\ConfirmacaoProcesso.cshtml" />
+    <Content Include="Views\ApresentacaoCondutor\SituacaoProcesso.cshtml" />
+    <Content Include="Views\Autenticacao\CorrigirEmail.cshtml" />
+    <Content Include="Views\Autenticacao\AlterarSenha.cshtml" />
+    <Content Include="Views\Pessoa\Informacao_Importante.cshtml" />
+    <Content Include="Views\Perfil\Perfil_CPF.cshtml" />
+    <Content Include="Views\Processo\ProcessosAbertos.cshtml" />
+    <Content Include="Relatorio\Sre_CondutorInfrator_Web.rpt" />
+    <Content Include="Views\Pessoa\Cad_PessoaCPF.cshtml" />
+    <Content Include="Views\Pessoa\Status_Cadastro.cshtml" />
+    <Content Include="Views\Pessoa\Cad_PessoaCNPJ_Analise.cshtml" />
+    <Content Include="Views\Perfil\Perfil_CNPJ.cshtml" />
+    <Content Include="Views\Processo\TipoProcesso.cshtml" />
+    <Content Include="Views\DefesaAutuacao\ConfirmacaoDados_Defesa.cshtml" />
+    <Content Include="Views\DefesaAutuacao\AnexaDocumento_Defesa.cshtml" />
+    <Content Include="Views\DefesaAutuacao\SituacaoProcesso_Defesa.cshtml" />
+    <Content Include="Views\InformacaoImportantes\Infor_CondutorInfrator.cshtml" />
+    <Content Include="Views\InformacaoImportantes\Infor_DefesaAutuacao.cshtml" />
+    <Content Include="Views\Pessoa\Cad_PessoaEstrangeiro.cshtml" />
+    <Content Include="Views\Perfil\Perfil_Estrangeiro.cshtml" />
+    <Content Include="Views\JARI\ConfirmacaoDados_JARI.cshtml" />
+    <Content Include="Views\JARI\AnexaDocumento_JARI.cshtml" />
+    <Content Include="Views\JARI\SituacaoProcesso_JARI.cshtml" />
+    <Content Include="Views\InformacaoImportantes\Infor_JARI.cshtml" />
+    <Content Include="Views\Juridica_Pessoa\Cad_PessoaCNPJ.cshtml" />
+    <Content Include="Views\Juridico_Perfil\juridico_perfil.cshtml" />
+    <Content Include="Views\Juridico_ApresentacaoCondutor\Buc_PJCondutorInfrator.cshtml" />
+    <Content Include="Views\Juridico_ApresentacaoCondutor\ConfirmacaoDados.cshtml" />
+    <Content Include="Views\Juridico_ApresentacaoCondutor\AnexaDocumento.cshtml" />
+    <Content Include="Views\Juridico_ApresentacaoCondutor\SituacaoProcesso.cshtml" />
+    <Content Include="Views\Juridico_ApresentacaoCondutor\ConfirmacaoProcesso.cshtml" />
+    <Content Include="Views\Juridico_DefesaAutuacao\AnexaDocumento_Defesa.cshtml" />
+    <Content Include="Views\Juridico_DefesaAutuacao\ConfirmacaoDados_Defesa.cshtml" />
+    <Content Include="Views\Juridico_DefesaAutuacao\SituacaoProcesso_Defesa.cshtml" />
+    <Content Include="Views\Juridico_JARI\ConfirmacaoDados_JARI.cshtml" />
+    <Content Include="Views\Juridico_JARI\AnexaDocumento_JARI.cshtml" />
+    <Content Include="Views\Juridico_JARI\SituacaoProcesso_jari.cshtml" />
+    <Content Include="Views\Multas\Multas_new.cshtml" />
+    <Content Include="Views\Autenticacao\SolicitarRedefinirSenha.cshtml" />
+    <Content Include="Views\Pessoa\SessaoExpirada.cshtml" />
+    <Content Include="Views\Autenticacao\Login.cshtml" />
+    <Content Include="Views\ApresentacaoCondutor\VisualizarAnexos.cshtml" />
+    <Content Include="Views\Juridico_ApresentacaoCondutor\VisualizarAnexo.cshtml" />
+    <Content Include="Views\DefesaAutuacao\VisualizarAnexo.cshtml" />
+    <Content Include="Views\Juridico_DefesaAutuacao\VisualizarAnexo.cshtml" />
+    <Content Include="Views\JARI\VisualizarAnexo.cshtml" />
+    <Content Include="Views\Juridico_JARI\VisualizarAnexo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Scripts\bootstrap-filestyle-2.1.0\src\" />
+    <Folder Include="Scripts\Funcoes_gr\" />
+    <Folder Include="Views\ViewProcesso\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54412</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:5442/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este projeto faz referência a pacotes do NuGet que não estão presentes neste computador. Use a Restauração de Pacotes do NuGet para baixá-los.  Para obter mais informações, consulte http://go.microsoft.com/fwlink/?LinkID=322105. O arquivo ausente é {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.17.2\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.17.2\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.17.2\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.17.2\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.17.2\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.1.17.2\build\Microsoft.VisualStudio.Azure.Containers.Tools.Targets.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,519 @@
+﻿@model CondutorInfrator.Models.ProcessoViewModel
+
+@{
+    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+    var Pes_TipoPessoa = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+}
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "form", name = "form" }))
+{
+    <div class="container">
+        <div class="conteudo">
+            <div class="row">
+                <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+                    <h5> <img src="~/img/Assitente.png" style="margin-left:20px;" /> <strong> Analise se todos os dados descritos no formulário abaixo estão corretos e confirme. </strong></h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>Confirmação dos Dados</h3>
+                </div>
+                <div class="col-md-4 text-left text-danger">
+                    <h5>
+                        <small style="color:red">INFORMAÇÕES IMPORTANTES!</small><br />
+                        <strong>LEIA ANTES DE INICIAR O PROCESSO <label id="LabelPassoaPasso" class="text-primary" style="cursor: pointer"> Clique Aqui </label> </strong>
+                    </h5>
+                </div>
+            </div>
+
+            <br />
+            <div class="row">
+
+                <div class="col-md-6">
+                    <h3>Informações do Requerente</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row">Requerente</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_CPF_CNPJ, new { htmlAttributes = new { @class = "form-control", id = "Ptr_CPF_CNPJ" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_CPF_CNPJ)</td>
+
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Nome)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_Nome, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Nome" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_Nome)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_RegistroCNH)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_RegistroCNH, new { htmlAttributes = new { @class = "form-control", id = "Ptr_RegistroCNH" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_RegistroCNH)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_CNHValidade)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_CNHValidade, new { htmlAttributes = new { @class = "form-control", id = "Ptr_CNHValidade" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_CNHValidade)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_RG)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_RG, new { htmlAttributes = new { @class = "form-control", id = "Ptr_RG" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_RG)</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_CEP)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_CEP, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_CEP" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_CEP)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Logradouro)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Logradouro, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Logradouro" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Logradouro)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Bairro)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Bairro, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Bairro" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Bairro)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Complemento)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Complemento, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Complemento" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Complemento)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Cidade)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Cidade, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Cidade" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Cidade)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Estado)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Estado, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Estado" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Estado)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Pais)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Pais, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Pais" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Pais)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Telefone)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_Telefone, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Telefone" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_Telefone)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Email)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_Email, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Email" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_Email)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
+                <div class="col-md-6">
+                    <h3>Informações do Veículo</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Placa)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_Placa, new { htmlAttributes = new { @class = "form-control", id = "Vec_Placa" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_Placa)</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_RENAVAN)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_RENAVAN, new { htmlAttributes = new { @class = "form-control", id = "Vec_RENAVAN" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_RENAVAN)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Ano)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_Ano, new { htmlAttributes = new { @class = "form-control", id = "Vec_Ano" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_Ano)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Marca)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_Marca, new { htmlAttributes = new { @class = "form-control", id = "Vec_Marca" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_Marca)</td>
+                            </tr>
+
+                            <tr></tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <h3>Informações da Multa</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_AIT)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_AIT, new { htmlAttributes = new { @class = "form-control", id = "Mut_AIT" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_AIT)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_CodigoInfracao)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_CodigoInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_CodigoInfracao" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_CodigoInfracao)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_DataInfracao)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_DataInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_DataInfracao" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_DataInfracao)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_DescricaoInfracao)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_DescricaoInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_DescricaoInfracao" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_DescricaoInfracao)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="col-md-12">
+
+                <div>
+                    <div class="title_box" id="subject">
+                        <div id="title" class="text-danger"><strong>INFORMAÇÃO IMPORTANTE</strong> </div>
+                        <div id="content">
+                            Tenha em mãos toda documentação necessária, pois a abertura do processo é imediata após confirmação dos termos e finalização dos procedimentos.<br />
+                            Caso não seja finalizada a abertura do processo, será necessário refazer todo procedimento.<br />
+                            A numeração do processo só será gerada após finalização da abertura.<br />
+                            Após clicar em “Finalizar Abertura do Processo”, não será mais possível realizar alterações.<br />
+                            <br />
+                            <label class="pure-material-checkbox">
+                                <input type="checkbox" name="ConfirmarChk" , id="ConfirmarChk" onchange="habilitar()">
+                                <span>Declaro que li e estou ciente das informações acima.</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+
+                <div class="text-center">
+                    <button type="button" class="btn btn-primary btn-lg btn-transalvador" id="BtnAvancar" , name="BtnAvancar" @*data-toggle="modal" data-target="#modalConfirmacao"*@>
+                        Próximo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+
+    <div class="modal fade" id="modalConfirmacao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacao"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="col-md-4" style="padding: 0;">
+                <div class="alerta-atencao text-center">
+                    <img src="~/img/warning.svg" width="120">
+                </div>
+            </div>
+            <div class="col-md-8" style="padding: 0;">
+                <div class="mensagem-modal modal-atencao text-center">
+                    <h4>Confirma os dados do formulário digital?</h4>
+                    <p>Você confirma os dados do formulário digital para registro da defesa de autuação? As informações não poderão ser alteradas posteriormente.</p>
+                    <div class="col-md-12 modal-footer">
+                        <div class="text-center">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" id="ConfirmarDados" name="ConfirmarDados"> Confirmar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade bd-example-modal-lg" id="modalOrientacao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacao" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+
+                <div class="modal-header">
+                    <h4 class="modal-title"> PASSO A PASSO</h4>
+
+                </div>
+                <div class="modal-body" style="margin-bottom: 90px;">
+                    <div class="lista-importante" id="Apresentacao">
+
+
+
+                        <div class="row text-center">
+                            <h4>DEFESA DE AUTUAÇÃO</h4>
+                            <strong><small><h5>INFORMAÇÕES IMPORTANTES / LEIA COM ATENÇÃO</h5></small></strong>
+                        </div>
+
+                        <br />
+
+
+                        <h4><strong>• 1 - Registrar Processo</strong></h4>
+                        <div class="text-justify">
+                            Ao logar no Sistema de Protocolo Online, o cidadão tem acesso a listagem de AITs de sua propriedade (CPF ou CNPJ).<br />
+                            O registro do processo de Defesa de Autuação pode ser realizado através do proprietário do veículo ou do condutor infrator apresentado, , <strong>este somente após aprovação.</strong><br /><br />
+                            <strong>O acesso do condutor para registro da Defesa é confirmada após as seguintes situações:</strong><br /><br />
+                            1 - Processo de apresentação de condutor infrator registrado presencialmente: após o registro do processo, estando apto nas regras de abertura, o condutor passa a ter vínculo imediato com o AIT;<br />
+                            2 - Processo de apresentação de condutor infrator registrado online: após o condutor apresentado logar no Sistema de Protocolo Online e aceitar a indicação de condutor infrator do veículo para o AIT <strong> e obter aprovação da triagem.</strong><br />
+                            O cidadão cadastrado como condutor infrator do veículo para o AIT, ao logar no sistema, além de ter acesso a listagem de AITs de sua propriedade (CPF), também tem acesso aos AITs que está indicado como condutor infrator.<br />
+                            Devido a possibilidade do processo de Defesa de Autuação poder ser registrado através do proprietário do veículo ou do<strong> condutor infrator apresentado legitimado</strong>,
+                            o sistema habilita um controle de acesso sobre o AIT. O sistema não permite o cadastro de mais de um processo do mesmo serviço para o AIT. Portanto, caso o requerente
+                            (proprietário ou condutor infrator apresentado) efetue o registro de um processo para o serviço de Defesa de Autuação, o sistema não permite que outro processo para o
+                            mesmo serviço seja registrado por outro requerente (proprietário ou condutor infrator apresentado).<br />
+                            O status da indicação pode ser alterado caso o retorno do DETRAN seja pela reprovação, podendo interferir na abertura do serviço ou análise do julgamento.
+                            <br />
+
+
+
+                            <h4><strong>• 2 - Formulário de Requerimento de Defesa</strong></h4>
+
+                            Nesta etapa o cidadão irá anexar a documentação obrigatória que deve estar completa, legível e em bom estado para obter aprovação.
+                            <br />
+                            Algumas informações do Formulário de Requerimento de Defesa serão preenchidas automaticamente pelo sistema, ficando a cargo do requerente discorrer sobre a exposição dos fatos.
+                            <strong>Verifique se as informações estão corretas antes de seguir para a exposição dos fatos. </strong>O Requerimento de Defesa é disponibilizado para impressão. Após descrever a exposição dos
+                            fatos deve ser assinado pelo Requerente. A assinatura deve ser original e semelhante ao documento de identificação anexado ao processo. A assinatura deve ser original e semelhante ao
+                            documento de identificação anexado ao processo (utilizar preferencialmente caneta na cor azul). A ausência de assinatura do recorrente ou seu representante legal pode ocasionar o
+                            não conhecimento ou indeferimento pelo julgador.<br />
+
+
+                            <h4><strong>• 3 - Juntar Documentação</strong></h4>
+                            <strong>Documentação Pessoa Física (proprietário ou condutor apresentado)</strong>
+                            <br />
+                            1 - Requerimento de DEFESA DA AUTUAÇÃO**; <br />
+                            2 - Notificação da Autuação – NAI (cada petição deverá ter somente um auto de infração como objeto / segunda via pode ser obtida no site<br />
+                            <a href="http://www.transalvador.salvador.ba.gov.br/conteudo/index.php/multa/nadaConsta  " targert="_blank"> http://www.transalvador.salvador.ba.gov.br/conteudo/index.php/multa/nadaConsta </a>.<br /><br />
+                            3 - RG ou CNH do Requerente ou outro documento que comprove assinatura;<br />
+                            4 - Documento do veículo - CRLV; <br />
+                            5 - Documentos comprobatórios das alegações da defesa; <br />
+                            6 - Comprovante de residência do Requerente; <br />
+                            7 - Procuração Pública e RG do procurador, quando for o caso; <br />
+                            <br />
+                            **Obs: O Requerimento de Defesa padrão poderá ser substituído por petição própria, desde que conste os dados mínimos exigidos pela legislação – Resolução 299/2008, artigo 3º (quando não for suficiente o espaço do “requerimento de defesa” do campo 1).
+                            <br />
+                            <br />
+
+                            <strong>Documentação Pessoa Jurídica</strong><br />
+                            1 - Requerimento de defesa**;<br />
+                            2 - 2 - Notificação da Autuação – NAI (cada petição deverá ter somente um auto de infração como objeto / segunda via pode ser obtida no site <a href="http://www.transalvador.salvador.ba.gov.br/conteudo/index.php/multa/nadaConsta  " targert="_blank"> http://www.transalvador.salvador.ba.gov.br/conteudo/index.php/multa/nadaConsta </a>.<br /><br />
+                            3 - RG ou CNH do Sócio da Empresa que assina no Contrato Social ou outro documento que comprove assinatura;<br />
+                            4 - Documento do veículo - CRLV;<br />
+                            5 - Documentos comprobatórios das alegações da defesa;<br />
+                            6 - Procuração Pública e RG do procurador, quando for o caso;<br />
+                            7 - Contrato Social (última alteração) ***;<br />
+                            <br />
+                            **Obs: O Requerimento de Defesa padrão poderá ser substituído por petição própria, desde que conste os dados mínimos exigidos pela legislação – Resolução 299/2008, artigo 3º (quando não for suficiente o espaço do “requerimento de defesa” do campo 1).,
+                            <br />
+                            <br />
+
+                            *** Órgão Público<br />
+                            a. Portaria de Nomeação do Dirigente.<br />
+                            b. RG ou CNH do Dirigente do Órgão ou outro documento que comprove assinatura;<br />
+                            <br />
+                            <strong>OBS:1 - </strong>A Falta de documentação obrigatória, ausência do pedido, ilegitimidade ou intempestividade são motivos previstos objetivamente na legislação e podem resultar o não conhecimento da DEFESA pelo julgador.<br />
+                            <br />
+                            <strong>OBS:2 - </strong>Veículo de propriedade de pessoa jurídica, será obrigatória a apresentação de condutor, sob pena de incorrer no agravamento da multa, conforme parágrafo 8º do artigo 257 do Código de Trânsito Brasileiro – CTB.<br />
+                            <br />
+                            <strong>OBS:3 - </strong>Serviços Públicos de Urgência / Utilidade Pública (artigo 29, VII do CTB): Apresentar em caráter complementar documentos que comprovem a diligência visando análise do julgador (ex: ordem de serviço correspondendo
+                            com a data e horário de cometimento da infração indicando placa do veículo ou em conjunto documento de registro da saída do veículo, escala de trabalho do dia e horário correspondente com o condutor infrator, no caso de ambulâncias incluir
+                            o relatório médico e OS).<br />
+
+
+                            <h4><strong>• 4 - Anexar Documentação</strong></h4>
+                            Anexar os documentos necessários de acordo com as regras descritas no tópico Juntar a Documentação. Os documentos devem estar salvos em PDF. <br />
+                            <strong>
+                                É necessário que os documentos digitalizados e anexados ao processo estejam completos e conforme o campo específico do campo anexar,
+                                legislação, sem rasuras, e legíveis, caso contrário poderá ser indeferido ou não conhecido pelo julgador.
+                            </strong> <br />
+                            <br />
+
+                            <h4><strong>• 5 - Enviar a documentação</strong></h4>
+                            Para finalizar o registro do processo é necessário realizar o upload dos documentos, concordar com os termos da TRANSALVADOR no local indicado e finalizar o
+                            registro do processo clicando em “Finalizar Registro do Processo”.<stromg>
+                                Antes de confirmar o envio certifique-se que toda documentação está legível e conforme anexado. Caso apareça mensagem de erro anexe
+                                novamente os documentos, confira e envie.
+                            </stromg>  <br />
+
+                            <h4><strong>• 6 - Comissão de Defesa Julgadora</strong></h4>
+                            Após o envio da documentação o processo é encaminhado automaticamente para uma Comissão de Defesa Julgadora na TRANSALVADOR.<br />
+
+                            <h4><strong>• 7 - Resultado do Processo</strong></h4>
+                            <strong>O processo aberto deve ser acompanhado no site da TRANSALVADOR:</strong><br />
+                            <a href="http://www.transalvador.salvador.ba.gov.br/conteudo/index.php/multa/consultaProcessoMulta"
+                               targert="_blank">http://www.transalvador.salvador.ba.gov.br/conteudo/index.php/multa/consultaProcessoMulta</a><br />
+                            Logo que o resultado do processo for publicado no Diário Oficial do Município - DOM, a situação/status do processo é utilizada no sistema.
+                            Caso indeferida ou não conhecida a Defesa, será encaminhada a Notificação da Imposição da Penalidade – NIP, cabendo Recurso à JARI.
+                            Prazo estimado de julgamento 30 dias.
+
+                            <h4><strong>• 8 - Problemas</strong></h4>
+                            Não deixe para apresentar A defesa de última hora pois pode ocorrer imprevisto de comunicação externo (internet).
+                            Em caso que não seja possível finalizar o cadastro do processo mantenha contato imediato com o setor de atendimento
+                            SETAP (71)3202-9188/9189 apresentando o print das telas de erro. Existem os seguintes meios alternativos:
+                            Atendimento Presencial mediante agendamento obrigatório no site da TRANSALVADOR, ou, o envio pelos Correios (ver regras para cada serviço).
+                            Não conseguindo solução em um dos canais fornecidos, entre em contato com nossa Ouvidoria através do site:<br />
+                            <a href="http://www.ouvidoria.transalvador@salvador.ba.gov.br"
+                               targert="_blank">http://www.ouvidoria.transalvador@salvador.ba.gov.br</a>
+                            <br />
+
+                            <h4><strong>• 9 - Documentação Necessária para Dirigir-se a Transalvador</strong></h4>
+                            <strong>Para atendimento presencial será necessário agendamento prévio obrigatório no site:</strong><br />
+                            <a href="http://transonline.salvador.ba.gov.br/agend/web/index.php/site/login " targert="_blank">http://transonline.salvador.ba.gov.br/agend/web/index.php/site/login. </a><br />
+                            O serviço de DEFESA. O agendamento deve ser feito no nome de quem vai comparecer ao Atendimento Presencial,
+                            sendo necessário apresentar documento de identificação original. Apresentar todos os documentos informados
+                            de acordo com as regras descritas no tópico Juntar Documentação. Qualquer orientação complementar manter contato
+                            com o Setor de Atendimento ao Público – SETAP nos telefones (71)3202-9188/9189.
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+
+
+<script type='text/javascript'>
+
+
+    document.getElementById('BtnAvancar').setAttribute("disabled", "disabled");
+
+
+    function habilitar() {
+        if (document.getElementById('ConfirmarChk').checked) {
+            document.getElementById('BtnAvancar').removeAttribute("disabled");
+        }
+        else {
+            document.getElementById('BtnAvancar').setAttribute("disabled", "disabled");
+        }
+    }
+
+    $(window).on('load', function () {
+        $('#modalOrientacao').modal('show');
+    });
+
+    $('#LabelPassoaPasso').click(function () {
+        $('#modalOrientacao').modal('show');
+        //colocar na view de confirmação uma verificação para nao processar novamente
+    });
+
+    //verificar se ja foi realizado o processo para o ait
+    $('#BtnAvancar').click(function () {
+
+        var form = $('form')[0];
+        var formData = new FormData(form);
+
+         $.ajax({
+            url: '@Url.Action("Analisar_Condutor_Infrator", "processo")',
+            type: "POST",
+            data: formData,
+            dataType: 'json',
+             contentType: false,
+             processData: false,
+             async: false,
+
+             success: function (data) {
+                 if (data.processoexistente == "NÃO") {
+                    swal({
+                        title: "Aviso!",
+                        text: "Caro Cidadão, identificamos que não existe processo de condutor registrado para o AIT. Caso seja necessário realizar a abertura do processo de condutor, esta deve ser efetuada antecedendo o registro " +
+                              "do processo de defesa. Dessa maneira, o condutor infrator apresentado poderá registrar a defesa em seu CPF. Se o registro do processo de condutor infrator foi efetuado online, o condutor apresentado passa " +
+                              "a ter vínculo com o AIT quando aceitar a indicação do proprietário em um prazo máximo de três dias a contar da data de envio do processo para aceite. Caso o processo de condutor infrator seja registrado posterior " +
+                              "ao registro do processo de defesa, a defesa poderá ser julgada com prejuízo a legitimidade (vínculo do condutor infrator no momento de cometimento da infração). Deseja continuar?",
+                        icon: "warning",
+                        Html: true,
+                        textAlign: "left",
+
+                        buttons: [
+                            'Não',
+                            'Sim'
+                        ],
+
+                    }).then((willDelete) => {
+                        if (willDelete)
+                            $('#modalConfirmacao').modal('show');
+                        else {
+                            posLoad();
+                            return false;
+                        }
+                    });
+                 } else {
+                     $('#modalConfirmacao').modal('show');
+                 }
+
+             },
+             error: function () {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                        .then(() => {
+                            location.reload();
+                        });
+             },
+        });
+    });
+
+    $('#ConfirmarDados').click(function () {
+
+        var form = $('form')[0];
+        var formData = new FormData(form);
+
+        $.ajax({
+            url: '@Url.Action("procgerarprocesso_defesa", "defesaautuacao")',
+            type: "POST",
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            async: false,
+
+            success: function (data) {
+                $('#modalConfirmacao').modal('hide');
+                if (data.error == true) {
+                    posLoad();
+                    swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error");
+                    return false;
+                }else {
+                    posLoad();
+                    swal("Confirmação de Dados!", "Procedimento concluido com sucesso.", "success")
+                    .then(() => {
+                        if (data.isRedirect) {
+                          //  window.location.href = data.redirectUrl;
+                            RedirectUrl(data.redirectUrl, data.mut_ait, data.pro_Numero)
+                        }
+                    });
+                }
+            },
+
+            error: function () {
+                posLoad();
+                swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                .then(() => {
+                    location.reload();
+                });
+            },
+        });
+    });
+
+
+
+    function RedirectUrl(redirectUrl, mut_ait, pro_Numero) {
+        var form = $('<form action="' + redirectUrl + '" method="post">' +
+            '<input type="hidden" name="mut_ait" value="' + mut_ait + '" />' +
+            '<input type="hidden" name="pro_Numero" value="' + pro_Numero + '" />' +
+            '</form>');
+
+        $('body').append(form);
+        $(form).submit();
+    }
+</script>

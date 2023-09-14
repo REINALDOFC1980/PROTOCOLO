@@ -1,0 +1,215 @@
+﻿@model CondutorInfrator.Models.ProcessoViewModel
+
+@{
+    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+    var Pes_TipoPessoa = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+}
+
+
+
+<link href="~/Content/Imagem.css" rel="stylesheet" />
+<div class="container">
+    <div class="conteudo">
+
+
+        @*<div class="row">
+                <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+                    <h2></h2>
+                    <h5> <img src="~/img/Assitente.png" style="margin-left:20px;" /><strong> Revise toda documentação anexada e o cumprimento das regras e legistação, pois uma vez encaminhado não será possível fazer modificações, seguindo o processo imediatamente para analise.</strong> </h5>
+                </div>
+            </div>
+            <hr>*@
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="lista-situacao">
+                    <ul>
+                        <li class="ativo">
+                            <span>#</span>
+                            <h2>PRÉ VISUALIZAÇÃO DOS ANEXOS</h2>
+                            <p>
+                                @Html.HiddenFor(model => model.StsPro_Descricao, new { id = "StsPro_Descricao", name = "StsPro_Descricao" })
+
+
+                                <br>
+                                <strong>
+                                    Antes de confirmar o envio, acesse o link <strong class="text-info">"CLIQUE AQUI"</strong>, e certifique-se que toda documentação está legível e completa.
+                                    Caso apresente alguma mensagem de erro, anexe os documentos novamente, confira e envie.
+                                </strong>
+
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br />
+
+            <hr>
+
+
+            <br />
+
+            <br />
+            <br />
+            <div class="row">
+
+
+
+
+
+                <div class="row">
+
+                    <div class="form-group col-12">
+                        <label><strong>Documento(s) anexado(s) pelo requerente formato(PDF):</strong></label>
+                        <ul>
+                            @if (Model.Anexos != null)
+                            {
+                                foreach (var anexo in Model.Anexos)
+                                {
+                                    var result = Model.Pro_Numero;
+                                    <li>
+                                        <p><i class="glyphicon glyphicon-paperclip"></i><small><strong> <a href='@Url.Action("download", "Juridico_ApresentacaoCondutor", new {  ext = anexo.Anx_NomeArquivo, pro_numero = @result})' target="_blank"> @anexo.Anx_TipoDocumento - CLIQUE AQUI! </a></strong></small></p>
+
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+                <br />
+                <br />
+
+                <div class="title_box" id="subject">
+                    <div id="title" class="text-danger"><strong>INFORMAÇÃO IMPORTANTE</strong> </div>
+                    <div id="content">
+                        <strong>Faça a pré-visualização dos anexo antes do envio: </strong>
+                        a identificação do condutor infrator somente será acatada e produzirá efeitos legais se estiver com toda documentação obrigatória legível,
+                        o formulário de requerimento corretamente preenchido,
+                        sem rasuras, com assinaturas originais s do condutor e do proprietário do veículo,
+                        semelhantes às dos documentos de identificação apresentados.
+                        <br />
+                        <br />
+                        <p>
+                            • Ao selecionar a opção abaixo, você concorda com os Termos da Superintendência de Trânsito de Salvador (TRANSALVADOR).
+                        </p>
+                        <label for="">Política de Privacidade</label>
+                        <p>
+                            • Declaro para os devidos fins, que as informações referentes ao cadastro para adesão ao TRANSALVADOR Digital são
+                            verdadeiras, sob pena de ser responsabilizado(a) cível, penal e
+                            administrativamente.
+                        </p>
+
+                        <br />
+                    </div>
+                </div>
+                <br />
+
+                <label class="pure-material-checkbox">
+                    <input type="checkbox" name="ConfirmarChk" , id="ConfirmarChk" onchange="habilitar()">
+                    <span>Declaro que li e estou ciente das informações acima.</span>
+                </label>
+                <br />
+                <div class="text-center">
+                    <strong>Para dúvidas e esclarecimentos:</strong>
+                    <br />
+                    <br />
+                    <strong>Setor de Atendimento ao Público – SETAP: e-mail:</strong> setap.transalvador@salvador.ba.gov.br (71) 3202-9188<br />
+           
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <button type="button" class="btn btn-success btn-lg" id="BtnAvancar" name="BtnAvancar" onclick="location.href='@Url.Action("AnexaDocumento", "juridico_apresentacaocondutor", new { pro_numero = Model.Pro_Numero })'"> Voltar </button>
+                        <button type="button" class="btn btn-primary btn-lg btn-transalvador" id="BtnConcluir" , name="BtnConcluir" onclick="location.href='@Url.Action("EncaminharParaCondutor", "juridico_apresentacaocondutor",new { pro_numero = Model.Pro_Numero })'"> Finalizar Abertura </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    window.onload = function () {
+        noBack();
+    }
+    function noBack() {
+        window.history.forward();
+    }
+
+    document.getElementById('BtnConcluir').setAttribute("disabled", "disabled");
+    function habilitar() {
+        if (document.getElementById('ConfirmarChk').checked) {
+            document.getElementById('BtnConcluir').removeAttribute("disabled");
+        }
+        else {
+            document.getElementById('BtnConcluir').setAttribute("disabled", "disabled");
+        }
+    }
+
+
+
+    $(document).ready(function () {
+        $('#mytooltip').tooltip();
+
+        //var texto = "";
+        //if ($('#StsPro_Descricao').val() == 'Aguardando aceite do condutor')
+        //    texto = "Prezado(a) seu processo foi gerado com sucesso e está aguardando o aceite do condutor,"
+        //else
+        //    texto = "Prezado(a) seu processo foi aberto com sucesso,"
+
+        //var content = document.createElement('div');
+        //content.innerHTML = texto + ' a relação de documentos anexados encontra-se disponível na parte inferior da tela <strong> “Documento(s) anexado(s) pelo requerente”</strong>. <br \><br \>' +
+        //    '<strong>Para dúvidas e esclarecimentos:</strong> <br \><br \>' +
+        //    '<strong>Setor de Atendimento ao Público – SETAP:</strong> e-mail: setap.transalvador@salvador.ba.gov.br  (71) 3202-9188 / 9189 <br> ' +
+        //    '<strong>Ouvidoria Transalvador:</strong> e-mail: ouvidoria.transalvador@salvador.ba.gov.br';
+
+        //swal({
+        //    title: 'TELA DE SITUAÇÃO DO PROCESSO',
+        //    content: content,
+        //    icon: "warning",
+        //});
+
+    });
+
+    function openModal() {
+        document.getElementById("myModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    var slideIndex = 1
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+
+
+
+</script>

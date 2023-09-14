@@ -1,0 +1,102 @@
+﻿/*body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}*/
+
+/* Set padding to keep content from hitting the edges */
+/*.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}*/
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+/*.dl-horizontal dt {
+    white-space: normal;
+}*/
+
+/* Set width on the form input elements since they're 100% wide by default */
+/*input,
+select,
+textarea {
+    max-width: 280px;
+}*/
+
+
+.backGridAcoes {
+    background: #e8e5e5;
+}
+
+.cinza {
+    border-left: 12px solid #808080;
+}
+
+.vermelho {
+    border-left: 12px solid #f70606;
+}
+
+.verde {
+    border-left: 12px solid #18b43a;
+}
+
+.amarelo {
+    border-left: 12px solid #ffc300;
+}
+
+
+.gi-1x {
+    font-size: 0.7em;
+}
+.gi-2x {
+    font-size: 2em;
+}
+
+.gi-3x {
+    font-size: 3em;
+}
+
+.gi-4x {
+    font-size: 4em;
+}
+
+.gi-5x {
+    font-size: 5em;
+}
+
+/*div {
+    font-family: Arial;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+input {
+    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
+    border-color: black;
+    width: 250px;
+    font-size: 1.3em;
+}*/
+
+btn-file {
+    height: 45px;
+    margin-top: 11px;
+    padding: 11px 12px;
+}
+.title_box {
+  border: black 2px solid;
+}
+
+.title_box #title {
+  position: relative;
+  top: -0.8em;
+  margin-left: 1em;
+  display: inline;
+  background-color: white;
+}
+
+    .title_box #content {
+        margin-left: 1em;
+
+    }

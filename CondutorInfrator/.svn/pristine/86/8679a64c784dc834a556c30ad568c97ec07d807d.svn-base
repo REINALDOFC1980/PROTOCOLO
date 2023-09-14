@@ -1,0 +1,156 @@
+﻿@model CondutorInfrator.Models.MultasModel
+
+<br />
+
+@{
+    try
+    {
+
+        if (TempData["vloTotal"].ToString() == "1")
+        {
+
+            <div class="alert alert-warning" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4> <strong>Atenção! </strong> Existe processo aguardando a confirmaçao do condutor. <a href="~/Processo/Processo" alert-link">Clique aqui pra ter acesso.</a>.</h4>
+            </div>
+        }
+    }
+    catch
+    {
+
+    }
+
+
+    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+    var Pes_TipoPessoa = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+}
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "form", name = "form" }))
+{
+    <div class="row">
+        <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+            <h5> <img src="~/img/Assitente.png" style="margin-left:20px;" /><strong> Para realizar a abertura do processo selecione um AIT e clique no botão  <strong>Serviço</strong> ao lado direito do quadro de informações.</strong></h5>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-9">
+            <h3>Lista de Multas </h3>
+            <small><strong>Legenda: <br />CI - Condutor Infrator | DA - Defesa de Autuação | JA - Recurso JARI <br /> <font size="1"> * Apenas para os serviços concluídos</font></strong></small>
+        </div>
+        <div class="col-md-3 text-right text-danger" style="font-style: italic">
+            @*<h5>
+                <img src="~/img/Assitente (1).png" />  <strong>Mais informações? @Html.ActionLink("Clique aqui!", "informacao_importante", "pessoa")</strong>
+            </h5>*@
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table id="grid" style="cursor:pointer" class="table-condensed table-hover table-striped">
+            <thead>
+                <tr>
+                    @*<th data-column-id="Mut_StatusAIT" data-width="100" data-header-align="center" data-align="center">Situação</th>*@
+                    <th data-column-id="Mut_AIT" data-width="100" data-header-align="center" data-align="center">AIT</th>
+                    <th data-column-id="Mut_PlacaVeiculo" data-width="80" data-header-align="" data-align="">Placa</th>
+                    <th data-column-id="Mut_CodigoInfracao" data-width="80">Infração</th>
+                    <th data-column-id="Mut_DescricaoInfracao" data-formatter="Mut_DescricaoInfracao" data-width="400">Descrição</th>
+                    <th data-column-id="Mut_DataInfracao" data-order="asc" data-width="150" data-type="numeric">Data/Hora Infração</th>
+                    <th data-column-id="Mut_DescricaoInfracaoCompleto" data-visible="false">Descrição Completa</th>
+                    <th data-column-id="Servico" data-visible="true" data-width="50">Serviços</th>
+                    <th data-column-id="link" data-formatter="acoes" data-header-align="center" data-align="center" data-css-class="" data-width="70px">Ação</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+}
+
+@*@Html.Raw(@ViewBag.ConteudoAd)*@
+
+
+@*<script src="~/Scripts/jquery-3.1.1.min.js"></script>*@
+@section scripts{
+    <script src="~/Scripts/jquery.bootgrid.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(configurarControles);
+
+        function configurarControles() {
+            $("#grid").bootgrid({
+                ajax: true,
+                url: '@Url.Action("Act_Multas", "multas")',
+                searchSettings: {
+                    delay: 100,
+                    characters: 4
+                },
+                labels: {
+                    all: "",
+                    infos: "Exibindo {{ctx.start}} a {{ctx.end}} de {{ctx.total}} registro(s)",
+                    loading: "Carregando...",
+                    noResults: "Você não possui multas aptas aos serviços disponíveis",
+                    refresh: "Atualizar",
+                    search: "Pesquisar"
+                },
+
+                formatters: {
+                    "acoes": function (column, row) {
+                        return "<a href='#' class='btn btn-info' data-toggle='tooltip' data-placement='top' title='Clique para abrir'  data-acao='Details' data-row-id ='' >" +
+                               "Serviço</a>";
+                    },
+
+                    "Mut_DescricaoInfracao": function (column, row) {
+                        return "<a href='#' class='' data-toggle='tooltip' data-placement='top' title='" + row.Mut_DescricaoInfracaoCompleto + "'  data-acao='Details' data-row-id ='" + row.Mut_DescricaoInfracao + "' >" +
+                            row.Mut_DescricaoInfracao + "</a>";
+                    },
+                },
+
+
+                statusMapping: {
+                     6: "amarelo",
+                     7: "vermelho",
+                     8: "verde",
+                     9: "cinza",
+
+                },
+                selection: true,
+                multiSelect: false,
+                rowSelect: true,
+                keepSelection: true,
+
+            }).on("click.rs.jquery.bootgrid", function (e, columns, row, target) {
+                var mut_ait = row.Mut_AIT;
+                var placa = row.Mut_PlacaVeiculo;
+
+                Abrir(mut_ait, placa);
+
+            }).on("loaded.rs.jquery.bootgrid", function (e, c, rows) {
+                //$('[data-toggle="tooltip"]').tooltip();
+
+                $(".stop-click-event").click(function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            });
+        }
+
+
+        function Abrir(mut_ait, placa,) {
+
+            var Tipopessoa = $('<span/>').html('@Pes_TipoPessoa').text();
+            var redirectUrl =  '@Url.Action("tipoprocesso", "processo")'; // "/processo/tipoprocesso";
+           
+
+            var form = $('<form action="' + redirectUrl + '" method="post">' +
+                '<input type="hidden" name="mut_ait" value="' + mut_ait + '" />' +
+                '<input type="hidden" name="placa" value="' + placa + '" />' +
+                '<input type="hidden" name="Tipopessoa" value="' + Tipopessoa + '" />' +
+                '</form>');
+
+            $('body').append(form);
+            $(form).submit();
+        }
+
+
+    </script>
+    }
+
+

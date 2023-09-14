@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/Login_Layout.cshtml";
+}
+
+<div class="bg-login">
+    <div class="container">
+        <div class="text-center logo">
+            <img src="~/img/transalvador.png" width="315">
+            <br>
+        </div>
+        <form class="form-signin login tipo-cadastro">
+            @*<label>Escolha o tipo de cadastro</label>*@
+            <h4><strong>Cadastro</strong></h4><br />
+            <input type="button" class="btn btn-lg btn-primary btn-block" value="CPF" onclick="location.href='@Url.Action("cad_pessoacpf", "pessoa")'" />
+            <br />
+            <input type="button" class="btn btn-lg btn-primary btn-block" value="CNPJ" onclick="location.href='@Url.Action("cad_pessoacnpj", "juridica_pessoa")'" />
+            <br />
+            <input type="button" class="btn btn-lg btn-primary btn-block" value="Estrangeiro" onclick="location.href='@Url.Action("Cad_PessoaEstrangeiro", "pessoa")'" />
+            <br />
+        </form>
+    </div> <!-- /container -->
+</div>

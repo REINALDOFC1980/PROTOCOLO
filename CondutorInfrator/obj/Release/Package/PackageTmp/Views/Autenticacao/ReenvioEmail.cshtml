@@ -1,0 +1,103 @@
+﻿
+@model CondutorInfrator.Models.PessoaViewModel
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/Login_Layout.cshtml";
+}  
+
+<div class="container">
+    <div class="text-center logo">
+        <img src="~/img/transalvador.png" width="315">
+        <br>
+    </div>
+
+
+    <div class="form-signin login">
+        <div id="DivEmail">
+            Digite o seu e-mail de cadastro.
+            @Html.EditorFor(model => model.Pes_Email, new { htmlAttributes = new { @class = "form-control", id = "Pes_Email" } })
+            <div class="alert-box failure text text-center" id="vemail">Campo Obrigatório</div>
+        </div>
+
+        <br />
+        <button class="btn btn-lg btn-primary btn-block" type="button" id="Btnreeviar">Reenviar</button>
+        <br />
+        <div class="alert-box warning text text-center" id="vmensagem"><strong> Atenção! </strong> Esse e-mail não existe em nossa base de dados</div>
+    </div>
+</div>
+
+
+<script type='text/javascript'>
+    //verificar email Homologado
+    $(document).ready(function () {
+
+        $('#Btnreeviar').click(function () {
+            if ($('#Pes_Email').val() == "") {
+                $("#vemail").fadeIn(300).delay(1500).fadeOut(300);
+                $('#DivEmail').addClass('has-error');
+                $('#Pes_Email').focus();
+                return false;
+            }
+
+
+            if ($('#Pes_Email').val() != "") {
+                //VidandoEmail
+                var resultado = func_validandoemail($("#Pes_Email").val());
+                if (resultado == false) {
+                    swal("E-mail inválido", "Necessário informar um e-mail válido.", "warning").then(() => {
+                        $('#DivEmail').addClass('has-error');
+                        $('#Pes_Email').focus();
+                        $('#Pes_Email').val("");
+                    });
+                }
+                else {
+
+                    var Email = $('#Pes_Email').val();
+                    var TipoEmail = "ReenvioConfirmação";
+
+                    $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ email: Email, tipoEmail: TipoEmail }),
+                    url: '@Url.Action("EncaminharEmail", "email")',
+                        success: function (data) {
+                       
+                        if (data.error == true) {
+                            posLoad();
+                            swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error");
+                            return false;
+                        }else
+                            if (data.emailexistente == false) {
+                            posLoad();
+                            $("#vmensagem").fadeIn(500).delay(5000).fadeOut(1000);
+                            return false;
+                        } else {
+                            posLoad();
+                            swal("Envio encaminhado com sucesso", "Você receberá um e-mail com instruções para a alteração da senha.", "success")
+                                .then(() => {
+                                    window.location.href = data.redirectUrl;
+                                });
+                            }
+                        },
+
+                        error: function () {
+                            posLoad();
+                            swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                            .then(() => {
+                                location.reload();
+                            });
+                        }
+                    })
+
+                }
+
+            }
+
+        });
+    });
+
+
+</script>
+
+

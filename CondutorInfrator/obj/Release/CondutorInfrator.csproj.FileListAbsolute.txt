@@ -1,0 +1,335 @@
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\CondutorInfrator.dll.config
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\CondutorInfrator.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\CondutorInfrator.pdb
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\csc.exe
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\csc.exe.config
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\csc.rsp
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\csi.exe
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\csi.exe.config
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\csi.rsp
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\Microsoft.Managed.Core.targets
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.AppContext.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Collections.Immutable.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Console.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.IO.Compression.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.IO.FileSystem.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.IO.Pipes.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Reflection.Metadata.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Security.AccessControl.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Security.Claims.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Security.Principal.Windows.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.ValueTuple.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Xml.XmlDocument.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Xml.XPath.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\vbc.exe
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\vbc.exe.config
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\vbc.rsp
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\VBCSCompiler.exe
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\roslyn\VBCSCompiler.exe.config
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Antlr3.Runtime.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\BouncyCastle.Crypto.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\CrystalDecisions.CrystalReports.Engine.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\CrystalDecisions.ReportSource.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\CrystalDecisions.Shared.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\CrystalDecisions.Web.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Dapper.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\itextsharp.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Microsoft.Owin.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Microsoft.Owin.Security.Cookies.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Microsoft.Owin.Security.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Microsoft.Web.Infrastructure.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Newtonsoft.Json.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Owin.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\PdfSharp.Charting.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\PdfSharp.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\SautinSoft.PdfFocus.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Syncfusion.Licensing.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.Helpers.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.Mvc.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.Optimization.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.Razor.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.WebPages.Deployment.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.WebPages.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.WebPages.Razor.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\WebGrease.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\BouncyCastle.Crypto.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Dapper.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\itextsharp.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Microsoft.Owin.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Microsoft.Owin.Security.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Microsoft.Owin.Security.Cookies.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\PdfSharp.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\PdfSharp.Charting.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\SautinSoft.PdfFocus.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.Helpers.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.Mvc.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.Optimization.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.Razor.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.WebPages.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.WebPages.Deployment.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\System.Web.WebPages.Razor.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Newtonsoft.Json.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Antlr3.Runtime.pdb
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\de\PdfSharp.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\de\PdfSharp.Charting.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\pt-br\System.Web.Helpers.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\pt-br\System.Web.Mvc.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\pt-br\System.Web.Optimization.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\pt-br\System.Web.Razor.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\pt-br\System.Web.WebPages.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\bin\pt-br\System.Web.WebPages.Razor.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\obj\Release\CondutorInfrator.csproj.AssemblyReference.cache
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\obj\Release\CondutorInfrator.csproj.CoreCompileInputs.cache
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\obj\Release\CondutorInfrator.csproj.CopyComplete
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\obj\Release\CondutorInfrator.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine - Modificada\CondutorInfrator\obj\Release\CondutorInfrator.pdb
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CondutorInfrator.dll.config
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CondutorInfrator.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CondutorInfrator.pdb
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\csc.exe
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\csc.exe.config
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\csc.rsp
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\csi.exe
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\csi.exe.config
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\csi.rsp
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.Managed.Core.targets
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.AppContext.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Collections.Immutable.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Console.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Diagnostics.StackTrace.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.IO.Compression.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.IO.FileSystem.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.IO.FileSystem.Primitives.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.IO.Pipes.AccessControl.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.IO.Pipes.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Reflection.Metadata.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.AccessControl.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.Claims.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.Cryptography.Encoding.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.Cryptography.Primitives.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.Principal.Windows.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Text.Encoding.CodePages.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.ValueTuple.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Xml.ReaderWriter.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Xml.XmlDocument.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Xml.XPath.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Xml.XPath.XDocument.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\vbc.exe
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\vbc.exe.config
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\vbc.rsp
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\VBCSCompiler.exe
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\VBCSCompiler.exe.config
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Antlr3.Runtime.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\BouncyCastle.Crypto.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CrystalDecisions.CrystalReports.Engine.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CrystalDecisions.ReportSource.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CrystalDecisions.Shared.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CrystalDecisions.Web.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Dapper.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\itextsharp.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.Security.Cookies.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.Security.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Web.Infrastructure.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Newtonsoft.Json.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Owin.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\PdfSharp.Charting.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\PdfSharp.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\SautinSoft.PdfFocus.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Syncfusion.Licensing.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Helpers.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Mvc.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Optimization.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Razor.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.WebPages.Deployment.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.WebPages.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.WebPages.Razor.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\WebGrease.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\stdole.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\BouncyCastle.Crypto.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Dapper.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\itextsharp.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.Security.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.Security.Cookies.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\PdfSharp.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\PdfSharp.Charting.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\SautinSoft.PdfFocus.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Helpers.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Mvc.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Optimization.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Razor.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.WebPages.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.WebPages.Deployment.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.WebPages.Razor.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Newtonsoft.Json.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Antlr3.Runtime.pdb
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\de\PdfSharp.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\de\PdfSharp.Charting.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.Helpers.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.Mvc.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.Optimization.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.Razor.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.WebPages.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.WebPages.Razor.resources.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\obj\Release\CondutorInfrator.csproj.AssemblyReference.cache
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\obj\Release\CondutorInfrator.csproj.CoreCompileInputs.cache
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\obj\Release\CondutorInfrator.csproj.CopyComplete
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\obj\Release\CondutorInfrator.dll
+D:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\obj\Release\CondutorInfrator.pdb
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CondutorInfrator.dll.config
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CondutorInfrator.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CondutorInfrator.pdb
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\csc.exe
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\csc.exe.config
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\csc.rsp
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\csi.exe
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\csi.exe.config
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\csi.rsp
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.Managed.Core.targets
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.AppContext.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Collections.Immutable.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Console.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Diagnostics.FileVersionInfo.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Diagnostics.StackTrace.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.IO.Compression.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.IO.FileSystem.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.IO.FileSystem.Primitives.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.IO.Pipes.AccessControl.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.IO.Pipes.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Reflection.Metadata.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.AccessControl.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.Claims.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.Cryptography.Algorithms.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.Cryptography.Encoding.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.Cryptography.Primitives.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.Cryptography.X509Certificates.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Security.Principal.Windows.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Text.Encoding.CodePages.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.ValueTuple.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Xml.ReaderWriter.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Xml.XmlDocument.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Xml.XPath.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\System.Xml.XPath.XDocument.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\vbc.exe
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\vbc.exe.config
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\vbc.rsp
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\VBCSCompiler.exe
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\roslyn\VBCSCompiler.exe.config
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Antlr3.Runtime.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\BouncyCastle.Crypto.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CrystalDecisions.CrystalReports.Engine.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CrystalDecisions.ReportSource.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CrystalDecisions.Shared.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\CrystalDecisions.Web.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Dapper.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\itextsharp.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.Security.Cookies.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.Security.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Web.Infrastructure.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Newtonsoft.Json.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Owin.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\PdfSharp.Charting.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\PdfSharp.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\SautinSoft.PdfFocus.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Syncfusion.Licensing.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Helpers.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Mvc.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Optimization.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Razor.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.WebPages.Deployment.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.WebPages.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.WebPages.Razor.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\WebGrease.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\stdole.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\BouncyCastle.Crypto.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Dapper.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\itextsharp.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.Security.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.Owin.Security.Cookies.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\PdfSharp.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\PdfSharp.Charting.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\SautinSoft.PdfFocus.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Helpers.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Mvc.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Optimization.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.Razor.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.WebPages.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.WebPages.Deployment.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\System.Web.WebPages.Razor.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Newtonsoft.Json.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Antlr3.Runtime.pdb
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\de\PdfSharp.resources.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\de\PdfSharp.Charting.resources.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.Helpers.resources.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.Mvc.resources.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.Optimization.resources.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.Razor.resources.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.WebPages.resources.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.WebPages.Deployment.resources.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\bin\pt-br\System.Web.WebPages.Razor.resources.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\obj\Release\CondutorInfrator.csproj.AssemblyReference.cache
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\obj\Release\CondutorInfrator.csproj.CoreCompileInputs.cache
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\obj\Release\CondutorInfrator.csproj.CopyComplete
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\obj\Release\CondutorInfrator.dll
+E:\PROJETOS WEB RECURSOS\ProtocoloOnLine\CondutorInfrator\obj\Release\CondutorInfrator.pdb

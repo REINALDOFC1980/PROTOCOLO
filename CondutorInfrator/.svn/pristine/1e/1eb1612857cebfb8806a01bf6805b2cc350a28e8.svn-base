@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/Login_Layout.cshtml";
+}
+
+<div class="bg-login">
+    <div class="container">
+        <div class="text-center logo">
+            <img src="~/img/transalvador.png" width="315">
+            <br>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="text-center">
+            <h1 style="color:white;">Até o momento não consta dados para esse e-mail ou o link expirou.</h1><br />
+            <p><h3 style="color:white;">Acesse a pagina de login e reenvie novamente.</h3></p>
+        </div>
+
+    </div> <!-- /container -->
+</div>
+

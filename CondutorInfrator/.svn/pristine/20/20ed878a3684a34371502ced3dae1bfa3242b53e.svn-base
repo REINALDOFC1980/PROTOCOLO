@@ -1,0 +1,132 @@
+﻿<div class="lista-importante" id="Apresentacao">
+
+
+    <div class="row text-center">
+        <h4>RECURSO JARI</h4>
+        <small><h5>INFORMAÇÕES IMPORTANTES / LEIA COM ATENÇÃO</h5></small>
+    </div>
+
+    <br />
+    <br />
+    <h4><strong>• 1 - Registrar Processo</strong></h4>
+    <div class="text-justify">
+        Ao logar no Sistema de Protocolo Online, o cidadão tem acesso a listagem de AITs de sua propriedade (CPF ou CNPJ).
+        O registro do processo de RECURSO JARI pode ser realizado através do proprietário do veículo ou do condutor infrator apresentado,
+        <strong>somente após legitimação.</strong><br /><br />
+        <strong>O acesso do condutor para registro do Recurso é confirmado após as seguintes situações:</strong><br /><br />
+        1 - Processo de apresentação de condutor infrator registrado presencialmente: após o registro do processo, estando apto nas regras de abertura, o condutor passa a ter vínculo imediato com o AIT;;<br />
+        2 - Processo de apresentação de condutor infrator registrado online: após o condutor apresentado logar no Sistema de Protocolo Online e aceitar a indicação de condutor infrator do veículo para o AIT<strong> e obter aprovação da triagem.</strong><br />
+        O cidadão cadastrado como condutor infrator do veículo para o AIT, ao logar no sistema, além de ter acesso a listagem de AITs de sua propriedade (CPF), também tem acesso aos AITs que está indicado como condutor infrator.<br />
+        Devido a possibilidade do processo de Recurso JARI poder ser registrado através do proprietário do veículo <strong>ou do condutor infrator cadastrado</strong>, o sistema habilita um controle de acesso sobre o AIT. O sistema não permite o cadastro de mais de um processo do mesmo serviço para o AIT. Portanto, caso o requerente (proprietário ou condutor infrator apresentado) efetue o registro de um processo para o serviço de Defesa de Autuação, o sistema não permite que outro processo para o mesmo serviço seja registrado por outro requerente (proprietário ou condutor infrator apresentado).
+        O status da indicação pode ser alterado caso o retorno do DETRAN seja pela reprovação, podendo interferir na abertura do serviço ou análise do julgamento.
+
+        <br />
+        <br />
+
+        <h4><strong>• 2 - Formulário de Requerimento de Recurso JARI</strong></h4>
+
+        Algumas informações do Formulário de Requerimento de Recurso serão preenchidas automaticamente pelo sistema, ficando a cargo do requerente discorrer sobre a exposição dos fatos.
+        Verifique se as informações estão corretas antes de seguir para a exposição dos fatos. O Requerimento de Recurso é disponibilizado para impressão. Após descrever a exposição dos
+        fatos deve ser assinado pelo Requerente. A assinatura deve ser original e semelhante ao documento de identificação anexado ao processo (utilizar preferencialmente caneta azul).
+        <br />
+        <br />
+
+        <h4><strong>• 3 - Juntar Documentação</strong></h4>
+        <strong>Documentação Pessoa Física (proprietário ou condutor apresentado)</strong>
+        <br />
+        1 - Requerimento de RECURSO JARI**;<br />
+        2 - Notificação da Imposição da Penalidade – NIP (cada petição deverá ter somente um auto de infração como objeto); <br />
+        3 - RG ou CNH do Requerente ou outro documento que comprove assinatura;<br />
+        4 - Documento do veículo - CRLV; <br />
+        5 - Documentos comprobatórios das alegações do RECURSO JARI; <br />
+        6 - Comprovante de residência do Requerente; <br />
+        7 - Procuração Pública e RG do procurador, quando for o caso; <br /><br />
+
+        **Obs: O Requerimento de Recurso padrão poderá ser substituído por petição própria, desde que conste os dados mínimos exigidos pela legislação
+        – Resolução 299/2008, artigo 3º (quando não for suficiente o espaço do “requerimento de defesa” do campo 1).
+
+        <br />
+        <br />
+
+        <strong>Documentação Pessoa Jurídica</strong><br />
+        1 - Requerimento de Recurso JARI;<br />
+        2 - Notificação da Autuação – NAI (cada petição deverá ter somente um auto de infração como objeto);<br />
+        3 - RG ou CNH do Sócio da Empresa que assina no Contrato Social ou outro documento que comprove assinatura;<br />
+        4 - Documento do veículo - CRLV;<br />
+        5 - Documentos comprobatórios das alegações da Recurso JARI;<br />
+        6 - Procuração Pública e RG do procurador, quando for o caso;<br />
+        7 - Contrato Social (última alteração) ***;<br /><br />
+
+        **Obs: O Requerimento de Recurso padrão poderá ser substituído por petição própria, desde que conste os dados mínimos exigidos pela legislação – Resolução 299/2008, artigo 3º (quando não for suficiente o espaço do “requerimento de defesa” do campo 1).
+        <br />
+        <br />
+        *** Órgão Público<br />
+        a. Portaria de Nomeação do Dirigente.<br />
+        b. RG ou CNH do Dirigente do Órgão ou outro documento que comprove assinatura;<br />
+        <br />
+        <strong>OBS:1 - </strong>A Falta de documentação obrigatória, ausência do pedido, ilegitimidade ou intempestividade são motivos previstos objetivamente na legislação e podem resultar o não conhecimento do RECURSO pelo julgador.<br />
+        <br />
+        <strong>OBS:2 - </strong>Serviços Públicos de Urgência / Utilidade Pública (artigo 29, VII do CTB): Apresentar em caráter complementar documentos que comprovem a diligência visando análise do julgador
+        (ex: ordem de serviço correspondendo com a data e horário de cometimento da infração indicando placa do veículo ou em conjunto documento de registro da saída do veículo, escala
+        de trabalho do dia e horário correspondente com o condutor infrator, no caso de ambulâncias incluir o relatório médico e OS).
+        <br />
+        <br />
+
+        <h4><strong>• 4 - Anexar Documentação</strong></h4>
+        Anexar os documentos necessários de acordo com as regras descritas no tópico Juntar a Documentação. Os documentos devem estar salvos em PDF.<br />
+        <strong>
+            É necessário que os documentos anexados ao processo estejam completos e conforme o indicativo específico do campo anexar, legislação, sem rasuras, e legíveis,
+            caso contrário poderá ser indeferido (não provido) ou não conhecido pelo julgador.
+        </strong>
+        <br />
+        <br />
+
+        <h4><strong>• 5 - Enviar a documentação</strong></h4>
+        Para finalizar o registro do processo é necessário realizar o upload dos documentos, concordar com os termos da TRANSALVADOR no local indicado e finalizar o registro do processo clicando em “Finalizar Registro do Processo”.
+        <strong>Antes de confirmar o envio certifique-se que toda documentação está legível e conforme anexado.</strong>
+        <br />
+        <br />
+
+        <h4><strong>• 6 - Junta Julgadora</strong></h4>
+        Após o envio da documentação, o processo é distribuído automaticamente para uma das Juntas Administrativas de Recursos Infrações – JARI, na SEMOB.
+        <br />
+        <br />
+        <h4><strong>• 7 - Resultado do Processo</strong></h4>
+        <strong>O processo aberto deve ser acompanhado no site da TRANSALVADOR:</strong><br />
+        <a href="http://www.transalvador.salvador.ba.gov.br/conteudo/index.php/multa/consultaProcessoMulta"
+           targert="_blank">http://www.transalvador.salvador.ba.gov.br/conteudo/index.php/multa/consultaProcessoMulta</a>.<br />
+        Logo que o resultado do processo for publicado no Diário Oficial do Município - DOM, a situação/status do processo é utilizada no sistema. Caso não provido (indeferido) ou não conhecido o
+        RECURSO JARI será encaminhada uma Notificação ao proprietário do veículo (“Carta JARI”), cabendo Recurso ao CETRAN.
+        <br />
+        <br />
+        <h4><strong>• 8 - Problemas</strong></h4>
+        <strong>Não deixe para apresentar o Recurso de última hora pois pode ocorrer imprevisto de comunicação externo (internet). </strong> Em caso que não seja possível finalizar o cadastro do processo mantenha
+        contato imediato com o setor de atendimento SETAP (71)3202-9188/9189 apresentando o print das telas de erro. Existem os seguintes meios alternativos: Atendimento Presencial mediante
+        agendamento obrigatório no site da TRANSALVADOR, ou, o envio pelos Correios (ver regras para cada serviço).
+        Não conseguindo solução em um dos canais fornecidos, entre em contato com nossa Ouvidoria através do site: www.ouvidoria.transalvador@salvador.ba.gov.br,
+        <br />
+        <br />
+        <h4><strong>• 9 - Documentação Necessária para Dirigir-se a Transalvador</strong></h4>
+
+        <strong>
+            Para atendimento presencial será necessário agendamento prévio obrigatório no site:
+            <a href="http://transonline.salvador.ba.gov.br/agend/web/index.php/site/login "
+               targert="_blank">http://transonline.salvador.ba.gov.br/agend/web/index.php/site/login. </a>
+            <br />
+        </strong>
+        Especificando o serviço de RECURSO JARI. O agendamento deve ser feito no nome de quem vai comparecer ao Atendimento Presencial, sendo necessário apresentar documento de
+        identificação original. Apresentar todos os documentos informados de acordo com as regras descritas no tópico Juntar Documentação. Qualquer orientação complementar manter
+        contato com o Setor de Atendimento ao Público – SETAP nos telefones (71)3202-9188/9189.
+    </div>
+    <br />
+    <hr>
+    <div class="row text-center">
+        <button type="button" class="btn btn-primary btn-lg btn-transalvador" id="BtnSair" name="GravarDados" @*onclick="location.href='@Url.Action("multas", "multas")'"*@> Voltar </button>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#BtnSair").click(function () {
+        history.back();
+    });
+    </script>

@@ -1,0 +1,228 @@
+﻿@model CondutorInfrator.Models.ProcessoViewModel
+<br />
+<br />
+
+@{
+    try
+    {
+
+        if (TempData["vloTotal"].ToString() == "1" || TempData["vloTotal"].ToString() == "21")
+        {
+
+            <div class="alert alert-warning" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4> <strong>Atenção! </strong> Existe processo aguardando a confirmação de condutor. <a href="~/Processo/Processo" alert-link">Clique aqui pra ter acesso.</a>.</h4>
+            </div>
+        }
+    }
+    catch
+    {
+
+    }
+}
+
+<div class="row">
+    <div class="col-md-1 text-center">
+        <img src="~/img/Assitente.png" />
+    </div>
+    <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+        <h5><strong>Para visualizar as informações dos processos gerados, clique no botão <span class='fa fa-folder-open fa-1x' style="color:deepskyblue"></span> ao lado direito do quadro de informações.</strong></h5>
+        <h5><strong>Para realizar a abertura de processo, clique no botão a baixo.</strong></h5>
+        <hr>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <button class="btn btn-lg btn-primary btn-block" type="submit" id="BtnLogar" onclick="location.href='@Url.Action("multas", "multas")'">@*<span class="glyphicon glyphicon-plus gi-1x" style="color:#ffffff"></span>*@Clique aqui para realizar um novo processo</button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <h3>Lista de Processos Gerados</h3>
+    </div>
+
+    <div class="col-md-3 text-right text-danger" style="font-style: italic">
+        <h5>
+            <img src="~/img/Assitente (1).png" />  <strong>Mais informações? @Html.ActionLink("Clique aqui!", "informacao_importante", "pessoa")</strong>
+        </h5>
+    </div>
+</div>
+<br />
+
+
+@*<h4><small><span class='fa  fa-bars fa-1x'></span> Lista de Multas cadastrado </small></h4>*@
+
+
+<div class="table-responsive">
+    <table id="gridProcesso" style="cursor:pointer" class="table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th data-column-id="StsPro_Descricao" data-formatter="StsPro_Descricao" data-width="280" data-header-align="center" data-align="center" @*data-identifier="true"*@> Status do Processo</th>
+                <th data-column-id="Pro_Numero" data-width="130">Nº Processo</th>
+                <th data-column-id="Pro_DataCriacao" data-width="180" data-header-align="" data-align="" data-type="numeric">Data de abertura</th>
+                <th data-column-id="Mut_AIT" data-header-align="" data-align="" data-width="100">AIT</th>
+                <th data-column-id="Mut_StatusAIT" data-header-align="" data-align="" data-width="120">Situação AIT</th>
+                <th data-column-id="Vec_Placa" data-width="80">Placa</th>
+                <th data-column-id="HisPro_StsPro_Id" data-visible="false">ID do Processo</th>
+                <th data-column-id="StsPro_Orientacao" data-visible="false">Orientacão</th>
+                <th data-column-id="Ass_Nome" data-formatter="acoes" data-header-align="center" data-align="" data-css-class="" data-order="desc" data-width="55px">Serviço</th>
+
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+@section scripts{
+    <script src="~/Scripts/jquery.bootgrid.js"></script>
+    <script type="text/javascript">
+
+      //  var controller = "Multas";
+
+        $(document).ready(configurarControles);
+
+        function configurarControles() {
+            $("#gridProcesso").bootgrid({
+                ajax: true,
+                url: '@Url.Action("Act_ProcessoAbertos", "Processo")',
+                searchSettings: {
+                    delay: 100,
+                    characters: 4
+                },
+                labels: {
+                    all: "",
+                    infos: "Exibindo {{ctx.start}} a {{ctx.end}} de {{ctx.total}} registro(s)",
+                    loading: "Carregando...",
+                    noResults: "Até o momento você não realizou nenhum processo.",
+                    refresh: "Atualizar",
+                    search: "Pesquisar"
+                },
+
+                formatters: {
+                    "acoes": function (column, row) {
+                        if (row.Ass_Nome == "APRESENTAÇÃO DE CONDUTOR")
+                        {
+                            return "<a href='#' class='btn btn-warning btn-block' data-toggle='tooltip' data-placement='top' title='Clique para abrir'  data-acao='Details' data-row-id ='" + row.HisPro_StsPro_Id + "' >" +
+                                row.Ass_Nome + "</a>";
+                        }else if (row.Ass_Nome == "DEFESA DA AUTUAÇÃO")
+                        {
+                            return "<a href='#' class='btn btn-info btn-block' data-toggle='tooltip' data-placement='top' title='Clique para abrir'  data-acao='Details' data-row-id ='" + row.HisPro_StsPro_Id + "' >" +
+                                row.Ass_Nome + "</a>";
+                        }else
+                        if (row.Ass_Nome == "RECURSO JARI") {
+                            return "<a href='#' class='btn btn-success btn-block' data-toggle='tooltip' data-placement='top' title='Clique para abrir'  data-acao='Details' data-row-id ='" + row.HisPro_StsPro_Id + "' >" +
+                                    row.Ass_Nome + "</a>";
+                        }
+                    },
+
+                    "StsPro_Descricao": function (column, row) {
+                        return "<a href='#' class='' data-toggle='tooltip' data-placement='top' title='" + row.StsPro_Orientacao + "'  data-acao='Details' data-row-id ='" + row.StsPro_Descricao + "' >" +
+                            row.StsPro_Descricao + "</a>";
+                    },
+
+                    "Ass_Nome": function (column, row) {
+                        return "<a href='#' class='' data-toggle='tooltip' data-placement='top' title='" + row.Ass_Nome + "'  data-acao='Details' data-row-id ='" + row.Ass_Nome + "' >" +
+                            row.Ass_Nome + "</a>";
+                    },
+                },
+
+                statusMapping: {
+                    6: "amarelo",
+                    7: "vermelho",
+                    8: "verde",
+                    9: "cinza",
+                },
+
+                selection: true,
+                multiSelect: false,
+                rowSelect: true,
+                keepSelection: true,
+
+            }).on("click.rs.jquery.bootgrid", function (e, columns, row, target) {
+                var mut_ait = row.Mut_AIT;
+                var Mut_StatusProcesso = row.HisPro_StsPro_Id;
+                var pro_numero = row.Pro_Numero;
+                var Ass_Nome = row.Ass_Nome;
+
+                Abrir(mut_ait, Mut_StatusProcesso, pro_numero, Ass_Nome);
+
+            }).on("loaded.rs.jquery.bootgrid", function (e, c, rows) {
+                //$('[data-toggle="tooltip"]').tooltip();
+
+                $(".stop-click-event").click(function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                });
+            });
+        }
+
+
+        function Abrir(mut_ait, Mut_StatusProcesso, pro_numero, Ass_Nome) {
+
+
+            if (Mut_StatusProcesso == "13" || Mut_StatusProcesso == "21") {
+                var MyAppUrlSettings = {MyUsefulUrl: '@Url.Action("Procanexadocumento", "processo")'}
+                    proximoEvento();
+            } else {
+                var MyAppUrlSettings = {MyUsefulUrl: '@Url.Action("procsituacaoprocesso", "processo")'}
+                    proximoEvento();
+            }
+
+            function proximoEvento() {
+
+                var Idservico;
+                if (Ass_Nome == "APRESENTAÇÃO DE CONDUTOR")
+                    Idservico = 1
+                if (Ass_Nome == "DEFESA DA AUTUAÇÃO")
+                    Idservico = 2
+                if (Ass_Nome == "RECURSO JARI")
+                    Idservico = 8
+
+              preLoad();
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ mut_ait: mut_ait, pro_numero: pro_numero, idservico : Idservico }),
+                    url: MyAppUrlSettings.MyUsefulUrl,
+
+                   success: function (data) {
+                       if (data.error == true) {
+                            posLoad();
+                            swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error");
+                            return false;
+                       } else {
+                           redirecPost(data.redirectUrl, pro_numero, mut_ait, Idservico)
+                           //window.location.href = data.redirectUrl;
+                       }
+                   },
+
+                   error: function () {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                        .then(() => {
+                            location.reload();
+                        });
+                   }
+               });
+            }
+        }
+
+        function redirecPost(redirectUrl, pro_numero, mut_ait, idservico) {
+            var form = $('<form action="' + redirectUrl + '" method="post">' +
+                '<input type="hidden" name="pro_numero" value="' + pro_numero + '" />' +
+                '<input type="hidden" name="mut_ait" value="' + mut_ait + '" />' +
+                '<input type="hidden" name="idservico" value="' + idservico + '" />' +
+                '</form>');
+
+            $('body').append(form);
+            $(form).submit();
+        }
+
+    </script>
+
+
+
+
+}

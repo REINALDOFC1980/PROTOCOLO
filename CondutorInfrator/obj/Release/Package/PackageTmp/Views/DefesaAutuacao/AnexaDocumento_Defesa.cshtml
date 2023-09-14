@@ -1,0 +1,1060 @@
+﻿@model CondutorInfrator.Models.ProcessoViewModel
+
+@{
+    var claimsIdentity = User.Identity as System.Security.Claims.ClaimsIdentity;
+    var Pes_TipoPessoa = claimsIdentity.FindFirst(System.Security.Claims.ClaimTypes.Role).Value;
+}
+
+<div class="container">
+
+
+    @*<div class="row">
+        <div class="col-md-12 text-center">
+            <p class="numero-protocolo">
+                N° Processo: @Html.DisplayFor(model => model.Pro_Numero, new { htmlAttributes = new { @class = "form-control", id = "Pro_Numero" } })
+                @Html.EditorFor(model => model.Pro_Numero, new { htmlAttributes = new { @class = "form-control", id = "Pro_Numero", style = "display:none" } })
+            </p>
+        </div>
+    </div>*@
+
+
+    <div class="conteudo">
+        <div class="row">
+            <div class="col-md-1 text-center">
+                <img src="~/img/Assitente.png" />
+            </div>
+            <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+                <h5>
+                    <strong>
+                        Etapa Final! Agora é anexar os documentos e finalizar o processo. Antes de anexar, realize a impressão do formulário.
+                    </strong>
+                </h5>
+
+            </div>
+        </div>
+        <div class="row">
+            @{
+                var status = Model.StsPro_Descricao;
+                if (status == "Liberado para Correção")
+
+                { <div class="row">
+                        <div class="col-md-9">
+                            <div class="lista-situacao">
+                                <ul>
+                                    <li class="ativo">
+                                        <span>#</span>
+                                        <h2>Status Atual do Processo:</h2>
+                                        <p>
+                                            <a href="#" id="mytooltip" data-toggle="tooltip" title="@Html.DisplayFor(model => model.StsPro_Orientacao, new { htmlAttributes = new { @class = "form-control", id = "StsPro_Orientacao", } })"
+                                               data-placement="right">@Html.DisplayFor(model => model.StsPro_Descricao, new { htmlAttributes = new { @class = "form-control", id = "StsPro_Descricao", } })</a>
+                                            <br>
+                                            <strong> @Html.DisplayFor(model => model.Mot_Descricao, new { htmlAttributes = new { @class = "form-control", id = "Mot_Descricao" } })</strong>
+
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Anexar documentos</h3>
+            </div>
+            @*<div class="col-md-4 text-left text-danger">
+                <h5>
+                    <small style="color:red">INFORMAÇÕES IMPORTANTES!</small><br />
+                    <strong>LEIA ANTES DE INICIAR O PROCESSO <label id="LabelPassoaPasso" class="text-primary" style="cursor: pointer"> Clique Aqui </label> </strong>
+                </h5>
+            </div>*@
+        </div>
+        <br />
+
+
+        @using (Html.BeginForm("", "", FormMethod.Post, new { id = "form", name = "form" }))
+        {
+            <div class="row">
+
+                <div class="col-md-6">
+                    <h3>Informações do Requerente</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_CPF_CNPJ)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_CPF_CNPJ, new { htmlAttributes = new { @class = "form-control", id = "Ptr_CPF_CNPJ" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_CPF_CNPJ, new { id = "Ptr_CPF_CNPJ", name = "Ptr_CPF_CNPJ" })</td>
+                                @Html.HiddenFor(model => model.StsPro_Descricao)
+                                @Html.HiddenFor(model => model.ativarmensagem, new { id = "ativarmensagem", name = "ativarmensagem" })
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Nome)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_Nome, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Nome" } })</td>
+                                <td>@Html.HiddenFor(model => model.Pro_Numero, new { id = "Pro_Numero", name = "Pro_Numero" })</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_RegistroCNH)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_RegistroCNH, new { htmlAttributes = new { @class = "form-control", id = "Pes_RegistroCNH" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_RegistroCNH)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_CNHValidade)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_CNHValidade, new { htmlAttributes = new { @class = "form-control", id = "Pes_CNHValidade" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_CNHValidade)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Logradouro)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Logradouro, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Logradouro" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Logradouro)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Bairro)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Bairro, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Bairro" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Bairro)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Complemento)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Complemento, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Complemento" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Complemento)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Cidade)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Cidade, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Cidade" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Cidade)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_Estado)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_Estado, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_Estado" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_Estado)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_EndPro_CEP)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_EndPro_CEP, new { htmlAttributes = new { @class = "form-control", id = "Ptr_EndPro_CEP" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_EndPro_CEP)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Telefone)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_Telefone, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Telefone" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_Telefone)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Ptr_Email)</th>
+                                <td>@Html.DisplayFor(model => model.Ptr_Email, new { htmlAttributes = new { @class = "form-control", id = "Ptr_Emai" } })</td>
+                                <td>@Html.HiddenFor(model => model.Ptr_Email)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h3>Informações do Veículo</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Placa)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_Placa, new { htmlAttributes = new { @class = "form-control", id = "Vec_Placa" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_Placa)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_RENAVAN)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_RENAVAN, new { htmlAttributes = new { @class = "form-control", id = "Vec_RENAVAN" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_RENAVAN)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Ano)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_Ano, new { htmlAttributes = new { @class = "form-control", id = "Vec_Ano" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_Ano)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Vec_Marca)</th>
+                                <td>@Html.DisplayFor(model => model.Vec_Marca, new { htmlAttributes = new { @class = "form-control", id = "Vec_Marca" } })</td>
+                                <td>@Html.HiddenFor(model => model.Vec_Marca)</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <h3>Informações da Multa</h3>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_AIT)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_AIT, new { htmlAttributes = new { @class = "form-control", id = "Mut_AIT" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_AIT, new { @id = "Mut_AIT", @name = "Mut_AIT" })</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_CodigoInfracao)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_CodigoInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_CodigoInfracao" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_CodigoInfracao)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_DataInfracao)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_DataInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_DataInfracao" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_DataInfracao)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_DescricaoInfracao)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_DescricaoInfracao, new { htmlAttributes = new { @class = "form-control", id = "Mut_DescricaoInfracao" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_DescricaoInfracao)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row"> @Html.DisplayNameFor(model => model.Mut_StatusAIT)</th>
+                                <td>@Html.DisplayFor(model => model.Mut_StatusAIT, new { htmlAttributes = new { @class = "form-control", id = "Mut_StatusAIT" } })</td>
+                                <td>@Html.HiddenFor(model => model.Mut_StatusAIT)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row">
+                <h3>Anexo</h3>
+                <div class="col-md-12" style="padding:0;">
+                    <div class="row" style="font-size:80%;">
+
+                        <div class="col-md-12" style="margin-top:10px;">
+                            <p>
+                                <strong>
+                                    <span style="color:red">
+                                        Prezado cidadão, certifique-se que o formato original seja PDF (obrigatório) e o tamanho máximo do arquivo é de 2.0 MB. Caso o sistema não aceite o anexo é possível que o arquivo esteja corrompido. Sugerimos salvar o arquivo novamente em formato PDF e tentar o reenvio.<br />
+                                        É obrigatório para abrir o processo anexar o pedido de defesa devendo escolher abaixo se petição própria ou requerimento padrão.<br />
+                                        A falta de documentos obrigatórios, legibilidade, erros de preenchimento, falta de assinatura poderá ter a análise prejudicada pelo julgador.<br />
+                                        <strong>
+                                            Ao finalizar o registro do processo, caso apareça mensagem de erro, será necessário anexar toda documentação novamente.<br />
+                                            Antes de finalizar a abertura conferir se os documentos anexados estão completos, no tamanho e formato permitidos, legíveis (nunca posicionados de cabeça para baixo).
+                                        </strong><br />
+                                    </span>
+                                </strong>
+                            </p>
+                            <br />
+                            <div class="text-left">
+                                <label>Deseja imprimir o requerimento? <button type="button" class="btn btn-primary btn-transalvador" id="BtnFormulario" onclick="ImpressaoAgendamento()"> Imprimir Requerimento de Defesa</button></label>
+                                <br />
+                                <br />
+                                <label>Caso deseje anexar uma petição própria marque o campo abaixo.</label><br />
+                                <label class="pure-material-checkbox">
+                                    <input type="checkbox" name="ConfirmarPeticao" , id="ConfirmarPeticao" onclick="habilitarPeticao()">
+                                    <span>Desejo anexar Petição</span>
+                                </label>
+                            </div>
+                            <br />
+
+                            @*<br><div id="DivPETICAO">Requerimento de Defesa Padrão constando assinatura original do Requerente ou Petição constando os dados mínimos exigidos pela legislação / Formato(PDF) Tamanho: 2.0 Mb.<span style="color:red">*</span>  <input type="file" class="filestyle" id="PETICAO" , name="PETICAO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div>
+                            <div class="alert-box failure text text-center" id="vPETICAO">Campo Petição Obrigatório</div>*@
+
+                            <div id="DivREQDEFESA">Requerimento de Defesa Padrão constando assinatura original do Requerente ou Petição constando os dados mínimos exigidos pela legislação / Formato(PDF) Tamanho: 2.0 Mb.<span style="color:red">*</span>  <input type="file" class="filestyle" id="REQDEFESA" , name="REQDEFESA" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div>
+                            <div class="alert-box failure text text-center" id="vREQDEFESA">Campo Requerimento Obrigatório</div>
+
+                            <br><div id="DivFORMULARIO_INDICACAO">Notificação de Autuação da Infração - NAI / Formato(PDF) Tamanho: 2.0 Mb.<input type="file" class="filestyle" id="FORMULARIO_INDICACAO" , name="FORMULARIO_INDICACAO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)" required></div>
+                            <div class="alert-box failure text text-center" id="vFORMULARIO_INDICACAO">Notificação de Autuação da Infração - NAI</div>
+
+                            <br><div id="DivCRLV">Documento do Veículo - CRLV / Formato(PDF) Tamanho: 2.0 Mb.<input type="file" class="filestyle" id="CRLV" , name="CRLV" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div>
+                            <div class="alert-box failure text text-center" id="vCRLV">Documento do Veículo - CRLV</div>
+
+                            <br><div id="DivDOC_REQUERENTE">Documento de Identificação do Requerente (RG, CNH ou outro documento que comprove assinatura) / Formato(PDF) Tamanho: 2.0 Mb.<input type="file" class="filestyle" id="DOC_REQUERENTE" , name="DOC_REQUERENTE" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)" required></div>
+                            <div class="alert-box failure text text-center" id="vDOC_REQUERENTE">Documento de Identificação do Requerente (RG, CNH ou outro documento que comprove assinatura)</div>
+
+                            <br><div id="DivCOMPROVANTE_PROPRIETARIO">Comprovante de residência do Requerente atualizado conforme descrito no cadastro do sistema / Formato(PDF) Tamanho: 2.0 Mb.<input type="file" class="filestyle" id="COMPROVANTE_PROPRIETARIO" , name="COMPROVANTE_PROPRIETARIO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div>
+
+                            <br>Documentos comprobatórios do alegado na defesa / Formato(PDF) Tamanho: 2.0 Mb. <input type="file" class="filestyle" id="COMPROBATORIOS" , name="COMPROBATORIOS" data-buttonText="Multiplos Anexo" accept="application/pdf" onchange="ValidateSizePDF(this)" multiple>
+                            <p><strong><small><span style="color:red">Caso deseja enviar mais de um anexo, recomendamos que adicione todos em uma única pasta, dessa forma você poderá selecionar vários arquivos, pressione a tecla Ctrl e clique em cada item desejado.</span></small></strong></p>
+
+                            <p><div id="DivPROCURACAO">Procuração Pública, quando for o caso / Formato(PDF) Tamanho: 2.0 Mb.<span style="color:red">*</span><input type="file" class="filestyle" id="PROCURACAO" , name="PROCURACAO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vPROCURACAO">Campo Procuração Obrigatório.</div>
+
+                            <p><div id="DivDOC_PROCURACAO">Documento oficial com foto do procurador quando for o caso / Formato(PDF) Tamanho: 2.0 Mb.<span style="color:red">*</span> <input type="file" class="filestyle" id="DOC_PROCURACAO" , name="DOC_PROCURACAO" data-buttonText="Anexar" accept="application/pdf" onchange="ValidateSizePDF(this)"></div></p>
+                            <div class="alert-box failure text text-center" id="vDOC_PROCURACAO">Campo Documento do Procurador Obrigatório.</div>
+
+                            <div class="text-left">
+                                <label class="pure-material-checkbox">
+                                    <input type="checkbox" name="ConfirmarProcuracao" , id="ConfirmarProcuracao" onclick="habilitarProcuracao()">
+                                    <span>Procuração/habilitar campo para anexar, quando for o caso.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+
+                    <a href="~/img/exemplo-pdf.pdf"></a>
+                    <div class="text-left" style="font-size:12px;">
+
+                        <strong><small>(<span style="color:red"> *</span> ) Campo obrigatório.</small></strong><br /><br />
+                        <p>- O comprovante de residência do Requerente anexado deve ser o atual (até três meses).</p>
+                        <p>- O endereço do comprovante de residência do Requerente deve ser o mesmo informado no cadastro.</p>
+                        <p>- Para melhor legibilidade recomendamos digitalizar através de documentos originais. </p>
+                        <p>- A petição ou requerimento deve ser assinado com caneta preferencialmente na cor azul.</p>
+                        <p>- A legitimidade do processo de condutor online é confirmada somente após aprovação da TRANSALVADOR.</p>
+                        <p>- O Requerente responde nas esferas penal, cível e administrativa pela veracidade das informações e dos documentos fornecidos.</p>
+                        <p>- Ao selecionar a opção "Eu concordo", você concorda com os Termos da Superintendência de Trânsito de Salvador (TRANSALVADOR).</p>
+
+                    </div>
+                    <br />
+
+                    <label for="">Política de Privacidade</label>
+                    <p>
+                        • Declaro para os devidos fins, que as informações referentes ao cadastro para adesão ao TRANSALVADOR Digital são
+                        verdadeiras, sob pena de ser responsabilizado(a) cível, penal e
+                        administrativamente.
+                    </p>
+
+                    @*<div class="text-left">
+
+                        <label class="pure-material-checkbox">
+                            <input type="checkbox" name="ConfirmarChk" , id="ConfirmarChk" onchange="habilitar()">
+                            <span>Eu concordo</span>
+                        </label>
+
+                    </div>*@
+
+                </div>
+
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <br />
+                        <br />
+                        <button type="button" class="btn btn-default" id="BtSair" data-dismiss="modal">Sair</button>
+                        <button type="button" class="btn btn-success btn-lg" id="BtDesejaConfirmar">Proximo</button>
+                    </div>
+                </div>
+
+            </div>
+
+
+        }
+
+
+        <!-- Modal -->
+
+        <div class="modal fade" id="modalConfirmacao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacao"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="col-md-4" style="padding: 0;">
+                    <div class="alerta-atencao text-center">
+                        <img src="~/img/warning.svg" width="120">
+                    </div>
+                </div>
+                <div class="col-md-8" style="padding: 0;">
+                    <div class="mensagem-modal modal-atencao text-center">
+                        <h4>Aviso importante!</h4>
+                        <p>
+                            @*Deseja finalizar o registro do processo de Defesa de Autuação? Nenhuma informação ou documentação poderá ser modificada após a confirmação.*@
+                            Na proxima pagina revise toda documentação anexada, o cumprimento das regras e legislação,
+                            pois uma vez encaminhado não será possível fazer modificações, seguindo o processo imediatamente para análise.<br />
+                        
+
+                        </p>
+                        <div class="col-md-12 modal-footer">
+                            <div class="text-center">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" id="BtGerarProcesso" name="ConfirmarDados"> Confirmar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="modal fade bd-example-modal-lg" id="modalOrientacao" tabindex="-1" role="dialog" aria-labelledby="modalConfirmacao" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+
+
+                    <div class="modal-header">
+                        <h4 class="modal-title"> PASSO A PASSO</h4>
+
+                    </div>
+                    <div class="modal-body" style="margin-bottom: 90px;">
+                        <div class="lista-importante" id="Apresentacao">
+
+
+
+                            <div class="row text-center">
+                                <h4>DEFESA DE AUTUAÇÃO</h4>
+                                <h5><strong><small>INFORMAÇÕES IMPORTANTES / LEIA COM ATENÇÃO</small></strong></h5>
+                            </div>
+
+                            <br />
+
+
+                            <h4><strong>• 1 - Registrar Processo</strong></h4>
+                            <div class="text-justify">
+                                Ao logar no Sistema de Protocolo Online, o cidadão tem acesso a listagem de AITs de sua propriedade (CPF ou CNPJ).<br />
+                                O registro do processo de Defesa de Autuação pode ser realizado através do proprietário do veículo ou do condutor
+                                infrator apresentado, <strong>somente após legitimação.</strong><br /><br />
+                                <strong>A legitimação do condutor é confirmada após as seguintes situações:</strong><br /><br />
+                                1 - Processo de apresentação de condutor infrator registrado presencialmente: após o registro do processo, estando apto nas regras de abertura, o condutor passa a ter vínculo imediato com o AIT;<br />
+                                2 - Processo de apresentação de condutor infrator registrado online: após o condutor apresentado logar no Sistema de Protocolo Online e aceitar a indicação de condutor infrator do veículo para o AIT <strong> e obter aprovação da triagem.</strong><br />
+                                O cidadão legitimado como condutor infrator do veículo para o AIT, ao logar no sistema, além de ter acesso a listagem de AITs de sua propriedade (CPF), também tem acesso aos AITs que está legitimado como condutor infrator.<br />
+                                Devido a possibilidade do processo de Defesa de Autuação poder ser registrado através do proprietário do veículo <strong>ou do condutor infrator apresentado legitimado</strong>, o sistema habilita um controle de acesso sobre o AIT. O sistema
+                                não permite o cadastro de mais de um processo do mesmo serviço para o AIT. Portanto, caso o requerente (proprietário ou condutor infrator apresentado) efetue o registro de um processo para o serviço de Defesa de Autuação,
+                                o sistema não permite que outro processo para o mesmo serviço seja registrado por outro requerente (proprietário ou condutor infrator apresentado).<br />
+                                O status de legitimado pode ser alterado caso o retorno do DETRAN seja pela reprovação, podendo interferir na abertura do serviço ou análise do julgamento.
+                                <br />
+
+
+
+                                <h4><strong>• 2 - Formulário de Requerimento de Defesa</strong></h4>
+
+                                Nesta etapa o cidadão irá anexar a documentação obrigatória que deve estar completa, legível e em bom estado para obter aprovação.
+                                <br />
+                                Algumas informações do Formulário de Requerimento de Defesa serão preenchidas automaticamente pelo sistema, ficando a cargo do requerente discorrer sobre a exposição dos fatos. Verifique se os dados estão corretos.
+                                O Requerimento de Defesa é disponibilizado para impressão, após descrever a exposição dos fatos deve ser assinado pelo Requerente, a assinatura deve ser original e semelhante ao documento de identificação anexado ao processo.
+                                A assinatura deve ser original e com caneta preferencialmente na cor azul. A ausência de assinatura do recorrente ou seu representante legal fará com que a Defesa não seja conhecida pelo julgador.
+                                <br />
+
+
+                                <h4><strong>• 3 - Juntar Documentação</strong></h4>
+                                <strong>Os documentos obrigatórios para registro do processo são:</strong>
+                                <br />
+                                <strong>Documentação Pessoa Física (proprietário ou condutor apresentado)</strong>
+                                <br />
+                                1 - Requerimento de defesa; <br />
+                                2 - Notificação da Autuação – NAI (cada petição deverá ter somente um auto de infração como objeto); <br />
+                                3 - RG ou CNH do Requerente ou outro documento que comprove assinatura; <br />
+                                4 - Documento do veículo - CRLV; <br />
+                                5 - Documentos comprobatórios das alegações da defesa; <br />
+                                6 - Comprovante de residência do Requerente; <br />
+                                7 - Procuração Pública e RG do procurador, quando for o caso; <br />
+                                8 - Petição constando os dados mínimos exigidos pela legislação – Resolução 299/2008 (quando não for suficiente o espaço do “requerimento de defesa” do campo 1). <br />
+                                <br />
+
+                                <strong>Documentação Pessoa Jurídica</strong><br />
+                                1 - Requerimento de defesa;<br />
+                                2 - Notificação da Autuação – NAI (cada petição deverá ter somente um auto de infração como objeto);<br />
+                                3 - RG ou CNH do Sócio da Empresa que assina no Contrato Social ou outro documento que comprove assinatura;<br />
+                                4 - Documento do veículo - CRLV;<br />
+                                5 - Documentos comprobatórios das alegações da defesa;<br />
+                                6 - Comprovante de residência do Requerente;<br />
+                                7 - Procuração Pública e RG do procurador, quando for o caso;<br />
+                                8 - Contrato Social (última alteração) ***;<br />
+                                9 - Petição constando os dados mínimos exigidos pela legislação – Resolução 299/2008, artigo 3º (quando não for suficiente o espaço do “requerimento de defesa” do campo 1).<br />
+                                <br />
+
+                                *** Órgão Público<br />
+                                a. Portaria de Nomeação do Dirigente.<br />
+                                b. RG ou CNH do Dirigente do Órgão ou outro documento que comprove assinatura;<br />
+                                <br />
+                                <strong>OBS:1 - </strong>A Falta de documentação obrigatória, ausência do pedido, ilegitimidade ou intempestividade são motivos previstos objetivamente na legislação para o não conhecimento da DEFESA pelo julgador.<br />
+                                <br />
+                                <strong>OBS:2 - </strong>Veículo de propriedade de pessoa jurídica, será obrigatória a apresentação de condutor, sob pena de incorrer no agravamento da multa, conforme parágrafo 8º do artigo 257 do Código de Trânsito Brasileiro – CTB.<br />
+                                <br />
+                                <strong>OBS:3 - </strong>Serviços Públicos de Urgência / Utilidade Pública (artigo 29, VII do CTB): Apresentar em caráter complementar documentos que comprovem a diligência visando análise do julgador (ex: ordem de serviço correspondendo
+                                com a data e horário de cometimento da infração indicando placa do veículo ou em conjunto documento de registro da saída do veículo, escala de trabalho do dia e horário correspondente com o condutor infrator, no caso de ambulâncias incluir o relatório médico e OS)<br />
+
+
+                                <h4><strong>• 4 - Anexar Documentação</strong></h4>
+                                Os documentos necessários de acordo com as regras descritas no tópico Juntar a Documentação.<br />
+                                É necessário que os documentos anexados ao processo estejam completos e conforme o indicativo do campo anexar, legislação, sem rasuras, e legíveis, caso contrário o processo será reprovado e arquivado definitivamente.<br />
+                               
+                                <h4><strong>• 5 - Enviar a documentação</strong></h4>
+                                Para finalizar o registro do processo é necessário realizar o upload dos documentos, concordar com os termos da TRANSALVADOR no local indicado e finalizar o registro do processo clicando em “Finalizar Registro do Processo”.  <br />
+
+                                <h4><strong>• 6 - Comissão de Defesa Julgadora</strong></h4>
+                                Após o envio da documentação o processo é encaminhado automaticamente para uma Comissão de Defesa Julgadora na TRANSALVADOR.<br />
+
+                                <h4><strong>• 7 - Resultado do Processo</strong></h4>
+                                O processo aberto pode ser acompanhado no site www.transalvador.salvador.ba.gov.br. Logo que o resultado do processo for publicado no Diário Oficial do Município - DOM, a situação/status do processo é utilizada no sistema. Caso indeferida ou não conhecida a Defesa,
+                                será encaminhada a Notificação da Imposição da Penalidade – NIP, cabendo Recurso à JARI.<br />
+
+                                <h4><strong>• 8 - Problemas</strong></h4>
+                                Em caso que não seja possível finalizar o cadastro do processo mantenha contato com www.ouvidoria.transalvador@salvador.ba.gov.br,
+                                ou efetue o agendamento obrigatório no site da TRANSALVADOR para apresentar sua DEFESA presencialmente.<br />
+
+                                <h4><strong>• 9 - Documentação Necessária para Dirigir-se a Transalvador</strong></h4>
+
+                                Para atendimento presencial será necessário agendamento prévio obrigatório no site especificando o serviço de DEFESA. O agendamento deve ser feito no nome de quem
+                                vai comparecer ao Atendimento Presencial, sendo necessário apresentar documento de identificação original. Apresentar todos os documentos informados de acordo com as
+                                regras descritas no tópico Juntar Documentação. Qualquer orientação complementar manter contato com o Setor de Atendimento
+                                ao Público – SETAP nos telefones (71) 3202-9188 / 9189.
+
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    window.onload = function () {
+        noBack();
+    }
+    function noBack() {
+        window.history.forward();
+    }
+
+
+
+    $('#LabelPassoaPasso').click(function () {
+        $('#modalOrientacao').modal('show');
+        //colocar na view de confirmação uma verificação para nao processar novamente
+    });
+
+    $('#BtSair').click(function () {
+         window.location.href = '@Url.Action("processosabertos", "processo")';
+    });
+
+
+/*    $("#DivPETICAO").hide();*/
+    $("#DivPROCURACAO").hide();
+    $("#DivDOC_PROCURACAO").hide();
+
+    //document.getElementById('BtDesejaConfirmar').setAttribute("disabled", "disabled");
+
+    function habilitarPeticao() {
+        if (document.getElementById('ConfirmarPeticao').checked) {
+         /*   $("#DivPETICAO").show();*/
+            $("#DivREQDEFESA").show();
+            } else {
+          /*  $("#DivPETICAO").hide();*/
+            $("#DivREQDEFESA").show();
+        }
+    }
+
+    function habilitarProcuracao() {
+        if (document.getElementById('ConfirmarProcuracao').checked) {
+            $("#DivPROCURACAO").show();
+            $("#DivDOC_PROCURACAO").show();
+
+
+        } else {
+            $("#DivPROCURACAO").hide();
+            $("#DivDOC_PROCURACAO").hide();
+        }
+    }
+
+    //function habilitar() {
+    //    if (document.getElementById('ConfirmarChk').checked) {
+    //        document.getElementById('BtDesejaConfirmar').removeAttribute("disabled");
+    //    }
+    //    else {
+    //        document.getElementById('BtDesejaConfirmar').setAttribute("disabled", "disabled");
+    //    }
+    //}
+
+    var processo = '@ViewData["ProcessoExistente"].ToString()'
+    if (processo == "Não") {
+        swal("Atenção usuário!", "Não consta Número de Protocolo do processo de Condutor para o AIT "+ '@Model.Mut_AIT' +
+            " recomendamos aguardar o aceite do condutor indicado. Assim, o Número do Protocolo referente ao processo de Condutor constará no documento de Requerimento de Defesa, e esta não será julgada com prejuízo a legitimidade." , "warning");
+    }
+
+    function bloquearCampos(status) {
+
+        if (status == "sim") {
+            $('#BtGerarProcesso').prop('disabled', true);
+            $("#BtnDocumento").prop("disabled", true);
+            $('#BtGerarCancelar').prop('disabled', true);
+            $('#BtnFormulario').prop('disabled', true);
+
+            preLoad();
+        }
+        else {
+            $('#BtGerarProcesso').prop('disabled', false);
+            $("#BtnDocumento").prop("disabled", false);
+            $('#BtGerarCancelar').prop('disabled', false);
+            $('#BtnFormulario').prop('disabled', false);
+
+            posLoad();
+        }
+    }
+
+    var mut_ait = $('#Mut_AIT').val();
+    var con_cpf = $('#Con_CPF').val();
+
+    function ValidateSizeIMG(file) {
+
+        var qtde = file.files.length; // CONTA QUANTOS TEM
+        var tamanho = 0;
+
+        for (i = 0; i < qtde; i++) {
+            tamanho += file.files[i].size / 1024 / 1024 //Mb
+        }
+
+        if (tamanho > 2) {
+            swal("Tamanho inválido!", "A soma de todos os arquivos não pode ultrapassar 2 MB.", "warning");
+            $(file).val('')
+            return false;
+        }
+
+        for (i = 0; i < qtde; i++) {
+            var formato = file.files[i].type;
+            if (formato != "image/jpeg") {
+                swal("Formato inválido!", "Apenas imagem no formato (Jpeg ou JPG).", "warning");
+                $(file).val('')
+                return false;
+            }
+        }
+
+
+    }
+
+    function ValidateSizeIMGPDF(file) {
+
+        var qtde = file.files.length; // CONTA QUANTOS TEM
+        var tamanho = 0;
+
+        for (i = 0; i < qtde; i++) {
+            tamanho += file.files[i].size / 1024 / 1024 //Mb
+        }
+
+        if (tamanho > 2) {
+            if (formato == "image/jpeg") {
+                swal("Tamanho inválido!", "A soma de todos os arquivos não pode ultrapassar 2 MB.", "warning");
+                $(file).val('')
+                return false;
+            }
+
+        }
+
+        for (i = 0; i < qtde; i++) {
+            var formato = file.files[i].type;
+            if (formato != "image/jpeg" && formato != "application/pdf") {
+                swal("Formato inválido!", "Apenas imagem no formato (PDF, Jpeg ou JPG).", "warning");
+                $(file).val('')
+                return false;
+            }
+        }
+    }
+
+    $('#COMPROBATORIOS').change(function () {
+
+        var files = this.files; // SELECIONA OS ARQUIVOS
+        var qtde = files.length; // CONTA QUANTOS TEM
+        var tamanho = 0;
+
+        for (i = 0; i < qtde; i++) {
+            tamanho += files[i].size / 1024 / 1024 //Mb
+        }
+
+        if (tamanho > 5) {
+            swal("Tamanho inválido!", "A soma de todos os arquivos não pode ultrapassar 5 MB.", "warning");
+            $('#COMPROBATORIOS').val("");
+            return false;
+        }
+    });
+
+    function ValidateSizePDF(file) {
+
+        var formato = file.files[0].type;
+        if (formato != "application/pdf") {
+            swal("Formato invalido!", "Apenas arquivo no formato (PDF).", "warning");
+            $(file).val('')
+            return false;
+        }
+
+        var FileSize = file.files[0].size / 1024 / 1024; // in MB
+        if (FileSize > 2) {
+            swal("Tamanho inválido!", "Apenas arquivo até 2 MB.", "warning");
+            $(file).val('')
+            return false;
+        }
+
+
+    };
+
+
+    //mensagemAnexo
+    function Func_mensagem_anexo(texto) {
+
+        posLoad();
+        var content = document.createElement('div');
+        content.innerHTML = texto;
+
+        swal({
+            title: 'Aviso importante!',
+            content: content,
+            icon: "warning",
+            buttons: [
+                'Não',
+                'Sim'
+            ],
+        }).then((willDelete) => {
+            if (willDelete) {
+                AnalisarAIT();
+            }
+            else//finaliza caso nao deseje alterar a senha
+            {
+                var is_empty = false;
+                var campo;
+                $('[required]').each(function (idx, elem) {
+                    is_empty = is_empty || ($(elem).val() == '');
+                    if ($(elem).val() == '') {                   
+
+                        campo = $(elem).attr('id');
+
+                        if (campo == "FORMULARIO_INDICACAO")
+                            campo_obrigatorio('#vFORMULARIO_INDICACAO', '#DivFORMULARIO_INDICACAO', '#FORMULARIO_INDICACAO');
+                        else if (campo == "CRLV")
+                            campo_obrigatorio('#vCRLV', '#DivCRLV', '#CRLV');
+                        else if (campo == "DOC_REQUERENTE")
+                            campo_obrigatorio('#vDOC_REQUERENTE', '#DivDOC_REQUERENTE', '#DOC_REQUERENTE');
+                        
+
+                    }
+                });
+
+                posLoad();
+                return false;
+            }
+        });
+
+    }
+
+
+    $(document).ready(function () {
+
+        $('#BtDesejaConfirmar').click(function () {
+
+            //if (($('#PETICAO').val()) == "" && (document.getElementById('ConfirmarPeticao').checked)) {
+            //    campo_obrigatorio('#vPETICAO', '#DivPETICAO', '#PETICAO');
+            //    return false;
+            //}
+
+            if (($('#REQDEFESA').val()) == "" && (document.getElementById('ConfirmarPeticao').checked == 0)) {
+                campo_obrigatorio('#vREQDEFESA', '#DivREQDEFESA', '#REQDEFESA');
+                return false;
+            }
+
+            if (($('#PROCURACAO').val()) == "" && (document.getElementById('ConfirmarProcuracao').checked)) {
+                campo_obrigatorio('#vPROCURACAO', '#DivPROCURACAO', '#PROCURACAO');
+                return false;
+            }
+
+            if (($('#DOC_PROCURACAO').val() == "") && (document.getElementById('ConfirmarProcuracao').checked)){
+                campo_obrigatorio('#vDOC_PROCURACAO', '#DivDOC_PROCURACAO', '#DOC_PROCURACAO');
+                return false;
+            }
+
+
+
+            //if (document.getElementById('ConfirmarPeticao').checked) {
+
+
+            //    if ($('#PETICAO').val() == "") {
+            //        bloquearCampos('não');
+            //        campo_obrigatorio('#vPETICAO', '#DivPETICAO', '#PETICAO');
+            //        return false;
+            //    }
+
+            //    if ($('#PETICAO').val() == "") {
+            //        swal("Anexo Obrigatório!", "Petição obrigatório", "warning");
+            //        return false;
+            //    }
+
+            //}
+
+
+            var is_empty = false;
+            var campo;
+            var texto = "";
+            $('[required]').each(function (idx, elem) {
+                is_empty = is_empty || ($(elem).val() == '');
+                if ($(elem).val() == '') {
+
+                    campo = $(elem).attr('id');
+                    if (campo == "FORMULARIO_INDICACAO")
+                        texto = "Notificação de Autuação da Infração (NAI)";
+                    else if (campo == "CRLV")
+                        texto = texto + " - " + "Documento do veículo (CRLV)"
+                    else if (campo == "DOC_REQUERENTE")
+                        texto = texto + " - " + "Documento de Identificação do Requerente (RG, CNH ou outro documento que comprove assinatura) "
+                }
+            });
+
+            if (texto != "") {
+                var textofinal = ("Prezado (a), informamos que <strong> " + texto + " </strong>  documento(s) previsto(s) na Resolução 299/2008, caso não sejam anexado(s), o processo poderá ser julgado com prejuízo. Deseja finalizar o registro do processo?");
+                Func_mensagem_anexo(textofinal);
+         
+            } else {
+                AnalisarAIT();
+            }
+
+
+          
+        });
+
+        $("#BtGerarProcesso").click(function () {
+            $('#modalConfirmacao').modal('hide');
+            finalizarprocesso();
+        });
+
+         
+
+       
+    });
+
+    function AnalisarAIT() {
+
+        preLoad();
+        $.ajax({
+           type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ ait: mut_ait}),
+            url: '@Url.Action("AnalisarAIT", "defesaautuacao")',
+
+
+            //data: fileData,
+            success: function (data) {
+                if (data.id == 'DA_Erro_1') {
+                    posLoad();
+                    swal({
+                        title: "Aviso!",
+                        text: data.mensagem_erro,
+                        icon: "warning",
+                        Html: true,
+                        textAlign: "left",
+
+                        buttons: [
+                            'Não',
+                            'Sim'
+                        ],
+
+                    }).then((willDelete) => {
+                        if (willDelete) {
+                            posLoad();
+                            $('#modalConfirmacao').modal('show');
+                        }
+                        else {
+                            posLoad();
+                            return false;
+                        }
+                    });
+                } else if (data.id == 'DA_Erro') {
+                            posLoad();
+                            swal("Ops!", data.mensagem_erro, "warning")
+                             .then(() => {
+                                 window.location.href = '@Url.Action("processosabertos", "processo")';
+                                 return false;
+                            });
+
+                } else {
+                            posLoad();
+                            $('#modalConfirmacao').modal('show');
+                       }
+
+            },
+            error: function (exception) {
+                posLoad();
+                swal("Ops!", "Houve uma falha de comunicação. Retorne ao status anterior, anexe novamente os documentos e reenvie.", "error")
+                .then(() => {
+                    location.reload();
+                });
+            }
+        });
+    }
+
+    function VisualizarAnexo() {
+
+
+        //$(function () {
+        //    $(".filestyle").aeImageResize({ height: 400, width: 400 });
+        //});
+
+        var form = $('form')[0];
+        var fileData = new FormData(form);
+
+
+        preLoad();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("VisualizarAnexo", "defesaAutuacao")',
+            dataType: "json",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: fileData,
+
+            success: function (data) {
+                if (data.img == true) {
+                    posLoad();
+                    swal("Ops!", "Houve uma falha de comunicação, um ou mais documentos não foram anexados, anexe novamente os documentos e reenvie. ", "error")
+                        .then(() => {
+                            location.reload();
+                        });
+                }else
+                if (data.error == true) {
+                    posLoad();
+                    bloquearCampos('não');
+                    swal("Ops!", "Houve uma falha de comunicação. Retorne ao status anterior, anexe novamente os documentos e reenvie.", "error");
+                    return false;
+                }else
+                if (data.formatoimg == false) {
+                    posLoad();
+                    swal("Erro Anexo!", "O anexo: " + data.imagemerro + " está corrompido ou em um formato errado, o sistema só aceita formato PDF.", "error");
+                    return false;
+                } else {
+                    posLoad();
+                    swal("Procedimento realizado com sucesso!", "Seu processo foi gerado e distribuído automaticamente para julgamento. Acompanhe seu processo pelo site da TRANSALVADOR.", "success")
+                    .then(() => {
+                      //  window.location.href = data.redirectUrl;
+                        RedirectUrl(data.redirectUrl, data.pro_numero)
+
+                    });
+                }
+            },
+            //error: function (request, status, error) {
+            //    alert(request.responseText);
+            //}
+            error: function (exception) {
+                        posLoad();
+                         swal("Ops!", "Houve uma falha de comunicação. Retorne ao status anterior, anexe novamente os documentos e reenvie. ", "error")
+                        .then(() => {
+                            location.reload();
+                        });
+            }
+        });
+
+    }
+
+    function finalizarprocesso() {
+
+
+        var form = $('form')[0];
+        var fileData = new FormData(form);
+
+
+        preLoad();
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("FinalizarAberturaDefesa", "defesaAutuacao")',
+            dataType: "json",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            data: fileData,
+
+            success: function (data) {
+                if (data.img == true) {
+                    posLoad();
+                    swal("Ops!", "Houve uma falha de comunicação, um ou mais documentos não foram anexados, anexe novamente os documentos e reenvie. ", "error")
+                        .then(() => {
+                            location.reload();
+                        });
+                }else
+                if (data.error == true) {
+                    posLoad();
+                    bloquearCampos('não');
+                    swal("Ops!", "Houve uma falha de comunicação. Retorne ao status anterior, anexe novamente os documentos e reenvie.", "error");
+                    return false;
+                }else
+                if (data.formatoimg == false) {
+                    posLoad();
+                    swal("Erro Anexo!", "O anexo: " + data.imagemerro + " está corrompido ou em um formato errado, o sistema só aceita formato PDF.", "error");
+                    return false;
+                } else {              
+                    RedirectUrl(data.redirectUrl, data.pro_numero, data.Restricao)
+                    posLoad();
+                    //swal("Procedimento realizado com sucesso!", "Seu processo foi gerado e distribuído automaticamente para julgamento. Acompanhe seu processo pelo site da TRANSALVADOR.", "success")
+                    //.then(() => {
+                    //  //  window.location.href = data.redirectUrl;
+                    //    RedirectUrl(data.redirectUrl, data.pro_numero, data.Restricao)
+
+                    //});
+                }
+            },
+            //error: function (request, status, error) {
+            //    alert(request.responseText);
+            //}
+            error: function () {
+                        posLoad();
+                         swal("Ops!", "Houve uma falha de comunicação. Retorne ao status anterior, anexe novamente os documentos e reenvie. ", "error")
+                        .then(() => {
+                            location.reload();
+                        });
+            }
+        });
+
+    }
+
+    function RedirectUrl(redirectUrl, pro_numero, Restricao) {
+        var form = $('<form action="' + redirectUrl + '" method="post">' +
+            '<input type="hidden" name="pro_Numero" value="' + pro_numero + '" />' +
+            '<input type="hidden" name="Restricao" value="' + Restricao + '" />' +
+            '</form>');
+
+        $('body').append(form);
+        $(form).submit();
+    }
+
+    function ImpressaoAgendamento() {
+        swal({
+            title: "Deseja imprimir o requerimento?",
+            text: "As informações do Formulário de Requerimento somente poderão ser modificadas enquanto o registro do processo não for finalizado. Para atualizar as informações do requerimento deve ser solicitado um nova impressão.",
+            icon: "warning",
+            Html: true,
+            textAlign: "left",
+
+            buttons: [
+                'Não',
+                'Sim'
+            ],
+
+        }).then((willDelete) => {
+            if (willDelete) {
+
+                var peticao = "";
+                var numeroait = $('#Mut_AIT').val();
+
+                var URL = '@Url.Action("ImprimirFormulario", "defesaautuacao")?numeroait=' + numeroait + '&peticao=' + peticao;
+                window.open(URL, '_blank')
+
+            }
+            else//finaliza caso nao deseje alterar a senha
+            {
+                posLoad();
+                return false;
+            }
+        });
+    }
+
+    function ImgPDF() {
+        preLoad();
+        $.ajax({
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({ mut_ait: mut_ait }),
+            url: '@Url.Action("imagempdf", "defesaautuacao")',
+
+            success: function (data) {
+                if (data.error == true) {
+                    posLoad();
+                    bloquearCampos('não');
+                    swal("Ops!", "Houve uma falha de comunicação. Retorne ao status anterior, anexe novamente os documentos e reenvie.", "error")
+                    return false;
+                }
+            },
+
+            error: function (exception) {
+                posLoad();
+                bloquearCampos('não');
+                swal("Ops!", "Houve uma falha de comunicação. Retorne ao status anterior, anexe novamente os documentos e reenvie. Retorne ao status anterior, anexe novamente os documentos e reenvie", "error")
+                .then(() => {
+                    location.reload();
+                });
+
+            }
+        });
+
+    }
+
+
+</script>

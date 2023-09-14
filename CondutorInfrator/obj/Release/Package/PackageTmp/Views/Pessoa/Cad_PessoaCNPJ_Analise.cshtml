@@ -1,0 +1,666 @@
+﻿@model CondutorInfrator.Models.PessoaViewModel
+
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "form", name = "form" }))
+{
+    @Html.AntiForgeryToken();
+
+    <div class="container">
+        <div class="conteudo">
+            <div class="row">
+                <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+                    <h5>
+                        <img src="~/img/Assitente.png" style="margin-left:20px;" /> <strong>
+                            Primeiro passo! Preencha o formulário e acompanhe sua solicitação de análise para confirmação de seu cadastro.
+                        </strong>
+                    </h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-9">
+                    <h3>Cadastro de Pessoa Jurídica</h3>
+                </div>
+                <div class="col-md-3 text-right" style="font-style: italic">
+                    <img src="~/img/Assitente (1).png" />  <strong>Mais informações? @Html.ActionLink("Clique aqui!", "informacao_importante", "pessoa")</strong>
+                </div>
+            </div>
+            <br />
+
+            <div class="row">
+                <br />
+                <div class="col-md-2" id="DivCPF">
+                    <text id="label_cpf">CNPJ</text> <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Pes_CPF_CNPJ, new { htmlAttributes = new { @class = "form-control", id = "Pes_CPF_CNPJ" } })
+                    @Html.EditorFor(model => model.Pes_TipoPessoa, new { htmlAttributes = new { @class = "form-control", id = "Pes_TipoPessoa", style = "display:none", @Value = "JURÍDICO" } })
+                    @Html.ValidationMessageFor(model => model.Pes_CPF_CNPJ)
+                    <div class="alert-box failure text text-center" id="vcpf">Campo Obrigatório</div>
+                    <span id="resposta"></span>
+                </div>
+                <div class="col-md-4" id="DivNome">
+                    <text id="label_cpf">Razão Social</text> <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Pes_Nome, new { htmlAttributes = new { @class = "form-control", id = "Pes_Nome", autocomplete = "off" } })
+                    <div class="alert-box failure text-center" id="vnome">Campo Obrigatório</div>
+                </div>
+                <div class="col-md-3" id="DivNomeFatasia">
+                    @Html.DisplayNameFor(model => model.Pes_NomeFantasia) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Pes_NomeFantasia, new { htmlAttributes = new { @class = "form-control", id = "Pes_NomeFantasia", autocomplete = "off" } })
+                    <div class="alert-box failure text-center" id="vNomeFantasia">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-3" id="DivTipoEmpresa">
+                    <p>@Html.DisplayNameFor(model => model.Pes_TipoEmpresa) <span style="color:red">*</span></p>
+                    <p>
+                        @Html.DropDownListFor(model => model.Pes_TipoEmpresa, new SelectList(
+                                                    new List<Object>{
+                                                        new { value = "" , text = "" },
+                                                        new { value = 1 , text = "LOCADORA" },
+                                                        new { value = 2 , text = "AMBULÂNCIA" },
+                                                        new { value = 3 , text = "DEMAIS PESSOAS JURÍDICAS" }
+                                                    }, "value", "text"/*, Model!=null?Model.Pes_TipoEmpresa.ToString():""*/), new { @class="form-control", @id= "Pes_TipoEmpresa" })
+
+                        @*@Html.DropDownListFor(model => model.Dados_Combobox, new SelectList(Model.Dados_Combobox, "Codigo", "Descricao", "Select"), new { @class = "form-control", @id = "Dados_Combobox" })*@
+                        <div class="alert-box failure text-center" id="vTipoEmpresa">Campo Obrigatório</div>
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-2" id="DivCEP">
+                    @Html.DisplayNameFor(model => model.End_CEP) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.End_CEP, new { htmlAttributes = new { @class = "form-control", id = "End_CEP", attrname = "CEP", @maxlength = 10, autocomplete = "off", AutoCompleteType = "Disabled" } })
+                    <div class="alert-box failure text-center" id="vcep">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-6" id="DivLogradouro">
+                    @Html.DisplayNameFor(model => model.End_Logradouro) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.End_Logradouro, new { htmlAttributes = new { @class = "form-control", id = "End_Logradouro", autocomplete = "off" } })
+                    <div class="alert-box failure text-center" id="vlogradouro">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-1" id="Divnd_Numero">
+                    @Html.DisplayNameFor(model => model.End_Numero)
+                    @Html.EditorFor(model => model.End_Numero, new { htmlAttributes = new { @class = "form-control", id = "End_Numero", } })
+                    <div class="alert-box failure text-center" id="vEnd_Numero">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-3" id="DivBairro">
+                    @Html.DisplayNameFor(model => model.End_Bairro) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.End_Bairro, new { htmlAttributes = new { @class = "form-control", id = "End_Bairro", } })
+                    <div class="alert-box failure text-center" id="vbairro">Campo Obrigatório</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3" id="DivCidade">
+                    @Html.DisplayNameFor(model => model.End_Cidade) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.End_Cidade, new { htmlAttributes = new { @class = "form-control", id = "End_Cidade", @readonly = "readonly" } })
+                    <div class="alert-box failure text-center" id="vcidade">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-1" id="DivEstado">
+                    @Html.DisplayNameFor(model => model.End_Estado) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.End_Estado, new { htmlAttributes = new { @class = "form-control", id = "End_Estado", @readonly = "readonly" } })
+                    <div class="alert-box failure text-center" id="vEstado">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-2" id="DivPais">
+                    @Html.DisplayNameFor(model => model.End_Pais) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.End_Pais, new { htmlAttributes = new { @class = "form-control", id = "End_Pais" } })
+                    <div class="alert-box failure text-center" id="vPais">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DisplayNameFor(model => model.End_Complemento)
+                    @Html.EditorFor(model => model.End_Complemento, new { htmlAttributes = new { @class = "form-control", id = "End_Complemento" } })
+                </div>
+
+                <div class="col-md-2" id="DivPes_Telefone">
+                    @Html.DisplayNameFor(model => model.Pes_Telefone) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Pes_Telefone, new { htmlAttributes = new { @class = "form-control", id = "Pes_Telefone", attrname = "telephone2" } })
+                    <div class="alert-box failure text-center" id="vPes_Telefone">Campo Obrigatório</div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-6" id="DivEmail">
+                    @Html.DisplayNameFor(model => model.Pes_Email) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Pes_Email, new { htmlAttributes = new { @class = "form-control", id = "Pes_Email", onpaste = "return false", ondrop = "return false" } })
+                    <div class="alert-box failure text-center" id="vemail">Campo Obrigatório</div>
+                    <div class="alert-box failure text-center" id="vemail_cadastrado">E-mail já cadastrado</div>
+
+                </div>
+                <div class="col-md-6" id="DivConfirmarEmail">
+                    @Html.DisplayNameFor(model => model.Pes_Email_Confirmar) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Pes_Email_Confirmar, new { htmlAttributes = new { @class = "form-control", id = "Pes_Email_Confirmar", style = "text-transform: toLowerCase" } })
+                    <div class="alert-box failure text-center" id="vConfirmarEmail">Campo Obrigatório</div>
+                    <div class="alert-box failure text-center" id="vConfirmarEmail2">Emails diferentes</div>
+                </div>
+               
+            </div>
+            <strong>Anexo de arquivo</strong>
+            <br />
+            <div class="form-group" id="DivAnexo">
+                <p><small>Contrato Social / Formato(PDF)</small><input type="file" class="filestyle" id="CONTRATO_SOCIAL" , name="CONTRATO_SOCIAL" data-buttonText="Contrato Social" accept="application/pdf"></p>
+                <p><small>Documento de Identificação com Foto dos Sócios (que assinam no CONTRATO_SOCIAL social ou dono único da empresa) / Formato(PDF)</small><input type="file" class="filestyle" id="DOC_SOCIOS" , name="DOC_SOCIOS" data-buttonText="Documento com Foto" accept="application/pdf"></p>
+                <p><small>Termo de Responsabilidade  / Formato(PDF)</small><input type="file" class="filestyle" id="TERMO_RESPONSABILIDADE" , name="TERMO_RESPONSABILIDADE" data-buttonText="Termo de Resposabilidade" accept="application/pdf"></p>
+                <p><small>Procuração / Formato(PDF)</small><input type="file" class="filestyle" id="PROCURACAO" , name="PROCURACAO" data-buttonText="Procuração" accept="application/pdf"></p>
+                <p><small>Documento de Identificação com Foto do Procurador / Formato(PDF)</small><input type="file" class="filestyle" id="DOC_PROCURACAO" , name="DOC_PROCURACAO" data-buttonText="Documento com Foto" accept="application/pdf"></p>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12 h6">
+                    <h5><label>Informações importantes</label></h5>
+                    <p> - As documentações anexadas devem ser originais, processos que possuam cópias de documentos não serão aprovados. </p>
+                    <p> - Caso ocorra alguma alteração contratual o cadastro deve ser atualizado. </p>
+                    <p> - Formatos permitidos: PDF, JPEG e JPG. </p>
+                    <p> - A procuração e o documento de identificação do procurador devem ser anexados apenas quando for necessário. </p>
+                    <p> - Todos os documentos a serem anexados são de extensão PDF. </p>
+                    <p> - Os documentos de identificação com foto dos Sócios devem ser anexados em arquivo único em PDF.</p>
+                    <p> - O Termo de Responsabilidade deve ser cadastrado carimbado e assinado por um representante legal que assina no CONTRATO_SOCIAL social atestando a ciência das regras e responsabilização cível e criminal pelas informações prestadas, inclusive por futuras  alterações contratuais ou de encerramento da empresa, comunicando imediatamente à Transalvador.</p>
+                    <p> - Após o cadastro realizado no Protocolo ser aprovado pela Transalvador a empresa poderá realizar a abertura de processos dos serviços disponíveis. </p>
+                    <p> - As atualizações referentes ao andamento da solicitação de análise de cadastro serão enviadas via e-mail. Ou poderá ser acompanhada no site.</p>
+                    <p> - No caso de reprovação do cadastro, o representante poderá solicitar outra análise.</p>
+                    <p> - Na necessidade de atualizar informações e/ou documentação do cadastro da empresa, deve ser solicitado uma nova análise. Após aprovação da Transalvador os dados serão atualizados na página do sistema. A alteração no cadastro pode interferir no resultado da análise dos processos, devendo o interessado acompanhar sua aprovação antes de requerer os serviços.</p>
+                    <p> - Processos de condutor infrator online apresentados por empresa deve constar na Notificação de Autuação de Infração de Trânsito - NAI a assinatura original da empresa ou do Requerente ou do representante legal (que assina no CONTRATO_SOCIAL social) carimbadas.</p>
+
+                    <p> - (<span style="color:red">*</span>)  Campos obrigatórios </p>
+
+
+                    <hr />
+                    <h5><label for="">Política de Privacidade</label></h5>
+                    <p>
+                        - Declaro para os devidos fins, que as informações referentes ao cadastro para adesão ao TRANSALVADOR Digital são
+                        verdadeiras, sob pena de ser responsabilizado(a) cível, penal e
+                        administrativamente.
+                    </p>
+                    <p>
+                        - O representante legal se responsabiliza em manter o cadastro da empresa atualizado, informando qualquer alteração contratual,
+                        responsabilizando-se pela documentação e informações prestadas.
+                    </p>
+                    <p>
+                        - Ao selecionar a opção "Eu concordo", você concorda com os Termos da Superintendência de Trânsito de Salvador
+                        (TRANSALVADOR).
+                    </p>
+
+                    <label class="pure-material-checkbox">
+                        <input type="checkbox" name="ConfirmarChk" , id="ConfirmarChk" onchange="habilitar()">
+                        <span>Eu concordo</span>
+                    </label>
+
+                </div>
+            </div>
+            <p></p>
+
+            <button type="button" class="btn btn-primary btn-lg btn-transalvador" id="GravarDados" , name="GravarDados"> Enviar Cadastro para Análise </button>
+            <button type="button" class="btn btn-primary btn-lg btn-transalvador" id="BtnSair" name="GravarDados" onclick="location.href='@Url.Action("login", "autenticacao")'"> Sair </button>
+            <br />
+            <br>
+        </div>
+    </div> <!-- /container -->
+
+}
+
+@*Marcar e desmarca o chequebox*@
+<script src="~/Scripts/gr_cep.js"></script>
+@*<script src="~/Scripts/jquery.min.js"></script>*@
+@*<script src="~/Scripts/gr_ValidadorCPF.js"></script>*@
+
+<script type='text/javascript'>
+
+    function habilitar() {
+        if (document.getElementById('ConfirmarChk').checked) {
+            document.getElementById('GravarDados').removeAttribute("disabled");
+        }
+        else {
+            document.getElementById('GravarDados').setAttribute("disabled", "disabled");
+        }
+    }
+
+
+    $(document).ready(function () {
+
+        //Desabitando chechebox
+        document.getElementById('GravarDados').setAttribute("disabled", "disabled");
+        document.getElementById('ConfirmarChk').checked = false;
+        func_limparcampos();
+
+
+        //letras minusculas
+        $("#Pes_Email").on("input", function () {
+            $(this).val($(this).val().toLowerCase());
+        });
+
+        $("#Pes_Email_Confirmar").on("input", function () {
+            $(this).val($(this).val().toLowerCase());
+        });
+
+        $('#Pes_CPF_CNPJ').focus();
+        $("#Pes_CPF_CNPJ").attr('maxlength', '14');
+
+
+        $("#End_Numero").blur(function () {
+            $('#End_Pais').focus();
+        });
+
+
+        //------------------------------------------------
+        //Apenas Numero Homologado
+        $('#Pes_CPF_CNPJ').keyup(function () {
+            $(this).val(this.value.replace(/\D/g, ''));
+        });
+
+        $('#End_Numero').keyup(function () {
+            $(this).val(this.value.replace(/\D/g, ''));
+        });
+
+        //Bloqueio do Copia Colar
+        $(document).ready(function () {
+            $('#Pes_Email').bind('cut copy paste', function (event) {
+                event.preventDefault();
+            });
+        });
+
+
+        //------------------------------------------------
+        //Colocando Mascaras no CPF, TELEFONES e CNPJ Homologado
+        var telMask2 = ['(99) 9999-99999', '(99) 99999-9999'];
+        var tel2 = document.querySelector('input[attrname=telephone2');
+        VMasker(tel2).maskPattern(telMask2[0]);
+        tel2.addEventListener('input', func_inputHandler.bind(undefined, telMask2, 14), false);
+
+
+        var CepMask = ['99.999-999',];
+        var Cep = document.querySelector('input[attrname=CEP');
+        VMasker(Cep).maskPattern(CepMask[0]);
+        Cep.addEventListener('input', func_inputHandler.bind(undefined, CepMask, 10), false);
+
+
+    });
+
+
+
+
+    //tratamento valor minimo
+    $('#Pes_Telefone').blur(function () {
+        if ($('#Pes_Telefone').val() != "") {
+            if ($('#Pes_Telefone').val().length < 14) {
+                swal("Formato inválido!", "Favor preencher o campo corretamente.", "").then(() => {
+                    $('#Pes_Telefone').focus();
+                });
+                return false;
+            };
+        }
+    });
+
+
+    $("#Pes_CPF_CNPJ").blur(function () {
+
+        if ($("#Pes_CPF_CNPJ").val() != "") {
+
+            //validandoCNPJ
+            if (func_validando_cnpj($("#Pes_CPF_CNPJ").val()) == false)
+            {
+                swal("CNPJ Invalido!", "Favor preencher o CNPJ corretamente..", "error")
+                .then(() => {
+                    $('#Pes_CPF_CNPJ').focus();
+                    $('#Pes_CPF_CNPJ').val("");
+                });
+                return false;
+            }
+
+
+            //verifica se existe
+            $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({ VloBusca1: $("#Pes_CPF_CNPJ").val()}),
+                    url: '@Url.Action("BuscarDadosPessoa", "pessoa")',//verificando se o CNPJ existe no Protocolo ou APCI
+
+                success: function (data) {
+                    if (data.error == true) {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error");
+                        $('#Pes_CPF_CNPJ').focus();
+                        $('#Pes_CPF_CNPJ').val("");
+                        return false;
+                    }
+                    else {
+                        $(data.Resultado).each(function () {
+                            if (this.Email == 1) {
+                                posLoad();
+                                campo_obrigatorio('#vemail_cadastrado', '#DivPes_Email', '#Pes_Email');
+                                return false;
+                            }
+                            if (this.APCI  == 1) {//Veirficando se existe no APCI
+                            posLoad();
+                            swal("Ops!", "Esse usuário já foi cadastro em nossa na base de dados.", "warning")
+                                .then(() => {
+                                    $('#Pes_CPF_CNPJ').focus();
+                                    $('#Pes_CPF_CNPJ').val("");
+                                    $('#DivCPF').addClass('has-error');
+                                });
+                            return false;
+                            }
+                        })
+                    };
+                },
+                error: function () {
+                    posLoad();
+                    swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                    .then(() => {
+                        location.reload();
+                    });
+                },
+
+            });
+        };
+    });
+
+
+
+
+
+   //------------------------------------------------
+    $('#Pes_Email').blur(function () {
+        if ($('#Pes_Email').val() != "") {
+            //VidandoEmail
+            var resultado = func_validandoemail($("#Pes_Email").val());
+            if (resultado == false) {
+                swal("E-mail inválido", "Necessário informar um e-mail válido.", "warning").then(() => {
+                    $('#DivEmail').addClass('has-error');
+                    $('#Pes_Email').focus();
+                    $('#Pes_Email').val("");
+                });
+            }
+            else//verificando se email existe
+            {
+                preLoad();
+                $.ajax({
+                       type: "POST",
+                       contentType: "application/json; charset=utf-8",
+                       data: JSON.stringify({ VloBusca1: $("#Pes_Email").val() }),
+                       url: '@Url.Action("BuscarDadosPessoa", "pessoa")',
+
+                       success: function (data) {
+
+                           if (data.error == true) {
+                               posLoad();
+                               swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error");
+                               $('#Pes_Email').focus();
+                               $('#Pes_Email').val("");
+                               return false;
+                           }
+                           else {
+                               $(data.Resultado).each(function () {
+                                   if (this.Email == 1) {
+                                       posLoad();
+                                       campo_obrigatorio('#vemail_cadastrado', '#DivPes_Email', '#Pes_Email');
+                                       return false;
+                                   }
+                               })
+                           }
+                           posLoad();
+                       },
+                       error: function () {
+                           posLoad();
+                           swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                               .then(() => {
+                                   location.reload();
+                               });
+
+                       },
+                   });
+            };
+        };
+     });
+
+
+
+    $('#Pes_Email_Confirmar').blur(function () {
+        //Validaçao,comparando os campos
+        if  ($('#Pes_Email_Confirmar').val() != "")
+            {
+            if ($('#Pes_Email').val() != $('#Pes_Email_Confirmar').val()) {
+                posLoad();
+                campo_obrigatorio('#vConfirmarEmail2', '#DivConfirmarEmail', '#Pes_Email_Confirmar');
+                return false;
+            };
+        }
+
+    });
+
+    $("#DOC_SOCIOS").change(function () {
+        var formato = this.files[0].type;
+        if (formato != "application/pdf") {
+            swal("Formato invalido!", "Apenas arquivo no formato (PDF).", "warning");
+            $("#DOC_SOCIOS").val("");
+            return false;
+        }
+    });
+
+
+    $("#CONTRATO_SOCIAL").change(function () {
+        var formato = this.files[0].type;
+        if (formato != "application/pdf") {
+            swal("Formato invalido!", "Apenas arquivo no formato (PDF).", "warning");
+            $("#CONTRATO_SOCIAL").val("");
+            return false;
+        }
+    });
+
+    $("#TERMO_RESPONSABILIDADE").change(function () {
+        var formato = this.files[0].type;
+        if (formato != "application/pdf") {
+            swal("Formato invalido!", "Apenas arquivo no formato (PDF).", "warning");
+            $("#TERMO_RESPONSABILIDADE").val("");
+            return false;
+        }
+    });
+
+    $("#DOC_SOCIOS").change(function () {
+        if ($("#DOC_SOCIOS").val() != "") {
+            var formato = this.files[0].type;
+            if (formato != "application/pdf") {
+                swal("Formato invalido!", "Apenas arquivo no formato (PDF).", "warning");
+                $("#DOC_SOCIOS").val("");
+                return false;
+            }
+        }
+    });
+
+    $("#DOC_PROCURACAO").change(function () {
+        if ($("#DOC_PROCURACAO").val() != "") {
+            var formato = this.files[0].type;
+            if (formato != "application/pdf") {
+                swal("Formato invalido!", "Apenas arquivo no formato (PDF).", "warning");
+                $("#DOC_PROCURACAO").val("");
+                return false;
+            }
+        }
+    });
+
+    $('#GravarDados').click(function () {
+
+        //Validaçao
+        if ($('#Pes_CPF_CNPJ').val() == "") {
+            campo_obrigatorio('#vcpf', '#DivCPF', '#Pes_CPF_CNPJ');
+            return false;
+        };
+
+        if ($('#Pes_Nome').val() == "") {
+            campo_obrigatorio('#vnome', '#DivNome', '#Pes_Nome');
+            return false;
+        };
+
+        if ($('#Pes_NomeFantasia').val() == "") {
+            campo_obrigatorio('#vNomeFantasia', '#DivNomeFantasia', '#Pes_NomeFantasia');
+            return false;
+        };
+
+
+        if ($('#Pes_TipoEmpresa').val() == "") {
+            campo_obrigatorio('#vTipoEmpresa', '#DivTipoEmpresa', '#Pes_TipoEmpresa');
+            return false;
+        };
+
+        if ($('#Pes_RG').val() == "") {
+            campo_obrigatorio('#vrg', '#DivRG', '#Pes_RG');
+            return false;
+        };
+
+        if ($('#End_CEP').val() == "") {
+            campo_obrigatorio('#vcep', '#DivCEP', '#End_CEP');
+            return false;
+        };
+
+        if ($('#End_Logradouro').val() == "") {
+            campo_obrigatorio('#vlogradouro', '#DivLogradouro', '#End_Logradouro');
+            return false;
+        };
+
+        if ($('#End_Bairro').val() == "") {
+            campo_obrigatorio('#vbairro', '#DivBairro', '#End_Bairro');
+            return false;
+        };
+
+        if ($('#End_Pais').val() == "") {
+            campo_obrigatorio('#vPais', '#DivPais', '#End_Pais');
+            return false;
+        };
+
+        if ($('#Pes_Telefone').val() == "") {
+            campo_obrigatorio('#vPes_Telefone', '#DivPes_Telefone', '#Pes_Telefone');
+            return false;
+        };
+
+        if ($('#End_Cidade').val() == "") {
+            campo_obrigatorio('#vcidade', '#DivCidade', '#End_Cidade');
+            return false;
+        };
+
+        if ($('#End_Estado').val() == "") {
+            campo_obrigatorio('#vEstado', '#DivEstado', '#End_Estado');
+            return false;
+        };
+
+        if ($('#Pes_Email').val() == "") {
+            campo_obrigatorio('#vemail', '#DivEmail', '#Pes_Email');
+            return false;
+        };
+
+        if ($('#Pes_Email_Confirmar').val() == "") {
+            campo_obrigatorio('#vConfirmarEmail', '#DivConfirmarEmail', '#Pes_Email_Confirmar');
+            return false;
+        };
+
+        if ($('#Usu_Senha').val() == "") {
+            campo_obrigatorio('#vsenha', '#DivSenha', '#Usu_Senha');
+            return false;
+        };
+
+        if ($('#Pes_CNHValidade').val() != "" && $('#Pes_RegistroCNH').val() == "") {
+            campo_obrigatorio('#vregistrocnh', '#Divregistrocnh', '#Pes_RegistroCNH');
+            return false;
+        };
+
+        if ($('#Pes_RegistroCNH').val() != "" && $('#Pes_CNHValidade').val() == "") {
+            campo_obrigatorio('#validadecnh', '#Divvalidadecnh', '#Pes_CNHValidade');
+            return false;
+        };
+
+
+
+
+
+        //Validaçao,comparando os campos
+        if ($('#Pes_Email').val() != $('#Pes_Email_Confirmar').val()) {
+            posLoad();
+            campo_obrigatorio('#vConfirmarEmail', '#DivConfirmarEmail', '#Pes_Email_Confirmar');
+            return false;
+        };
+
+        //Validaçao,comparando os campos
+        if ($('#Usu_Senha').val() != $('#Usu_ConfirmarSenha').val()) {
+            posLoad();
+            campo_obrigatorio('#vUsu_ConfirmarSenha', '#DivUsu_ConfirmarSenha', '#Usu_ConfirmarSenha');
+            return false;
+        };
+
+
+        //Validação do Anexo
+        if ($('#CONTRATO_SOCIAL').val() == "") {
+            swal("Anexo Obrigatório!", "Necessário adicionar CONTRATO_SOCIAL Social.", "warning");
+            return false;
+        }
+        if ($('#DOC_SOCIOS').val() == "") {
+            swal("Anexo Obrigatório!", "Necessário adicionar Documento com foto.", "warning");
+            return false;
+        }
+
+        if ($('#TERMO_RESPONSABILIDADE').val() == "") {
+            swal("Anexo Obrigatório!", "Necessário adicionar um Resposabilidade.", "warning");
+            return false;
+        }
+        if ($('#PROCURACAO').val() != "" && $('#DOC_PROCURACAO').val() == "") {
+            swal("Anexo Obrigatório!", "Necessário anexar o documento de identificação com foto do procurador.", "warning");
+            return false;
+        }
+        if ($('#PROCURACAO').val() == "" && $('#DOC_PROCURACAO').val() != "") {
+            swal("Anexo Obrigatório!", "Necessário adicionar uma procuração.", "warning");
+            return false;
+        }
+
+            //Salvando
+            preLoad();
+            var form = $('form')[0];
+            var fileData = new FormData(form);
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("RotinaSalvarPJ", "pessoa")',//Upload, Insert, Envio Email
+                dataType: "json",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (data) {
+                    if (data.error == true) {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error");
+                        return false;
+                    }
+                    if (data.formato == false) {
+                        posLoad();
+                        swal("Ops!", "Um dos documento está comrropindo ou com o formato errado.", "error");
+                        return false;
+                    }
+                    else {
+                        posLoad();
+                        swal("Procedimento realizado com sucesso!", "Solicitação para analisar as informações e documentações do cadastro enviada. Acompanhe as atualizações, após aprovada os serviços estarão disponíveis.", "success")
+                        .then(() => {
+                            window.location.href = data.redirectUrl;
+                        });
+                    }
+                },
+
+                error: function () {
+                    posLoad();
+                    swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                    .then(() => {
+                        location.reload();
+                    });
+                }
+            })
+
+    })
+
+
+
+</script>
+
+
+

@@ -1,0 +1,516 @@
+﻿@model CondutorInfrator.Models.PessoaViewModel
+
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { id = "form", name = "form" }))
+{
+    @Html.AntiForgeryToken();
+
+    <div class="container">
+        <div class="conteudo">
+            <div class="row">
+                <div class="col-md-11" style="margin-left:-28px; font-style: italic">
+                    <h5> <img src="~/img/Assitente.png" style="margin-left:20px;" /> <strong> Primeiro passo! Preencha o formulário e aguarde o e-mail de confirmação do seu cadastro. </strong></h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-9">
+                    <h3>Cadastro de Pessoa Jurídica</h3>
+                </div>
+
+            </div>
+            <br />
+            <div class="row">
+
+                <br />
+                <div class="col-md-2" id="DivPes_CPF_CNPJ">
+                    <text id="label_cpf">CNPJ</text> <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Pes_CPF_CNPJ, new { htmlAttributes = new { @class = "form-control", id = "Pes_CPF_CNPJ", maxlength = 14, required = true } })
+                    @Html.EditorFor(model => model.Pes_TipoPessoa, new { htmlAttributes = new { @class = "form-control", id = "Pes_TipoPessoa", style = "display:none", @Value = "JURÍDICA" } })
+                    @Html.ValidationMessageFor(model => model.Pes_CPF_CNPJ)
+                    <div class="alert-box failure text text-center" id="vPes_CPF_CNPJ">Campo Obrigatório</div>
+                    <span id="resposta"></span>
+                </div>
+                <div class="col-md-5" id="DivPes_Nome">
+                    <text id="label_cpf">Razão Social</text> <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Pes_Nome, new { htmlAttributes = new { @class = "form-control", id = "Pes_Nome", autocomplete = "off", required = true } })
+                    <div class="alert-box failure text-center" id="vPes_Nome">Campo Obrigatório</div>
+                </div>
+                <div class="col-md-5" id="DivPes_NomeFantasia">
+                    @Html.DisplayNameFor(model => model.Pes_NomeFantasia) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Pes_NomeFantasia, new { htmlAttributes = new { @class = "form-control", id = "Pes_NomeFantasia", autocomplete = "off", required = true } })
+                    <div class="alert-box failure text-center" id="vPes_NomeFantasia">Campo Obrigatório</div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-2" id="DivEnd_CEP">
+                    @Html.DisplayNameFor(model => model.End_CEP) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.End_CEP, new { htmlAttributes = new { @class = "form-control", id = "End_CEP", attrname = "CEP", @maxlength = 10, autocomplete = "off", AutoCompleteType = "Disabled", required = true } })
+                    <div class="alert-box failure text-center" id="vEnd_CEP">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-6" id="DivEnd_Logradouro">
+                    @Html.DisplayNameFor(model => model.End_Logradouro) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.End_Logradouro, new { htmlAttributes = new { @class = "form-control", id = "End_Logradouro", autocomplete = "off", maxlength = 100, required = true } })
+                    <div class="alert-box failure text-center" id="vEnd_Logradouro">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-1" id="DivEnd_Numero">
+                    @Html.DisplayNameFor(model => model.End_Numero)
+                    @Html.EditorFor(model => model.End_Numero, new { htmlAttributes = new { @class = "form-control", id = "End_Numero" } })
+                    <div class="alert-box failure text-center" id="vEnd_Numero">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-3" id="DivEnd_Bairro">
+                    @Html.DisplayNameFor(model => model.End_Bairro) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.End_Bairro, new { htmlAttributes = new { @class = "form-control", id = "End_Bairro", maxlength = 100, required = true } })
+                    <div class="alert-box failure text-center" id="vEnd_Bairro">Campo Obrigatório</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3" id="DivEnd_Cidade">
+                    @Html.DisplayNameFor(model => model.End_Cidade) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.End_Cidade, new { htmlAttributes = new { @class = "form-control", id = "End_Cidade", @readonly = "readonly", required = true } })
+                    <div class="alert-box failure text-center" id="vEnd_Cidade">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-1" id="DivEnd_Estado">
+                    @Html.DisplayNameFor(model => model.End_Estado) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.End_Estado, new { htmlAttributes = new { @class = "form-control", id = "End_Estado", @readonly = "readonly", required = true } })
+                    <div class="alert-box failure text-center" id="vEnd_Estado">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-2" id="DivEnd_Pais">
+                    @Html.DisplayNameFor(model => model.End_Pais) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.End_Pais, new { htmlAttributes = new { @class = "form-control", id = "End_Pais", maxlength = 100, required = true, @readonly = "readonly", Value = "BRASIL" } })
+                    <div class="alert-box failure text-center" id="vEnd_Pais">Campo Obrigatório</div>
+                </div>
+
+                <div class="col-md-4">
+                    @Html.DisplayNameFor(model => model.End_Complemento)
+                    @Html.EditorFor(model => model.End_Complemento, new { htmlAttributes = new { @class = "form-control", id = "End_Complemento", maxlength = 200 } })
+                </div>
+
+
+                <div class="col-md-2" id="DivPes_Telefone">
+                    @Html.DisplayNameFor(model => model.Pes_Telefone) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Pes_Telefone, new { htmlAttributes = new { @class = "form-control", id = "Pes_Telefone", attrname = "telephone2", required = true } })
+                    <div class="alert-box failure text-center" id="vPes_Telefone">Campo Obrigatório</div>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-3" id="DivPes_Email">
+                    @Html.DisplayNameFor(model => model.Pes_Email) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Pes_Email, new { htmlAttributes = new { @class = "form-control", id = "Pes_Email", onpaste = "return false", ondrop = "return false", maxlength = 100, required = true } })
+                    <div class="alert-box failure text-center" id="vPes_Email">Campo Obrigatório</div>
+                    <div class="alert-box failure text-center" id="vPes_Email_cadastrado">E-mail já cadastrado</div>
+
+                </div>
+                <div class="col-md-3" id="DivPes_Email_Confirmar">
+                    @Html.DisplayNameFor(model => model.Pes_Email_Confirmar) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Pes_Email_Confirmar, new { htmlAttributes = new { @class = "form-control", id = "Pes_Email_Confirmar", style = "text-transform: toLowerCase", maxlength = 100, required = true } })
+                    <div class="alert-box failure text-center" id="vPes_Email_Confirmar">Campo Obrigatório</div>
+                    <div class="alert-box failure text-center" id="vPes_Email_Confirmar2">Emails diferentes</div>
+                </div>
+                <div class="col-md-3" id="DivUsu_Senha">
+                    @Html.DisplayNameFor(model => model.Usu_Senha) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Usu_Senha, new { htmlAttributes = new { @class = "form-control", id = "Usu_Senha", required = true } })
+                    <div class="alert-box failure text-center" id="vUsu_Senha">Campo Obrigatório</div>
+
+                </div>
+                <div class="col-md-3">
+                    @Html.DisplayNameFor(model => model.Usu_ConfirmarSenha) <span style="color:red">*</span>
+                    @Html.EditorFor(model => model.Usu_ConfirmarSenha, new { htmlAttributes = new { @class = "form-control", id = "Usu_ConfirmarSenha", required = true } })
+                    <div class="alert-box failure text-center" id="vUsu_ConfirmarSenha">Senhas diferentes</div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-9 h6">
+
+                    <p>
+                        <strong> ( <span style="color:red">*</span> ) Campos obrigatórios</strong>
+                    </p>
+
+                    <hr />
+                    <label for="">Política de Privacidade</label>
+                    <p>
+                        •  Após preenchido certifique-se que as informações acima estão corretas, conforme constam nos
+                        documentos originais e o e-mail informado esteja apto para receber mensagens, sendo responsabilidade do
+                        requerente qualquer divergência que possa prejudicar o serviço.
+                    </p>
+                    <p>
+                        •  Após conferir as informações marque o campo “eu concordo”, clique em gravar dados e acesse o e-mail
+                        indicado para conclusão do cadastro.
+                    </p>
+                    <p>
+                        •  Declaro para os devidos fins, que as informações referentes ao cadastro para adesão ao TRANSALVADOR Digital
+                        são verdadeiras, sob pena de ser responsabilizado (a) penal, cível e administrativamente.
+                    </p>
+                    <p>
+                        •  Ao selecionar a opção "Eu concordo", você concorda  com os Termos da Superintendência de Trânsito de Salvador
+                        (TRANSALVADOR).
+                    </p>
+
+                    <hr />
+                    <label class="pure-material-checkbox">
+                        <input type="checkbox" name="ConfirmarChk" , id="ConfirmarChk" onchange="habilitar()">
+                        <span>Eu concordo</span>
+                    </label>
+
+                </div>               
+            </div>
+            <p></p>
+
+            <button type="button" class="btn btn-primary btn-lg btn-transalvador" id="GravarDados" , name="GravarDados"> Gravar Dados </button>
+            <button type="button" class="btn btn-primary btn-lg btn-transalvador" id="BtnSair" name="GravarDados" onclick="location.href='@Url.Action("login", "autenticacao")'"> Sair </button>
+            <br />
+            <br>
+        </div>
+    </div> <!-- /container -->
+
+}
+
+
+<script src="~/Scripts/Funcoes_gr.js"></script>
+<script type='text/javascript'>
+
+
+    function habilitar() {
+        if (document.getElementById('ConfirmarChk').checked) {
+            document.getElementById('GravarDados').removeAttribute("disabled");
+        }
+        else {
+            document.getElementById('GravarDados').setAttribute("disabled", "disabled");
+        }
+    }
+
+
+
+    $(document).ready(function () {
+
+        //inicinado com o focus
+        $('#Pes_CPF_CNPJ').focus();
+
+        //Desabitando chechebox
+        document.getElementById('GravarDados').setAttribute("disabled", "disabled");
+        document.getElementById('ConfirmarChk').checked = false;
+
+
+        //------------------------------------------------
+        //Colocando Mascaras no CPF, TELEFONES e CNPJ Homologado
+
+        var telMask2 = ['(99) 9999-99999', '(99) 99999-9999'];
+        var tel2 = document.querySelector('input[attrname=telephone2');
+        VMasker(tel2).maskPattern(telMask2[0]);
+        tel2.addEventListener('input', func_inputHandler.bind(undefined, telMask2, 14), false);
+
+        var CepMask = ['99.999-999',];
+        var Cep = document.querySelector('input[attrname=CEP');
+        VMasker(Cep).maskPattern(CepMask[0]);
+        Cep.addEventListener('input', func_inputHandler.bind(undefined, CepMask, 10), false);
+
+
+        //------------------------------------------------
+
+        //letras minusculas
+        $("#Pes_Email").on("input", function () {
+            $(this).val($(this).val().toLowerCase());
+        });
+
+        $("#Pes_Email_Confirmar").on("input", function () {
+            $(this).val($(this).val().toLowerCase());
+        });
+
+
+
+        //controle de focos
+        $("#End_Numero").blur(function () {
+            if ($("#End_Bairro").val() != "")
+                $('#End_Pais').focus();
+            else
+                $('#End_Bairro').focus();
+        });
+
+        $("#Pes_CNHValidade").blur(function () {
+            if ($('#Pes_Estrangeiro').val() == "Sim") {
+                $('#End_Pais').focus();
+            }
+        });
+        $("#End_Pais").blur(function () {
+            if ($('#Pes_Estrangeiro').val() == "Sim") {
+                $('#Pes_Telefone ').focus();
+            }
+        });
+
+        //Apenas Numero
+        $('#Pes_CPF_CNPJ').keyup(function () {
+            $(this).val(this.value.replace(/\D/g, ''));
+        });
+
+        $('#Pes_RG').keyup(function () {
+            $(this).val(this.value.replace(/\D/g, ''));
+        });
+
+        $('#End_Numero').keyup(function () {
+            $(this).val(this.value.replace(/\D/g, ''));
+        });
+
+
+        //Bloqueio do Copia Colar
+        $(document).ready(function () {
+            $('#Pes_Email').bind('cut copy paste', function (event) {
+                event.preventDefault();
+            });
+        });
+
+
+
+        $("#Pes_CPF_CNPJ").blur(function () {
+            //validaçao cpf
+            if ($("#Pes_CPF_CNPJ").val() != "") {
+                preLoad();
+
+                //validandoCNPJ
+                if (func_validando_cnpj($("#Pes_CPF_CNPJ").val()) == false) {
+                    posLoad();
+                    swal("CNPJ Invalido!", "Favor preencher o CNPJ corretamente..", "error")
+                        .then(() => {
+                            $('#Pes_CPF_CNPJ').focus();
+                            $('#Pes_CPF_CNPJ').val("");
+                        });
+                    return false;
+                }
+
+
+            };
+
+            //Cadastro Existentes da CNH Homologado
+            if ($("#Pes_CPF_CNPJ").val() != "") {
+
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify({ _cpf: $("#Pes_CPF_CNPJ").val(), tipo: "CNPJ" }),
+                    url: '@Url.Action("PesquisarDados", "juridica_pessoa")',//verifica se existe e pegando os dados da CHN na base do Detran
+
+                    success: function (data) {
+                        if (data.error == true) {
+                            posLoad();
+                            swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error");
+                            $('#Pes_CPF_CNPJ').focus();
+                            $('#Pes_CPF_CNPJ').val("");
+                            return false;
+                        }else
+                        if (data.existe == true) {
+                            posLoad();
+                            swal("Ops!", "Esse usuário já foi cadastrado em nossa base de dados.", "warning")
+                                .then(() => {
+                                    $('#DivPes_CPF_CNPJ').addClass('has-error');
+                                    func_limparcampos();
+                                    $("#Pes_CPF_CNPJ").focus();
+                                });
+                            return false;
+                        }
+                            posLoad();
+
+                    },
+
+                    error: function () {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                        .then(() => {
+                            location.reload();
+                        });
+                    }
+                });
+
+            }
+        });
+
+        //Fim
+
+
+
+
+        //tratamento valor minimo
+        $('#Pes_Celular').blur(function () {
+            if ($('#Pes_Celular').val() != "") {
+                if ($('#Pes_Celular').val().length < 14) {
+                    swal("Formato inválido!", "Favor preencher o campo corretamente.", "").then(() => {
+                        $('#Pes_Celular').focus();
+                    });
+
+                    return false;
+                };
+            }
+        });
+
+
+
+
+
+        //Verificaçao de email valido e existente
+       $('#Pes_Email').blur(function () {
+
+           if ($('#Pes_Email').val() != "") {
+
+               //VidandoEmail
+               var resultado = func_validandoemail($("#Pes_Email").val());
+
+               if (resultado == false) {
+                   swal("E-mail inválido", "Necessário informar um e-mail válido.", "warning").then(() => {
+                       $('#DivPes_Email').addClass('has-error');
+                       $('#Pes_Email').focus();
+                       $('#Pes_Email').val("");
+                   });
+               }
+               else
+               {
+                   preLoad();
+                   //Verificando se existe o email
+                   $.ajax({
+                       type: "POST",
+                       contentType: "application/json; charset=utf-8",
+                       data: JSON.stringify({ VloBusca1: $("#Pes_Email").val() }),
+                       url: '@Url.Action("BuscarDadosPessoa", "pessoa")',
+
+                       success: function (data) {
+
+                           if (data.error == true) {
+                               posLoad();
+                               swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error");
+                               $('#Pes_Email').focus();
+                               $('#Pes_Email').val("");
+                               return false;
+                           }
+                           else {
+                               $(data.Resultado).each(function () {
+                                   if (this.Email == 1) {
+                                       posLoad();
+                                       campo_obrigatorio('#vPes_Email_cadastrado', '#DivPes_Email', '#Pes_Email');
+                                       return false;
+                                   }
+                               })
+                           }
+                           posLoad();
+                       },
+                       error: function () {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                        .then(() => {
+                            location.reload();
+                        });
+                       },
+                   });
+               };
+           };
+        });
+
+
+
+        //Validaçao,comparando os campos
+        $('#Pes_Email_Confirmar').blur(function () {
+
+            if ($('#Pes_Email_Confirmar').val() != "") {
+                if ($('#Pes_Email').val() != $('#Pes_Email_Confirmar').val()) {
+                    posLoad();
+                    campo_obrigatorio('#vPes_Email_Confirmar2', '#DivPes_Email_Confirmar', '#Pes_Email_Confirmar');
+                    $('#Pes_Email_Confirmar').focus();
+
+                    return false;
+                };
+            }
+
+        });
+        $('#Usu_ConfirmarSenha').blur(function () {
+            if ($('#Usu_ConfirmarSenha').val() != "") {
+                if ($('#Usu_Senha').val() != $('#Usu_ConfirmarSenha').val()) {
+                    posLoad();
+                    campo_obrigatorio('#vUsu_ConfirmarSenha', '#DivUsu_ConfirmarSenha', '#Usu_ConfirmarSenha');
+                    $('#Usu_ConfirmarSenha').focus();
+
+                    return false;
+                }
+            }
+
+        });
+   });
+
+
+    //------------------------------------------------
+    //https//pt.stackoverflow.com/questions/110623/exibir-mensagem-e-esconder-em-alguns-segundos
+    // SALVAR
+    $('#GravarDados').click(function () {
+
+        // Validando os campos em brancos
+        var is_empty = false;
+        var campo;
+        $('[required]').each(function (idx, elem) {
+            is_empty = is_empty || ($(elem).val() == '');
+            if (is_empty) {
+                campo = $(elem).attr('id');
+                $(elem).focus();
+                return false
+            }
+        });
+
+        if (is_empty) {
+            campo_obrigatorio('#v' + campo, '#Div' + campo, campo);
+        } else {
+
+            preLoad();
+            var form = $('form')[0];
+            var fileData = new FormData(form);
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("RotinaSalvarPJ", "juridica_pessoa")',//Upload, Insert, Envio Email
+                dataType: "json",
+                contentType: false, // Not to set any content header
+                processData: false, // Not to process data
+                data: fileData,
+                success: function (data) {
+                    if (data.error == true) {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde.", "error");
+                        return false;
+                    }
+                    else {
+                        posLoad();
+                        swal("Procedimento realizado com sucesso!", "Verifique seu e-mail para ativar a conta.", "success")
+                        .then(() => {
+                            window.location.href = data.redirectUrl;
+                        });
+                    }
+                },
+
+                error: function () {
+                        posLoad();
+                        swal("Ops!", "Houve uma falha de comunicação, por favor tente novamente mais tarde. ", "error")
+                        .then(() => {
+                            location.reload();
+                        });
+                }
+            })
+
+        }
+
+    });
+
+
+
+
+
+
+</script>
+

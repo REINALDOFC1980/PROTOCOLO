@@ -1,0 +1,369 @@
+﻿using CondutorInfrator.DAL;
+using CondutorInfrator.Models;
+using Dapper;
+using System;
+using System.Configuration;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Web;
+using System.Web.Helpers;
+using System.Web.Mvc;
+
+namespace CondutorInfrator.Controllers
+{
+    //[AuthorizeActionFilterAtribute]
+    public class PessoaController : Controller
+    {
+
+       
+
+        //verificando se existe
+        public static DadosExistenteModel VerificarExistencia(string par1)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@VloCampo", "CadastroExistente");
+            parameters.Add("@VloBusca1", par1);
+            parameters.Add("@VloBusca2", "");
+
+            var Dados = DapperORM.DapperORM.ReturnList<DadosExistenteModel>("STb_Pessoa_Localizar_Dapper", parameters).FirstOrDefault<DadosExistenteModel>();
+
+            return Dados;
+
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult TipoCadastro()
+        {
+            return View();
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult Cad_PessoaCPF()
+        {
+            return View();
+        }
+
+
+        /////////////// VIEW \\\\\\\\\\\\\\\\\\\\\
+
+        [AllowAnonymous]
+        public ActionResult Informacao_Importante()
+        {
+            return View();
+        }
+
+
+
+        [AllowAnonymous]
+        public ActionResult Cad_PessoaCNPJ_Analise()
+        {
+
+            return View();
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult Cad_PessoaEstrangeiro()
+        {
+            return View();
+        }
+
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult RotinaSalvarPF()
+        {
+            try
+            {
+
+
+                //Upload da foto do perfil
+                string path = ConfigurationManager.AppSettings["Vlo_CaminhoFotoPerfil"];
+                var cpf_cnpj_logado = Request.Params["Pes_CPF_CNPJ"];
+
+                //upload
+                HttpFileCollectionBase files = Request.Files;
+
+                for (int i = 0; i < files.Count; i++)
+                {
+                    string Nome = Request.Files.AllKeys[0];
+                    HttpPostedFileBase file = files[0];
+                    if (file.ContentLength != 0)
+                    {
+                        var NomeDoc = Nome + cpf_cnpj_logado + ".JPEG";
+
+                        WebImage img = new WebImage(file.InputStream);
+                        if (img.ImageFormat == "jpeg")
+                        {
+                            if (img.Width > 1000)
+                                img.Resize(1000, 1000);
+                            img.Save(path + NomeDoc);
+                        }
+                        else
+                            return Json(new { formatoimg = false }, JsonRequestBehavior.AllowGet);
+                    }
+                }
+                var r = Request.Params["Pes_Estrangeiro"];
+
+                //Salvando o registro
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("@Pes_CPF_CNPJ", Request.Params["Pes_CPF_CNPJ"]);
+                parameters.Add("@Pes_Nome", Request.Params["Pes_Nome"]);
+                parameters.Add("@Pes_NomeFantasia", Request.Params["Pes_NomeFantasia"]);
+                parameters.Add("@Pes_TipoEmpresa", Request.Params["Pes_TipoEmpresa"]);
+                parameters.Add("@Pes_RegistroCNH", Request.Params["Pes_RegistroCNH"]);
+                parameters.Add("@Pes_CNHValidade", Request.Params["Pes_CNHValidade"]);
+                parameters.Add("@Pes_UF_CNH", Request.Params["Pes_UF_CNH"]);
+                parameters.Add("@Pes_RG", Request.Params["Pes_RG"]);
+
+                parameters.Add("@Pes_Telefone", Request.Params["Pes_Telefone"]);
+                parameters.Add("@Pes_Celular", Request.Params["Pes_Celular"]);
+                parameters.Add("@Pes_Email", Request.Params["Pes_Email"]);
+
+                parameters.Add("@Pes_Estrangeiro", Request.Params["Pes_Estrangeiro"]);
+                parameters.Add("@Pes_TipoPessoa", "FÍSICA");
+
+                parameters.Add("@End_CEP", Request.Params["End_CEP"]);
+                parameters.Add("@End_Logradouro", Request.Params["End_Logradouro"]);
+                parameters.Add("@End_Numero", Request.Params["End_Numero"]);
+                parameters.Add("@End_Bairro", Request.Params["End_Bairro"]);
+                parameters.Add("@End_Cidade", Request.Params["End_Cidade"]);
+                parameters.Add("@End_Estado", Request.Params["End_Estado"]);
+                parameters.Add("@End_Complemento", Request.Params["End_Complemento"]);
+                parameters.Add("@End_Pais", Request.Params["End_Pais"]);
+
+
+                parameters.Add("@Usu_Senha", Request.Params["Usu_Senha"]);
+
+
+                DapperORM.DapperORM.ExecuteWithouReturn("Stb_Pessoa_Inserir_Dapper", parameters);
+
+                //Envio do Email
+                string pes_email = Request.Params["Pes_Email"];
+                string Pes_nome = Request.Params["Pes_Nome"];
+
+                EmailController email = new EmailController();
+                var resultado = email.RotinhaEmail(pes_email, Pes_nome, "Confirmação", "", "", "", "","","");
+
+
+                return Json(new { redirectUrl = Url.Action("login", "autenticacao"), isRedirect = true, envioemail = resultado }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { redirectUrl = Url.Action("login", "autenticacao"), isRedirect = true, error = true }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
+        //OK Homologado
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult BuscarDadosPessoa(string VloBusca1)
+        {
+            DadosExistenteModel dadosExistenteModel = VerificarExistencia(VloBusca1);
+
+            var Resultado = dadosExistenteModel;
+
+            try
+            {
+                return Json(new { Resultado }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new {  error = true }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        //Dados da CNH
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult PesquisarDadosCNH(string _cpf, string tipo)
+        {
+            try
+            {
+                DadosExistenteModel dadosExistenteModel = VerificarExistencia(_cpf);
+
+                if (tipo == "CPF")
+                {
+                    if (dadosExistenteModel.APCI == 1)
+                    {
+                        return Json(new { existe = true }, JsonRequestBehavior.AllowGet);
+                    }
+                    else
+                    {
+                        ResultGetCnhPorCpf resultGetCnhPorCpf = new Detran().CnhCpf(_cpf);
+                        var Resultado = resultGetCnhPorCpf.dadosGetCnhPorCpf;
+                        return Json(new { Resultado }, JsonRequestBehavior.AllowGet);
+
+                    }
+                }
+
+                return Json(new { Resultado = false }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(new { error = true }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult PesquisarCNH(string _cpf)
+        {
+            try
+            {
+                ResultGetCnhPorCpf resultGetCnhPorCpf = new Detran().CnhCpf(_cpf);
+                var Resultado = resultGetCnhPorCpf.dadosGetCnhPorCpf;
+                return Json(new { Resultado }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception)
+            {
+                return Json(new { error = true }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        //Dados da CNH
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult PesquisarDados(string _cpf, string tipo)
+        {
+            try
+            {
+                DadosExistenteModel dadosExistenteModel = VerificarExistencia(_cpf);
+
+                if (tipo == "CPF")
+                {
+                    if (dadosExistenteModel.APCI == 1)
+                    {
+                        return Json(new { existe = true }, JsonRequestBehavior.AllowGet);
+                    }
+
+                }
+
+                return Json(new { Resultado = false }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                return Json(new { error = true }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult RotinaSalvarPJ()
+        {  //Envio do Email
+            string pes_email = Request.Params["Pes_Email"];
+            string Pes_nome = Request.Params["Pes_Nome"];
+            EmailController email = new EmailController();
+
+            try
+            {
+                var cpf_cnpj = Request.Params["Pes_CPF_CNPJ"];
+
+
+                string path = ConfigurationManager.AppSettings["Vlo_CaminhoAnexoCNPJ"] + cpf_cnpj + '\\';
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                //Salvando as fotos
+                HttpFileCollectionBase files = Request.Files;
+
+                for (int i = 0; i < files.Count; i++)
+                {
+                    string Nome = Request.Files.AllKeys[i];
+                    var NomeDoc = Nome + ".PDF";
+
+                    HttpPostedFileBase file = files[i];
+
+                    if (file.ContentType == "application/pdf" && file.ContentLength != 0)
+                        file.SaveAs(path + NomeDoc);
+
+
+
+                }
+
+                //Salvando o registro
+                DynamicParameters parameters = new DynamicParameters();
+
+                parameters.Add("@Pes_CPF_CNPJ", Request.Params["Pes_CPF_CNPJ"]);
+                parameters.Add("@Pes_Nome", Request.Params["Pes_Nome"]);
+                parameters.Add("@Pes_NomeFantasia", Request.Params["Pes_NomeFantasia"]);
+                parameters.Add("@Pes_Telefone", Request.Params["Pes_Telefone"]);
+                parameters.Add("@Pes_Celular", Request.Params["Pes_Celular"]);
+                parameters.Add("@Pes_Email", Request.Params["Pes_Email"]);
+                parameters.Add("@Pes_TipoEmpresa", Request.Params["Pes_TipoEmpresa"]);
+                parameters.Add("@Pes_Qtd_Veiculo", Request.Params["Pes_Qtd_Veiculo"]);
+
+                parameters.Add("@End_CEP", Request.Params["End_CEP"]);
+                parameters.Add("@End_Logradouro", Request.Params["End_Logradouro"]);
+                parameters.Add("@End_Numero", Request.Params["End_Numero"]);
+                parameters.Add("@End_Bairro", Request.Params["End_Bairro"]);
+                parameters.Add("@End_Cidade", Request.Params["End_Cidade"]);
+                parameters.Add("@End_Estado", Request.Params["End_Estado"]);
+                parameters.Add("@End_Complemento", Request.Params["End_Complemento"]);
+                parameters.Add("@End_Pais", Request.Params["End_Pais"]);
+
+                parameters.Add("@CPFProcurador", Request.Params["CPFProcurador"]);
+                parameters.Add("@CPFSocio1", Request.Params["CPFSocio1"]);
+
+                DapperORM.DapperORM.ExecuteWithouReturn("Stb_Pessoa_Juridica_Analise_Inserir_Dapper", parameters);
+
+                var resultado = email.RotinhaEmail(pes_email, Pes_nome, "Confirmação CNPJ", "", "", "", "","","");
+
+
+                return Json(new { redirectUrl = Url.Action("login", "autenticacao"), isRedirect = true, envioemail = resultado }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(new { redirectUrl = Url.Action("login", "autenticacao"), isRedirect = true, error = true }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+
+
+        [AllowAnonymous]
+        public ActionResult Back()
+        {
+            string urlAnterior = Session["Referrer"].ToString();
+            Response.Redirect(urlAnterior); //Redireciona pra url anterior.
+
+            return View();
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult Status_Cadastro(string CPF_CNPJ)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@Pes_Ana_CNPJ", CPF_CNPJ);
+            var Resultado = DapperORM.DapperORM.ReturnList<HistoricoStatusModel>("Stb_Historico_Analise_Localizar_Dapper", parameters).FirstOrDefault<HistoricoStatusModel>();
+
+            return View(Resultado);
+        }
+
+
+        [AllowAnonymous]
+        public ActionResult SessaoExpirada()
+        {
+            return View();
+        }
+
+
+
+    }
+}
+

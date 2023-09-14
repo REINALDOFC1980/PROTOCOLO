@@ -1,0 +1,207 @@
+﻿using CondutorInfrator.Models;
+using Dapper;
+using System;
+using System.Configuration;
+using System.Linq;
+using System.Security.Claims;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Services.Description;
+using System.Web.UI;
+
+namespace CondutorInfrator.Controllers
+{
+    [AllowAnonymous]
+    public class AutenticacaoController : Controller
+    {
+        private static AutenticacaoModel autenticacaoModel_global = new AutenticacaoModel();
+
+        // GET: Autenticacao
+        public ActionResult Login()
+        {
+  
+            if (User?.Identity.IsAuthenticated == true)
+                return RedirectToAction("processosabertos", "processo");
+            else
+                return View();
+
+        }        
+
+
+        [HttpPost]
+        public JsonResult ValidarAcesso(string Usu_Login, string Usu_Senha)
+        { //2146232060
+            try
+            {
+                string mensagem = ConfigurationManager.AppSettings["Menssagem"];
+
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@VloCampo", "Autenticar");
+                parameters.Add("@VloBusca1", Usu_Login);
+                parameters.Add("@VloBusca2", Usu_Senha);
+                parameters.Add("@VloBusca3", "");
+
+                autenticacaoModel_global = DapperORM.DapperORM.ReturnList<AutenticacaoModel>("STb_Usuario_Localizar_Dapper", parameters).FirstOrDefault<AutenticacaoModel>();
+
+                if (autenticacaoModel_global != null)
+
+                   return Json(new { error = false, login = true, redirectUrl = Url.Action("Logar", "autenticacao"), mensagem }, JsonRequestBehavior.AllowGet);
+                else
+                    return Json(new { error = false, login = false }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            { 
+                return Json(new { error = true, mensagem = ex }, JsonRequestBehavior.AllowGet);
+            }
+
+        }
+
+
+       
+ 
+
+
+
+        // [HttpPost]
+        //  [ValidateAntiForgeryToken]
+        public ActionResult Logar(AutenticacaoModel model)
+        {
+            
+            if (!ModelState.IsValid)
+                return View();
+
+            if (autenticacaoModel_global != null)
+            {
+                HttpContext.Session["CPF_CNPJ_LOGADO"] = autenticacaoModel_global.Usu_Login;
+
+                var identity = new ClaimsIdentity(new[]
+                {    new Claim(ClaimTypes.Name, autenticacaoModel_global.Usu_Nome),
+                     new Claim(ClaimTypes.PrimarySid, autenticacaoModel_global.Usu_Login),
+                     new Claim(ClaimTypes.Sid, autenticacaoModel_global.Pes_Id),
+                     new Claim(ClaimTypes.Role, autenticacaoModel_global.Pes_TipoPessoa),
+
+                }, "ApplicationCookie", ClaimTypes.Name, ClaimTypes.Role);
+
+                var ctx = Request.GetOwinContext();
+                var authManager = ctx.Authentication;
+
+                authManager.SignIn(identity);
+
+                return Redirect(GetRedirectUrl(model.ReturnUrl));
+
+            }
+            else
+            {
+                //TempData["MsgLoginInvalido"] = "Login ou Senha Inválido!";
+                return View();
+            }
+
+        }
+
+
+        private string GetRedirectUrl(string returnUrl)
+        {
+            if (string.IsNullOrEmpty(returnUrl) || Url.IsLocalUrl(returnUrl))
+            {
+                if (autenticacaoModel_global.Pes_TipoPessoa == "JURÍDICO")
+                {
+                    if (autenticacaoModel_global.Pes_DataAprovadoSipro == "Sim")
+
+                        // return Url.Action("multas", "multas");
+                        return Url.Action("processosabertos", "processo");
+                    else
+                    {
+                        var CNPJ = autenticacaoModel_global.Usu_Login;
+
+                        var ctx = Request.GetOwinContext();
+                        var authManager = ctx.Authentication;
+                        authManager.SignOut("ApplicationCookie");
+                        return Url.Action("Status_Cadastro", "Pessoa", new { CPF_CNPJ = CNPJ });
+                    }
+
+                }
+                else
+                {
+                     //return Url.Action("multas", "multas");,
+                     return Url.Action("processosabertos", "processo");
+                }
+
+
+            }
+            else
+                return returnUrl;
+        }
+
+
+        public ActionResult LogOut()
+        {
+
+
+            var ctx = Request.GetOwinContext();
+            var authManager = ctx.Authentication;
+            authManager.SignOut("ApplicationCookie");
+            return RedirectToAction("login", "autenticacao");
+        }
+
+
+
+        public ActionResult ReenvioEmail()
+        {
+            return View();
+        }
+
+
+        public ActionResult SolicitarRedefinirSenha()
+        {
+            return View();
+        }
+
+        public ActionResult CorrigirEmail()
+        {
+            return View();
+        }
+
+
+        public ActionResult AlterarSenha(string r)
+        {
+            UsuarioModel usuarioModel = new UsuarioModel
+            {
+                Usu_Email = r
+            };
+
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@VloCampo", "Link_Expirado");
+            parameters.Add("@VloBusca1", r);
+            parameters.Add("@VloBusca2", "");
+            parameters.Add("@VloBusca3", "");
+
+            var expirado = DapperORM.DapperORM.ReturnList<AutenticacaoModel>("STb_Usuario_Localizar_Dapper", parameters).FirstOrDefault<AutenticacaoModel>().Usu_Expirado;
+
+            if (expirado == false)
+            {
+                TempData["MsgLoginInvalido"] = "Link expirado, favor solicitar novamente";
+                return RedirectToAction("login", "autenticacao");
+            }
+
+            TempData["MsgLoginInvalido"] = "";
+            return View(usuarioModel);
+        }
+
+
+        // GET: Autenticacao
+        public ActionResult ProcAlterarSenha(UsuarioModel usuarioModel)
+        {
+            DynamicParameters parameters = new DynamicParameters();
+            parameters.Add("@Pes_Email", usuarioModel.Usu_Email);
+            parameters.Add("@Usu_Senha", usuarioModel.Usu_Senha);
+            DapperORM.DapperORM.ExecuteWithouReturn("Stb_Senha_Alterar_Dapper", parameters);
+
+            return RedirectToAction("login", "autenticacao");
+        }
+
+
+
+
+
+    }
+}
