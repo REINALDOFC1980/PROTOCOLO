@@ -479,7 +479,7 @@
                             //$('#Pes_CPF_CNPJ').val("");
                             return false;
                         } else
-                        if (data.existe == true) {
+                            if (data.existe == true) {
                             posLoad();
                             swal("Ops!", "Esse usuário já foi cadastrado em nossa base de dados.", "warning")
                                 .then(() => {
@@ -488,7 +488,7 @@
                                     $("#Pes_CPF_CNPJ").focus();
                                     $("#End_Pais").val('BRASIL');
                                 });
-                            return false;
+                          //  return false;
                         } else {
                             $(data.Resultado).each(function () {
                                 $("#Pes_RegistroCNH").val(this.registro);
@@ -678,10 +678,27 @@
                 swal("Ops!", "Não foi anexada foto!", "warning")
                 return false;
             }
-            if ($('#PERFIL_').val() != "" && $('#Pes_RegistroCNH').val() == "") {
-                swal("Ops!", "Preencha os campos da CNH!", "warning")
+
+            var input = document.getElementById("PERFIL_");
+            if (input.files.length > 0 && $('#Pes_RegistroCNH').val() == "") {
+                campo_obrigatorio('#vPes_RegistroCNH', '#DivPes_RegistroCNH', '#Pes_RegistroCNH');
                 return false;
             }
+
+            var input = document.getElementById("PERFIL_");
+            if (input.files.length > 0 && $('#Pes_UF_CNH').val() == "") {
+                campo_obrigatorio('#vPes_UF_CNH', '#DivPes_UF_CNH', '#Pes_UF_CNH');
+                return false;
+            }
+
+            var input = document.getElementById("PERFIL_");
+            if (input.files.length > 0 && $('#Pes_CNHValidade').val() == "") {
+                campo_obrigatorio('#vPes_CNHValidade', '#DivPes_CNHValidade', '#Pes_CNHValidade');
+                return false;
+            }
+
+      
+
 
             preLoad();
             var form = $('form')[0];
